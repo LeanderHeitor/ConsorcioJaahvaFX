@@ -89,4 +89,24 @@ public class UsuarioRepository implements IRepository<Usuario> {
         }
         return indice;
     }
+
+    public List<Admin> findAllAdmin() {
+        List<Admin> admins = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Admin) {
+                admins.add((Admin) usuario);
+            }
+        }
+        return admins;
+    }
+
+    public List<Cliente> findAllCliente() {
+        List<Cliente> clientes = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Cliente) {
+                clientes.add((Cliente) usuario);
+            }
+        }
+        return clientes;
+    }
 }
