@@ -1,6 +1,8 @@
 package repository;
 
 import lombok.Data;
+import model.Admin;
+import model.Cliente;
 import model.Usuario;
 
 import java.util.ArrayList;
@@ -66,6 +68,26 @@ public class UsuarioRepository implements IRepository<Usuario> {
     @Override
     public List<Usuario> findAll() {
         return this.usuarios;
+    }
+
+    public List<Admin> findAllAdmin() {
+        List<Admin> admins = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Admin) {
+                admins.add((Admin) usuario);
+            }
+        }
+        return admins;
+    }
+
+    public List<Cliente> findAllCliente() {
+        List<Cliente> clientes = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Cliente) {
+                clientes.add((Cliente) usuario);
+            }
+        }
+        return clientes;
     }
 
 
