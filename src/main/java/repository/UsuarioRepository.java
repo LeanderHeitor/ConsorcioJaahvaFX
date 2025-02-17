@@ -1,6 +1,8 @@
 package repository;
 
 import lombok.Data;
+import model.Admin;
+import model.Cliente;
 import model.Usuario;
 
 import java.util.ArrayList;
@@ -18,11 +20,11 @@ public class UsuarioRepository implements IRepository<Usuario> {
         this.indice = 0;
     }
 
-    public static IRepository<Usuario> getInstance() {
+    public static UsuarioRepository getInstance() {
         if (instance == null) {
             instance = new UsuarioRepository();
         }
-        return instance;
+        return (UsuarioRepository) instance;
     }
 
     @Override

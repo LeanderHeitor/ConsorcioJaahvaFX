@@ -1,8 +1,5 @@
 package model;
 
-import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -12,7 +9,6 @@ import enums.TipoServico;
 import exception.ErroNoRelatorioException;
 import lombok.Data;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Data
@@ -43,19 +39,16 @@ public class Contrato implements Processo{
         String title = "Relatorio Contrato- " + String.valueOf(getUsuarioVinculado().getCPF()) + "-" + getUsuarioVinculado().getNome();
         Relatorio relatorio = new Relatorio("ContRel-" + String.valueOf(this.getIdContrato()));
         try {
-            PdfWriter writer = new PdfWriter(new FileOutputStream("relatorioContrato" + String.valueOf(this.getIdContrato()) + ".pdf"));
+            PdfWriter writer = new PdfWriter(title + ".pdf");
             PdfDocument pdfDoc = new PdfDocument(writer);
             Document documentExport = new Document(pdfDoc);
 
-            PdfFont titleFont = PdfFontFactory.createFont(StandardFonts.TIMES_BOLDITALIC);
-            PdfFont defaultFont = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
-
-            documentExport.add(new Paragraph(title).setFont(titleFont));
-            documentExport.add(new Paragraph("Usuario Vinculado: " + String.valueOf(this.getUsuarioVinculado().getNome())).setFont(defaultFont));
-            documentExport.add(new Paragraph("Tipo de Serviço: " + String.valueOf(this.getTipoServico())).setFont(defaultFont));
-            documentExport.add(new Paragraph("Status do Cliente: " + String.valueOf(this.getStatusCliente())).setFont(defaultFont));
-            documentExport.add(new Paragraph("Grupo: " + String.valueOf(this.getGrupo().getId())).setFont(defaultFont));
-            documentExport.add(new Paragraph("ID do Contrato: " + String.valueOf(this.getIdContrato())).setFont(defaultFont));
+            documentExport.add(new Paragraph(title));
+            documentExport.add(new Paragraph("Usuario Vinculado: " + String.valueOf(this.getUsuarioVinculado().getNome())));
+            documentExport.add(new Paragraph("Tipo de Serviço: " + String.valueOf(this.getTipoServico())));
+            documentExport.add(new Paragraph("Status do Cliente: " + String.valueOf(this.getStatusCliente())));
+            documentExport.add(new Paragraph("Grupo: " + String.valueOf(this.getGrupo().getId())));
+            documentExport.add(new Paragraph("ID do Contrato: " + String.valueOf(this.getIdContrato())));
 
             documentExport.close();
             relatorio.setDadoPDF(documentExport);

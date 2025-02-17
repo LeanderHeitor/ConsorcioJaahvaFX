@@ -11,8 +11,8 @@ public class Cliente extends Usuario {
     private ArrayList<Grupo> consorciosAtivos;
     private ArrayList<Contrato> historicoContratos;
 
-    public Cliente(String nome, long CPF, String telefone, String email) {
-        super(nome, CPF, telefone, email);
+    public Cliente(String nome, long CPF, String telefone, String email, String senha) {
+        super(nome, CPF, telefone, email, senha);
         this.consorciosAtivos = new ArrayList<>();
         this.historicoContratos = new ArrayList<>();
     }

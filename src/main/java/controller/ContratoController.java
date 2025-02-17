@@ -95,9 +95,4 @@ public class ContratoController {
             }
         }
     }
-    public void sendRelatorio(Contrato contrato){
-        Relatorio relatorio= contrato.sendRelatorio();
-        relatorioController.salvarRelatorio(relatorio);
-
-    }
 }

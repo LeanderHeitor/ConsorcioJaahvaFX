@@ -1,9 +1,6 @@
 package controller;
 
 import exception.ErroNoRelatorioException;
-import model.Cliente;
-import model.Consorcio;
-import model.Grupo;
 import model.Relatorio;
 import repository.IRepository;
 import repository.RelatorioRepository;
@@ -40,10 +37,10 @@ public class RelatorioController {
             throw new ErroNoRelatorioException("Relatório não pode ser nulo");
         }
     }
-    public void relatoriosDevedores(Consorcio consorcio){
+    public void relatoriosDevedores(){
 
     }
-    public void relatoriosPremiados(Consorcio consorcio){
+    public void relatorioMensal(){
 
     }
 }

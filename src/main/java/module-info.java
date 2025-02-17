@@ -4,7 +4,6 @@ module com.example.consorciojaahvafx {
     requires static lombok;
     requires kernel;
     requires layout;
-    requires io;
 
 
     opens com.example.consorciojaahvafx to javafx.fxml;

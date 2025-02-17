@@ -7,9 +7,11 @@ import repository.IRepository;
 import repository.UsuarioRepository;
 
 public class UsuarioController {
-    private IRepository<Usuario> usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
-    public UsuarioController() { this.usuarioRepository = UsuarioRepository.getInstance(); }
+    public UsuarioController() { 
+        this.usuarioRepository = UsuarioRepository.getInstance(); 
+    }
 
 
     // login
@@ -55,7 +57,7 @@ public class UsuarioController {
 
         try{
             usuarioRepository.add(usuario);
-            System.out.println("Usuario" + usuario.getNome() + "cadastrado com sucesso");
+            System.out.println("Usuario" + usuario.getNome() + " cadastrado com sucesso");
         } catch (Exception e) {
             throw new FormularioIncorretoException("Não foi possível cadastrar o usuário");
         }
@@ -92,6 +94,16 @@ public class UsuarioController {
                 usuarioRepository.add(usuario); // confirmar método
             } else {
                 throw new CPFNaoPodeSerNuloException("Usuário não pode ser um cliente");
+            }
+        }
+    }
+
+    public void printClientes() {
+        for (Usuario usuario : usuarioRepository.findAllCliente()) {
+            if (usuario instanceof Admin) {
+                System.out.println("Admin: " + usuario.getNome());
+            } else {
+                System.out.println("Cliente: " + usuario.getNome());
             }
         }
     }
