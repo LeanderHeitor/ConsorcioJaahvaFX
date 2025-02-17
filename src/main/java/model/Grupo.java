@@ -24,6 +24,7 @@ public class Grupo /*implements Processo*/ {
     private static final int MIN_PARTICIPANTES = 3;
     // lista de lances dados pelos clientes por fora das parcelas pagas
     private HashMap<Cliente, Double> lances;
+    //TODO esse método se encaixa melhor na classe de consorcio
     private HashMap<Contrato, Boolean> verificaContrato;
 
     public Grupo(Admin supervisor, int numeroParcelas, double valorTotal, double taxaAdm) {
