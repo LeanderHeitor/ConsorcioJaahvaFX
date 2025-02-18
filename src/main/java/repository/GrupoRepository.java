@@ -4,6 +4,8 @@ import lombok.Data;
 import model.Grupo;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
 
 @Data
 public class GrupoRepository implements IRepository<Grupo> {
@@ -30,6 +32,7 @@ public class GrupoRepository implements IRepository<Grupo> {
         grupos[indice] = grupo;
         indice++;
     }
+
 
     public void remove(Grupo grupo) {
         for (int i = 0; i < indice; i++) {

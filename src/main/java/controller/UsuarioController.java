@@ -1,16 +1,23 @@
 package controller;
 
 import exception.*;
-import model.Admin;
-import model.Usuario;
+import model.*;
+import repository.*;
 import repository.IRepository;
 import repository.UsuarioRepository;
+import repository.GrupoRepository;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UsuarioController {
-    private UsuarioRepository usuarioRepository;
+    private IRepository<Usuario> usuarioRepository;
+    private IRepository<Grupo> grupoRepository;
+    private Map<Long, Double> penalidades;
 
-    public UsuarioController() { 
-        this.usuarioRepository = UsuarioRepository.getInstance(); 
+    public UsuarioController() {
+        this.usuarioRepository = UsuarioRepository.getInstance();
+        this.grupoRepository = GrupoRepository.getInstance();
+        this.penalidades = new HashMap<>();
     }
 
 
@@ -57,7 +64,7 @@ public class UsuarioController {
 
         try{
             usuarioRepository.add(usuario);
-            System.out.println("Usuario" + usuario.getNome() + " cadastrado com sucesso");
+            System.out.println("Usuario" + usuario.getNome() + "cadastrado com sucesso");
         } catch (Exception e) {
             throw new FormularioIncorretoException("Não foi possível cadastrar o usuário");
         }
@@ -98,14 +105,81 @@ public class UsuarioController {
         }
     }
 
-    public void printClientes() {
-        for (Usuario usuario : usuarioRepository.findAllCliente()) {
-            if (usuario instanceof Admin) {
-                System.out.println("Admin: " + usuario.getNome());
-            } else {
-                System.out.println("Cliente: " + usuario.getNome());
-            }
+    public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {
+        if (valorPenalidade <= 0) { throw new ValorDaPenalidadePositivoException("O valor da penalidade precisa ser positivo.");}
+
+        Usuario usuario = usuarioRepository.findById(cpf);
+        if (usuario == null) {
+            throw new UsuarioNuloException(" Usuário com o CPF " + cpf + "não encontrado.");
         }
+
+        penalidades.put(cpf, penalidades.getOrDefault(cpf, 0.0) + valorPenalidade);
+        System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(cpf));
+    }
+
+    public double consultarPenalidade(long cpf) {
+        return penalidades.getOrDefault(cpf, 0.0);
+    }
+
+    public void cancelarLance(long cpfAdmin, long cpfCliente, int idGrupo) {
+        // Verifica se o administrador existe
+        Admin admin = (Admin) usuarioRepository.findById(cpfAdmin);
+        if (admin == null) {
+            throw new IllegalArgumentException("Administrador não encontrado.");
+        }
+
+        // Verifica se o cliente existe
+        Cliente cliente = (Cliente) usuarioRepository.findById(cpfCliente);
+        if (cliente == null) {
+            throw new IllegalArgumentException("Cliente não encontrado.");
+        }
+
+        // Verifica se o grupo existe
+        Grupo grupo = grupoRepository.findById(idGrupo);
+        if (grupo == null) {
+            throw new IllegalArgumentException("Grupo não encontrado.");
+        }
+
+        // Verifica se o cliente fez um lance no grupo
+        if (grupo.getLances() == null) {
+            throw new IllegalArgumentException("O cliente não fez um lance neste grupo.");
+        }
+
+        // Cancela o lance (remove o lance do grupo)
+        grupo.cancelarLance(grupo.getLances());
+
+        // Reembolsa o valor do lance ao cliente (se necessário)
+        grupo.reembolsarLance(grupo.getValorTotal());
+
+        System.out.println("Lance cancelado pelo administrador: " + admin.getNome());
+        System.out.println("Cliente reembolsado: " + cliente.getNome() + " | Valor: " + grupo.getLances());
+    }
+
+    private double calcularValorParcela(double valorTotal, int numParcelas, double taxaAdm) {
+        double valorParcelaSemTaxa = valorTotal / numParcelas;
+        double valorTaxaAdm = valorParcelaSemTaxa * (taxaAdm / 100);
+        return valorParcelaSemTaxa + valorTaxaAdm;
+    }
+
+
+    public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {
+        Admin admin = (Admin) usuarioRepository.findById(cpf);
+        if (admin == null) {
+            throw new IllegalArgumentException("Administrador não encontrado. ");
+        }
+
+        Grupo grupo = grupoRepository.findById(idGrupo);
+        if (grupo == null) {
+            throw new IllegalArgumentException("Grupo não encontrado");
+        }
+
+        if (valorTaxa < 0) {
+            throw new IllegalArgumentException("A taxa de administração não pode ser negativa. ");
+        }
+
+        grupo.setTaxaAdm(valorTaxa);
+
+        double novoValorParcela = calcularValorParcela(grupo.getValorTotal(), grupo.getNumeroParcelas(), valorTaxa);
     }
     
 }

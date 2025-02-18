@@ -2,19 +2,23 @@ package controller;
 
 import enums.StatusCliente;
 import enums.TipoServico;
-import exception.AcessoNegadoException;
-import exception.GrupoInativoException;
-import exception.RenegociacaoNegadaException;
-import exception.UsuarioPenalizadoException;
+import exception.*;
 import lombok.Data;
 import model.*;
 import repository.ContratoRepository;
 import repository.IRepository;
+import repository.UsuarioRepository;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 @Data
 public class ContratoController {
     private IRepository<Contrato> contratoRepository;
     private RelatorioController relatorioController;
     private static ContratoController instance;
+    private Map<Long, Double> penalidades;
 
     public static ContratoController getInstance() {
         if (instance == null) {
@@ -26,6 +30,7 @@ public class ContratoController {
     public ContratoController(){
         this.contratoRepository = ContratoRepository.getInstance();
         this.relatorioController = RelatorioController.getInstance();
+        this.penalidades = new HashMap<>();
     }
 
     public void realizarContratoConsorcio(Cliente user, Grupo grupo) throws RuntimeException {
@@ -99,4 +104,5 @@ public class ContratoController {
         Relatorio relatorio= contrato.sendRelatorio();
         relatorioController.salvarRelatorio(relatorio);
     }
+
 }
