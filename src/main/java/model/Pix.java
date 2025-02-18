@@ -7,9 +7,8 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Pix extends Pagamento {
     private String chavePix;
-    public Pix(){}
     public Pix(String chavePix ,long id, Double valor) {
-        super(valor);
+        super(id, valor);
         this.chavePix = chavePix;
     }
 }

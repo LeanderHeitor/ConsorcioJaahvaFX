@@ -1,10 +1,13 @@
 package controller;
 import model .*;
 import repository.ContratoRepository;
+import repository.PagamentoRepository;
+
+import java.time.LocalDate;
 
 public class PagamentoController {
 
-
+        private PagamentoRepository pagamentoRepository = new PagamentoRepository();
     public void processarParcelas(CartaoDeCredito cartao) {
         // Valida o número do cartão
         if (cartao.getNumeroCartao() == null || cartao.getNumeroCartao().trim().isEmpty()) {
@@ -78,6 +81,36 @@ public class PagamentoController {
 
 
 
+
+    }
+    // 4. Atualizar o saldo devedor
+    public void atualizarSaldoDevedor(Pagamento pagamento, double valor) {
+        if (pagamento != null) {
+            pagamento.setValor(valor);
+            System.out.println("Saldo devedor atualizado com sucesso.");
+        } else {
+            System.out.println("Pagamento não encontrado.");
+        }
+    }
+
+    public void gerarBoleto(Pagamento pagamento) {
+        System.out.println("----- BOLETO DE PAGAMENTO -----");
+        System.out.println("ID do Pagamento: " + pagamento.getId());
+
+        // Se você tiver um pagador definido
+        if (pagamento.getPagador() != null) {
+            System.out.println("Cliente: " + pagamento.getPagador().getNome());
+        } else {
+            System.out.println("Cliente: [Não informado]");
+        }
+
+        System.out.println(String.format("Valor: R$ %.2f", pagamento.getValor()));
+        System.out.println("Data de Emissão: " + LocalDate.now());
+        System.out.println("Data de Vencimento: " + LocalDate.now().plusDays(7));
+        System.out.println("-------------------------------");
+        System.out.println("Use este boleto para efetuar o pagamento.");
+        System.out.println("-----------------------------------------\n");
     }
 }
+
 

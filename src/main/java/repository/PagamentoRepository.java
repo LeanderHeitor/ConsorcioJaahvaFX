@@ -4,6 +4,7 @@ import exception.BuscaInvalidaException;
 import exception.PagamentoConcluidoException;
 import exception.PagamentoFalhouException;
 import lombok.Data;
+import model.Grupo;
 import model.Pagamento;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class PagamentoRepository implements IRepository<Pagamento> {
     }
 
 
-    @Override
+
     public void add(Pagamento pagamento) throws PagamentoConcluidoException, PagamentoFalhouException {
         pagamentos.add(pagamento);
         indice = indice + 1;
@@ -60,15 +61,13 @@ public class PagamentoRepository implements IRepository<Pagamento> {
 
     }
 
-    @Override
-    public Pagamento findById(long id) throws BuscaInvalidaException {
-        int i = getIndex(id);
-        if (i == indice) {
-            return pagamentos.get(i);
-        } else {
-            System.out.println("Pagamento não encontrado");
-            return null;
+    public Pagamento findById(long id) {
+        for (Pagamento pagamento : pagamentos) {
+            if (pagamento.getId() == id) {
+                return pagamento;
+            }
         }
+        return null; // Retorna null se nenhum Pagamento correspondente for encontrado
     }
 
     @Override

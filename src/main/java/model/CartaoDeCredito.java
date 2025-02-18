@@ -10,8 +10,8 @@ public class CartaoDeCredito extends Pagamento {
     private String numeroCartao;
 
     public CartaoDeCredito(){}
-    public CartaoDeCredito(int parcelas, String numeroCartao) {
-        super();
+    public CartaoDeCredito(int parcelas, String numeroCartao, long id, Double valor) {
+        super(id, valor);
         this.parcelas = parcelas;
         this.numeroCartao = numeroCartao;
     }
