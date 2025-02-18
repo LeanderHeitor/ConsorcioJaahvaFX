@@ -28,7 +28,7 @@ import java.util.Scanner;
 
    TODO controller dos pagamentos
    - atualização do saldo do usuario e das parcelas pagas/pendentes automaticamente
-   - bloquear pagamento de lances ou parcelas com o grupo inativo ✔️
+   - bloquear pagamento de lances ou parcelas com o grupo inativo ✔
    - gerar boletos de maneira automática e enviar pros relatorios
 
    TODO controller dos contratos
@@ -114,8 +114,8 @@ public class Main {
                     Pix pix1 = new Pix("alice@pix.com", 2, 200.0);
                     Pix pix2 = new Pix("bob@pix.com", 3, 400.0);
                     pix1.setValor(500.0);
-                    CartaoDeCredito cartao1 = new CartaoDeCredito(6, "1234-5678-9012-3456");
-                    CartaoDeCredito cartao2 = new CartaoDeCredito(24, "2345-6789-0123-4567");
+                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
+                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5);
 
                     // Criar objetos Consorcio
                     Consorcio consorcio1 = new Consorcio();
@@ -177,26 +177,16 @@ public class Main {
                     Pix pPix = new Pix("pix@example.com", 1, 100.0);
 
                     // Teste Pagamento
+                    Pix pix5 = new Pix("jonas@pix.com", 2, 200.0);
                     pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
                     pagamentoController.processarPagamento(pPix, PgrupoInativo, pContrato);
-
+                    Pix pix12 = new Pix("alice@pix.com", 2, 200.0);
+                    CartaoDeCredito cartao12 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
+                    pagamentoController.atualizarSaldoDevedor(pix12, 500);
+                    pagamentoController.gerarBoleto(pix12);
                     break;
                 case 3:
-
-                    //  CRIANDO CONSÓRCIO
-                    Consorcio jConsorcio = consorcioController.criarConsorcio();
-
-                    // CRIANDO GRUPOS
-                    Admin jAdmin = new Admin("Lebron", 00010, "777787777", "TheKing@gmail.com", "123456");
-                    Cliente jCliente1 = new Cliente("Luka", 00020, "888878888", "Tesouro@gmail.com", "654321");
-                    Cliente jCliente2 = new Cliente("Reaves", 00030, "999989999", "TheWhiteKobe@gmail.com", "321456");
-
-                    Grupo grupo1 = grupoController.criarGrupo(jAdmin, jConsorcio);
-                    grupoController.adicionarParticipante(grupo1.getId(), jCliente1);
-                    grupoController.adicionarParticipante(grupo1.getId(), jCliente2);
-                    System.out.println("O grupo Lakers é integrado por: " + grupo1);
-
-
+                    System.out.println("\n\n");
 
                     break;
 

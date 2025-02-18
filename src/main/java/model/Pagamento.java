@@ -18,9 +18,6 @@ public abstract class Pagamento /*implements Processo*/ {
         this.status = false;
     }
 
-    public Pagamento(Double valor) {
-        this.valor = valor;
-    }
 
     // @Override
     // public Document sendRelatorio(){
