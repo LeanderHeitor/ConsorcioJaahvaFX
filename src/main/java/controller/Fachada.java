@@ -9,6 +9,12 @@ public class Fachada {
     private GrupoController grupoController;
     private static Fachada fachada;
 
+    public Fachada(){
+        this.consorcioController = new ConsorcioController();
+        this.grupoController = new GrupoController();
+        this.usuarioController = new UsuarioController();
+    }
+
     public static Fachada getInstance() {
         if (fachada == null) {
             fachada = new Fachada();
@@ -17,7 +23,7 @@ public class Fachada {
     }
 
     public void cadastrarusuario(Usuario usuario) {
-        // cadastroCliente.cadastrarusuario(usuario);
+        usuarioController.cadastrarUsuario(usuario);
     }
 
     //MÉTODOS GRUPO
@@ -42,7 +48,7 @@ public class Fachada {
 
 
     public void escolherPremiacao(Grupo grupo, Consorcio consorcio){
-        escolherPremiacao(grupo, consorcio);
+        consorcioController.escolherPremiacao(grupo, consorcio);
     }
 
     public void adicionarGrupo(Long id, Grupo grupo){

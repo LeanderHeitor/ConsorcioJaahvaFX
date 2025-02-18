@@ -97,18 +97,18 @@ public class Main {
                 case 1:
                     System.out.println("\n\n");
                     // first try
-                    Usuario usuario = new Cliente("Joao", 12345678901L, "123-456-7890", "joao.bolado@example.com");
+                    Usuario usuario = new Cliente("Joao", 12345678901L, "123-456-7890", "joao.bolado@example.com", "123456");
                     Relatorio relatorio = new Relatorio("Monthly Report");
                     Pix pix = new Pix("john.doe@pix.com", 1, 100.0);
                     // Create Cliente objects
-                    Cliente cliente1 = new Cliente("Alice", 12345678901L, "123-456-7890", "alice@example.com");
-                    Cliente cliente2 = new Cliente("Bob", 23456789012L, "234-567-8901", "bob@example.com");
-                    Cliente cliente3 = new Cliente("Charlie", 34567890123L, "345-678-9012", "charlie@example.com");
-                    Cliente cliente4 = new Cliente("Diana", 45678901234L, "456-789-0123", "diana@example.com");
+                    Cliente cliente1 = new Cliente("Alice", 12345678901L, "123-456-7890", "alice@example.com", "123456");
+                    Cliente cliente2 = new Cliente("Bob", 23456789012L, "234-567-8901", "bob@example.com", "123456"); 
+                    Cliente cliente3 = new Cliente("Charlie", 34567890123L, "345-678-9012", "charlie@example.com", "123456");
+                    Cliente cliente4 = new Cliente("Diana", 45678901234L, "456-789-0123", "diana@example.com", "123456");
 
                     // fazendo Admin objects
-                    Admin admin1 = new Admin("Eve", 56789012345L, "567-890-1234", "eve@example.com");
-                    Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com");
+                    Admin admin1 = new Admin("Eve", 56789012345L, "567-890-1234", "eve@example.com", "123456");
+                    Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com", "123456");
 
                     // criar Pagamento objects
                     Pix pix1 = new Pix("alice@pix.com", 2, 200.0);
@@ -161,10 +161,10 @@ public class Main {
 
                     /// Recursos para teste
                     Consorcio pConsorcio = consorcioController.criarConsorcio();
-                    Admin pAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com");
-                    Cliente pClienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com");
-                    Cliente pClienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com");
-                    Cliente pClienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com");
+                    Admin pAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com", "123456");
+                    Cliente pClienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
+                    Cliente pClienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
+                    Cliente pClienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com", "123456");
 
                     Grupo PgrupoAtivo = grupoController.criarGrupo(pAdmin, pConsorcio);
                     Grupo PgrupoInativo = grupoController.criarGrupo(pAdmin, pConsorcio);
@@ -183,6 +183,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("\n\n");
+
                     break;
 
                 case 4:
@@ -192,10 +193,10 @@ public class Main {
                     Consorcio consorcio = consorcioController.criarConsorcio();
 
                     // CLASSE GRUPO
-                    Admin cAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com");
-                    Cliente clienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com");
-                    Cliente clienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com");
-                    Cliente clienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com");
+                    Admin cAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com", "123456");
+                    Cliente clienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
+                    Cliente clienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
+                    Cliente clienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com", "123456");
 
                     Grupo grupoAtivo = grupoController.criarGrupo(cAdmin, consorcio);
                     Grupo grupoInativo = grupoController.criarGrupo(cAdmin, consorcio);
@@ -224,7 +225,7 @@ public class Main {
 
                     Consorcio uConsorcio = consorcioController.criarConsorcio(); // É aberto um consórcio
 
-                    Admin admin = new Admin("Seabra", 00001, "1985198", "Seabra@gmail.com"); // Admin é criado
+                    Admin admin = new Admin("Seabra", 00001, "1985198", "Seabra@gmail.com", "saas"); // Admin é criado
 
                     Grupo grupo = fachada.criarGrupo(admin, uConsorcio); // Grupo é criado inativo
 
@@ -234,20 +235,30 @@ public class Main {
 
                     System.out.println("Grupo criado: " + grupo);
 
-                    Cliente clienteT1 = new Cliente("Antonio", 00001, "819999989002", "a.guedes.cn@gmail.com");
-                    Cliente clienteT2 = new Cliente("Eito", 00002, "4984984", "eito@gmail.com");
-                    Cliente clienteT3 = new Cliente("joao", 00003, "123456789", "joao@example.com");
+                    Cliente clienteT1 = new Cliente("Antonio", 00001, "819999989002", "a.guedes.cn@gmail.com", "123456");
+                    Cliente clienteT2 = new Cliente("Eito", 00002, "4984984", "eito@gmail.com", "123456");
+                    Cliente clienteT3 = new Cliente("joao", 00003, "123456789", "joao@example.com", "123456");
 
-                    grupoController.adicionarParticipante(grupo.getId(), clienteT1);
-                    grupoController.adicionarParticipante(grupo.getId(), clienteT2);
-                    grupoController.adicionarParticipante(grupo.getId(), clienteT3);
+                    fachada.adicionarParticipante(grupo.getId(), clienteT1);
+                    fachada.adicionarParticipante(grupo.getId(), clienteT2);
+                    fachada.adicionarParticipante(grupo.getId(), clienteT3);
 
                     uConsorcio.setPremiacao(Premiacao.Casa);
 
-                    consorcioController.escolherPremiacao(grupo, uConsorcio);
+                    fachada.escolherPremiacao(grupo, uConsorcio);
 
                     System.out.println("Grupo Ativo: " + grupo);
+                    
+                    fachada.cadastrarusuario(clienteT1);
+                    fachada.cadastrarusuario(clienteT2);
+                    fachada.cadastrarusuario(clienteT3);
+
+                    
+
+                    
                     break;
+
+                    
 
                 case 0:
                     System.out.println("Fim dos testes.");

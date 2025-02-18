@@ -11,11 +11,12 @@ public abstract class Usuario {
     private String senha;
 
     public Usuario(){}
-    public Usuario(String nome, long CPF, String telefone, String email) {
+    public Usuario(String nome, long CPF, String telefone, String email, String senha) {
         this.nome = nome;
         this.CPF = CPF;
         this.telefone = telefone;
         this.email = email;
+        this.senha = senha;
     }
 
 }

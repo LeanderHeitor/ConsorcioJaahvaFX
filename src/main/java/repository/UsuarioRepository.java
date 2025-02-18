@@ -20,11 +20,11 @@ public class UsuarioRepository implements IRepository<Usuario> {
         this.indice = 0;
     }
 
-    public static IRepository<Usuario> getInstance() {
+    public static UsuarioRepository getInstance() {
         if (instance == null) {
             instance = new UsuarioRepository();
         }
-        return instance;
+        return (UsuarioRepository) instance;
     }
 
     @Override
@@ -70,26 +70,6 @@ public class UsuarioRepository implements IRepository<Usuario> {
         return this.usuarios;
     }
 
-    public List<Admin> findAllAdmin() {
-        List<Admin> admins = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Admin) {
-                admins.add((Admin) usuario);
-            }
-        }
-        return admins;
-    }
-
-    public List<Cliente> findAllCliente() {
-        List<Cliente> clientes = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Cliente) {
-                clientes.add((Cliente) usuario);
-            }
-        }
-        return clientes;
-    }
-
 
     @Override
     public boolean existsById(long id) {
@@ -110,5 +90,25 @@ public class UsuarioRepository implements IRepository<Usuario> {
             }
         }
         return indice;
+    }
+
+    public List<Admin> findAllAdmin() {
+        List<Admin> admins = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Admin) {
+                admins.add((Admin) usuario);
+            }
+        }
+        return admins;
+    }
+
+    public List<Cliente> findAllCliente() {
+        List<Cliente> clientes = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Cliente) {
+                clientes.add((Cliente) usuario);
+            }
+        }
+        return clientes;
     }
 }
