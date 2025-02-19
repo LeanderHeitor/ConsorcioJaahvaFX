@@ -188,6 +188,20 @@ public class Main {
                 case 3:
                     System.out.println("\n\n");
 
+                    Consorcio jConsorcio = consorcioController.criarConsorcio();
+
+                    Admin jAdmin = new Admin("Lebron", 0010, "777787777", "TheKing@gmail.com", "123456");
+
+                    Cliente jClienteA = new Cliente("Luka", 0020, "888898888", "Tesouro@gmail.com", "654321");
+                    Cliente jClienteB = new Cliente("Reaves", 0030, "999909999", "TheWhiteKobe@gmail.com", "654123");
+
+                    Grupo grupoLakers = grupoController.criarGrupo(jAdmin, jConsorcio);
+
+                    grupoController.adicionarParticipante(grupoLakers.getId(), jClienteA);
+                    grupoController.adicionarParticipante(grupoLakers.getId(), jClienteB);
+
+                    System.out.println("Grupo: " + grupoLakers);
+
                     break;
 
                 case 4:
