@@ -122,33 +122,29 @@ public class UsuarioController {
     }
 
     public void cancelarLance(long cpfAdmin, long cpfCliente, int idGrupo) {
-        // Verifica se o administrador existe
+
         Admin admin = (Admin) usuarioRepository.findById(cpfAdmin);
         if (admin == null) {
             throw new IllegalArgumentException("Administrador não encontrado.");
         }
 
-        // Verifica se o cliente existe
         Cliente cliente = (Cliente) usuarioRepository.findById(cpfCliente);
         if (cliente == null) {
             throw new IllegalArgumentException("Cliente não encontrado.");
         }
 
-        // Verifica se o grupo existe
         Grupo grupo = grupoRepository.findById(idGrupo);
         if (grupo == null) {
             throw new IllegalArgumentException("Grupo não encontrado.");
         }
 
-        // Verifica se o cliente fez um lance no grupo
+
         if (grupo.getLances() == null) {
             throw new IllegalArgumentException("O cliente não fez um lance neste grupo.");
         }
 
-        // Cancela o lance (remove o lance do grupo)
-        grupo.cancelarLance(grupo.getLances());
 
-        // Reembolsa o valor do lance ao cliente (se necessário)
+        grupo.cancelarLance(grupo.getLances());
         grupo.reembolsarLance(grupo.getValorTotal());
 
         System.out.println("Lance cancelado pelo administrador: " + admin.getNome());
