@@ -1,5 +1,3 @@
-package com.consorcio.app.ConsorcioApp;
-
 import controller.*;
 import enums.Premiacao;
 import enums.TipoServico;

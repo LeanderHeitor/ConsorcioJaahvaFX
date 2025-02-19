@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="LoginCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="580.0" styleClass="Card" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+   <children>
+      <VBox alignment="CENTER" layoutX="190.0" layoutY="121.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <ImageView fitHeight="255.0" fitWidth="250.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cone.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="username">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="50.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="password">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="50.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="478.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="sem login ainda?" />
+                  <Button mnemonicParsing="false" text="cadastre-se" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

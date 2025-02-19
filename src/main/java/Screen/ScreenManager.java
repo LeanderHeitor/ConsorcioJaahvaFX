@@ -14,7 +14,7 @@ public class ScreenManager {
 
     //telas como atributos associados a um controller
     private Scene menuScene;
-    private MenuController menuController;
+    private MenuHolderController menuHolderController;
 
 
     public static ScreenManager getInstance(){
@@ -34,7 +34,7 @@ public class ScreenManager {
         try {
             FXMLLoader MenuLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
             this.menuScene = new Scene(MenuLoader.load());
-            this.menuController = MenuLoader.getController();
+            this.menuHolderController = MenuLoader.getController();
 
         } catch (Exception e) {
             throw new ArquivosDeTelaException("Erro ao carregar arquivos de tela");
