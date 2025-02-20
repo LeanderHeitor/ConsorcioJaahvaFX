@@ -1,0 +1,10 @@
+----- BOLETO DE PAGAMENTO -----
+ID do Pagamento: 2
+Cliente: Alice
+Valor: R$ 20,00
+Status: Pendente
+Data de Emissão: 2025-02-20
+Data de Vencimento: 2025-02-27
+-------------------------------
+Use este boleto para efetuar o pagamento.
+-----------------------------------------

@@ -11,8 +11,8 @@ public class Boleto extends Pagamento {
     private LocalDate vencimento;
 
 
-    public Boleto(String codigoBoleto, LocalDate vencimento, long id, Double valor) {
-        super(id, valor);
+    public Boleto(String codigoBoleto, LocalDate vencimento, long id, Double valor, Cliente pagador) {
+        super(id, valor, pagador );
         this.codigoBoleto = codigoBoleto;
         this.vencimento = vencimento;
     }

@@ -1,3 +1,4 @@
+
 package model;
 
 import com.itextpdf.layout.Document;
@@ -12,11 +13,14 @@ public abstract class Pagamento /*implements Processo*/ {
     private Contrato contrato;
 
     public Pagamento(){}
-    public Pagamento(long id, Double valor) {
+    public Pagamento(long id, Double valor, Cliente pagador) {
         this.id = id;
         this.valor = valor;
         this.status = false;
+        this.pagador = pagador;
     }
+
+
 
 
     // @Override
@@ -24,5 +28,5 @@ public abstract class Pagamento /*implements Processo*/ {
     //     return null;
     // }
 
-   
+
 }

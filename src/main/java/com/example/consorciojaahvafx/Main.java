@@ -99,10 +99,10 @@ public class Main {
                     // first try
                     Usuario usuario = new Cliente("Joao", 12345678901L, "123-456-7890", "joao.bolado@example.com", "123456");
                     Relatorio relatorio = new Relatorio("Monthly Report");
-                    Pix pix = new Pix("john.doe@pix.com", 1, 100.0);
+                    Pix pix = new Pix("john.doe@pix.com", 1, 100.0, (Cliente) usuario);
                     // Create Cliente objects
                     Cliente cliente1 = new Cliente("Alice", 12345678901L, "123-456-7890", "alice@example.com", "123456");
-                    Cliente cliente2 = new Cliente("Bob", 23456789012L, "234-567-8901", "bob@example.com", "123456"); 
+                    Cliente cliente2 = new Cliente("Bob", 23456789012L, "234-567-8901", "bob@example.com", "123456");
                     Cliente cliente3 = new Cliente("Charlie", 34567890123L, "345-678-9012", "charlie@example.com", "123456");
                     Cliente cliente4 = new Cliente("Diana", 45678901234L, "456-789-0123", "diana@example.com", "123456");
 
@@ -111,11 +111,11 @@ public class Main {
                     Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com", "123456");
 
                     // criar Pagamento objects
-                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0);
-                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0);
+                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0, cliente1);
+                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0, cliente2);
                     pix1.setValor(500.0);
-                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
-                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5);
+                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, cliente2);
+                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5, cliente1);
 
                     // Criar objetos Consorcio
                     Consorcio consorcio1 = new Consorcio();
@@ -165,7 +165,10 @@ public class Main {
                     Cliente pClienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
                     Cliente pClienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
                     Cliente pClienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com", "123456");
-
+                    Cliente pClienteD = new Cliente ("Jonas", 00005, "819999989022", "jonas@gmail.com", "234567");
+                    Cliente pClienteE = new Cliente ("Alice", 00007, "819999989052", "Alice@gmail.com", "234567");
+                    Cliente pClienteF = new Cliente ("Joao", 22222, "819999989062", "joao@gmail.com", "234567");
+                    Pix pPix = new Pix("pix@example.com", 1, 100.2, pClienteA);
                     Grupo PgrupoAtivo = grupoController.criarGrupo(pAdmin, pConsorcio);
                     Grupo PgrupoInativo = grupoController.criarGrupo(pAdmin, pConsorcio);
 
@@ -173,17 +176,29 @@ public class Main {
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteB);
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteC);
 
+
                     Contrato pContrato = new Contrato(pAdmin, TipoServico.CONTRATACAO);
-                    Pix pPix = new Pix("pix@example.com", 1, 100.0);
+                    pContrato.setUsuarioVinculado(pClienteA);
+
+
+                    Cliente clienteVinculado = (Cliente) pContrato.getUsuarioVinculado();
+                    grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
+
+                    pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
                     // Teste Pagamento
-                    Pix pix5 = new Pix("jonas@pix.com", 2, 200.0);
+                    Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD );
                     pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
                     pagamentoController.processarPagamento(pPix, PgrupoInativo, pContrato);
-                    Pix pix12 = new Pix("alice@pix.com", 2, 200.0);
-                    CartaoDeCredito cartao12 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
+                    Pix pix12 = new Pix("alice@pix.com", 2, 200.0, pClienteE);
+                    CartaoDeCredito cartao12 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, pClienteC);
+                    pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
+
+                    System.out.println("Saldo devedor: " + pix12.getValor());
                     pagamentoController.atualizarSaldoDevedor(pix12, 500);
-                    pagamentoController.gerarBoleto(pix12);
+                    pagamentoController.atualizarSaldoDevedor(pix12, 180);
+                    System.out.println("Saldo devedor: " + pix12.getValor());
+                    pagamentoController.gerarBoletoTxt(pix12);
                     break;
                 case 3:
                     System.out.println("\n\n");
@@ -232,9 +247,9 @@ public class Main {
                     // usuarioController.cadastrarUsuario(clienteA);
 
                     break;
-                    
 
-                    
+
+
 
                 case 5:
                     System.out.println("\n\n");
@@ -266,17 +281,17 @@ public class Main {
                     fachada.escolherPremiacao(grupo, uConsorcio);
 
                     System.out.println("Grupo Ativo: " + grupo);
-                    
+
                     fachada.cadastrarusuario(clienteT1);
                     fachada.cadastrarusuario(clienteT2);
                     fachada.cadastrarusuario(clienteT3);
 
-                    
 
-                    
+
+
                     break;
 
-                    
+
 
                 case 0:
                     System.out.println("Fim dos testes.");
