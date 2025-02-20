@@ -57,7 +57,7 @@ import java.util.Scanner;
    -
  */
 
-public class Testes {
+public class Main {
     public static void main(String[] args) {
 
         // Repositorios
@@ -111,11 +111,11 @@ public class Testes {
                     Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com", "123456");
 
                     // criar Pagamento objects
-                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0, cliente1);
-                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0, cliente2);
+                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0);
+                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0);
                     pix1.setValor(500.0);
-                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, cliente2);
-                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5, cliente1);
+                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
+                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5);
 
                     // Criar objetos Consorcio
                     Consorcio consorcio1 = new Consorcio();
@@ -164,7 +164,8 @@ public class Testes {
                     Admin pAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com", "123456");
                     Cliente pClienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
                     Cliente pClienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
-                    Cliente pClienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com", "123456");
+                    Cliente pClienteC = new Cliente("Seabro", 00004, "819999989002", "seabra@gmail.com", "123456");
+
                     Cliente pClienteD = new Cliente ("Jonas", 00005, "819999989022", "jonas@gmail.com", "234567");
                     Cliente pClienteE = new Cliente ("Alice", 00007, "819999989052", "Alice@gmail.com", "234567");
                     Cliente pClienteF = new Cliente ("Joao", 22222, "819999989062", "joao@gmail.com", "234567");
@@ -248,9 +249,9 @@ public class Testes {
                     // usuarioController.cadastrarUsuario(clienteA);
 
                     break;
+                    
 
-
-
+                    
 
                 case 5:
                     System.out.println("\n\n");
@@ -287,12 +288,12 @@ public class Testes {
                     fachada.cadastrarusuario(clienteT2);
                     fachada.cadastrarusuario(clienteT3);
 
+                    
 
-
-
+                    
                     break;
 
-
+                    
 
                 case 0:
                     System.out.println("Fim dos testes.");

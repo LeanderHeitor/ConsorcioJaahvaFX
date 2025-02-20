@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class PagamentoRepository implements IRepository<Pagamento> {
 
-    private static IRepository instance;
+    private static PagamentoRepository instance;
     private ArrayList<Pagamento> pagamentos;
     private int indice;
 
@@ -23,7 +23,7 @@ public class PagamentoRepository implements IRepository<Pagamento> {
         indice = 0;
     }
 
-    public static IRepository<Pagamento> getInstance() {
+    public static PagamentoRepository getInstance() {
         if (instance == null) {
             instance = new PagamentoRepository();
         }

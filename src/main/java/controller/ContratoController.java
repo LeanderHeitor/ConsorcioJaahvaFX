@@ -33,6 +33,14 @@ public class ContratoController {
         this.penalidades = new HashMap<>();
     }
 
+    public void ListarContratos(){
+        System.out.println("---Listando todos os Contratos---");
+       // contratoRepository.findAll().forEach(System.out::println); -> forma de fazer usando Stream
+        for (Contrato c : contratoRepository.findAll()) {
+            System.out.println(c);
+        }
+    }
+
     public void realizarContratoConsorcio(Cliente user, Grupo grupo) throws RuntimeException {
         Contrato contrato = new Contrato();
         contrato.setTipoServico(TipoServico.VENDA);

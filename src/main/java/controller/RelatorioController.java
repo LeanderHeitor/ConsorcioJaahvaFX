@@ -38,6 +38,13 @@ public class RelatorioController {
             throw new ErroNoRelatorioException("Relatório não pode ser nulo");
         }
     }
+    public void ListarRelatorios(){
+        System.out.println("---Listando todos os Relatórios---");
+        // relatorioRepository.findAll().forEach(System.out::println); -> forma de fazer usando Stream
+        for (Relatorio r : relatorioRepository.findAll()) {
+            System.out.println(r);
+        }
+    }
     public void relatoriosDevedores(Consorcio consorcio){
 
     }
