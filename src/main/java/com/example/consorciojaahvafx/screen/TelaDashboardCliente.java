@@ -1,4 +1,4 @@
-package Screen;
+package com.example.consorciojaahvafx.screen;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;

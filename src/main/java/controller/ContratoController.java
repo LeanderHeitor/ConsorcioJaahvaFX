@@ -1,5 +1,10 @@
 package controller;
 
+import com.itextpdf.io.exceptions.IOException;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
+import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
 import enums.StatusCliente;
 import enums.TipoServico;
 import exception.*;
@@ -9,6 +14,8 @@ import repository.ContratoRepository;
 import repository.IRepository;
 import repository.UsuarioRepository;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,6 +113,36 @@ public class ContratoController {
 
                 }
             }
+        }
+    }
+    public void imprimirConteudoDocumentos(ArrayList<Contrato> contratos) {
+        for (Contrato contrato : contratos) {
+            System.out.println("=== Contrato ID: " + contrato.getIdContrato() + " ===");
+            System.out.println("Usuário Vinculado: " + contrato.getUsuarioVinculado().getNome());
+            System.out.println("Tipo de Serviço: " + contrato.getTipoServico());
+            System.out.println("Status do Cliente: " + contrato.getStatusCliente());
+            System.out.println("Grupo: " + contrato.getGrupo().getId());
+            System.out.println("Finalizado: " + (contrato.isFinalizado() ? "Sim" : "Não"));
+
+            // Extrair e imprimir o conteúdo do documento PDF
+            try {
+                byte[] documentoBytes = contrato.getDocumento().getBytes();
+                PdfDocument pdfDoc = new PdfDocument(new PdfReader(new ByteArrayInputStream(documentoBytes)));
+                StringBuilder conteudo = new StringBuilder();
+
+                for (int i = 1; i <= pdfDoc.getNumberOfPages(); i++) {
+                    String texto = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(i), new SimpleTextExtractionStrategy());
+                    conteudo.append(texto).append("\n");
+                }
+
+                System.out.println("Conteúdo do Documento:\n" + conteudo.toString());
+                pdfDoc.close();
+            } catch (IOException | java.io.IOException e) {
+                System.err.println("Erro ao ler o documento do contrato ID: " + contrato.getIdContrato());
+                e.printStackTrace();
+            }
+
+            System.out.println("=============================\n");
         }
     }
     public void sendRelatorio(Contrato contrato){

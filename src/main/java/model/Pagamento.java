@@ -1,4 +1,3 @@
-
 package model;
 
 import com.itextpdf.layout.Document;
@@ -21,12 +20,10 @@ public abstract class Pagamento implements Processo {
     }
 
 
-
-
     @Override
     public Relatorio sendRelatorio(){
-        return null;
+         return null;
     }
 
-
+   
 }

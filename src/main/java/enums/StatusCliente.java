@@ -1,7 +1,9 @@
 package enums;
 
 public enum StatusCliente {
+    NOTCLIENTE,
     PAGANTE,
     ATRASADO,
-    INADIMPLENTE
+    INADIMPLENTE,
+    CANCELADO
 }

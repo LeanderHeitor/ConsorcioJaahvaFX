@@ -1,4 +1,4 @@
-package Screen;
+package com.example.consorciojaahvafx.screen;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

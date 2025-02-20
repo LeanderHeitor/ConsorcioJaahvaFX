@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 @Data
 @ToString(exclude = {"lances", "verificaContrato"})
-public class Grupo /*implements Processo*/ {
+public class Grupo {
     private Long id;  // corrigido para minúsculo (convenção de nomenclatura Java)
     private int numeroParcelas;
     private double valorTotal;
@@ -96,8 +96,4 @@ public class Grupo /*implements Processo*/ {
     public void cancelarLance(HashMap<Long, Double> lances) {
     }
 
-    // @Override
-    // public Document sendRelatorio() {
-    //     // Implementação do método
-    // }
 }

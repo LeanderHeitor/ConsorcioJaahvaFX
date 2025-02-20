@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:id="ErrorCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screen.ErrorCardController">
+<AnchorPane fx:id="ErrorCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.consorciojaahvafx.screen.ErrorCardController">
    <children>
       <Button layoutX="507.0" layoutY="29.0" mnemonicParsing="false" text="X" />
       <VBox alignment="CENTER" layoutX="8.0" layoutY="10.0" prefHeight="504.0" prefWidth="564.0">
          <children>
             <ImageView fitHeight="255.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/tonel.png" />
+                  <Image url="@../images/tonel.png" />
                </image>
             </ImageView>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="465.0">

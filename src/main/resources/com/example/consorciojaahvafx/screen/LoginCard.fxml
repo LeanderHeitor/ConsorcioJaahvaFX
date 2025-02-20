@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="LoginCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="580.0" styleClass="Card" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screen.LoginCardController">
+<AnchorPane id="LoginCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="580.0" styleClass="Card" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.consorciojaahvafx.screen.LoginCardController">
    <padding>
       <Insets top="10.0" />
    </padding>
@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="255.0" fitWidth="250.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/cone.png" />
+                  <Image url="@../images/cone.png" />
                </image>
                <VBox.margin>
                   <Insets top="10.0" />

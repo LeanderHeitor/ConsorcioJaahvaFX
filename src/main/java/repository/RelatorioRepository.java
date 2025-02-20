@@ -8,14 +8,14 @@
  import java.util.List;
  @Data
  public class RelatorioRepository implements IRepository<Relatorio> {
-     private static IRepository instance;
+     private static RelatorioRepository instance;
      private ArrayList<Relatorio> relatorios;
      private int indice;
      public RelatorioRepository() {
          relatorios = new ArrayList<>();
          indice = 0;
      }
-     public static IRepository<Relatorio> getInstance() {
+     public static RelatorioRepository getInstance() {
          if (instance == null) {
              instance = new RelatorioRepository();
          }

@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class ContratoRepository implements IRepository<Contrato> {
 
-    private static IRepository<Contrato> instance;
+    private static ContratoRepository instance;
     private ArrayList<Contrato> contratos;
     private int indice;
 
@@ -17,7 +17,7 @@ public class ContratoRepository implements IRepository<Contrato> {
         this.indice = 0;
     }
 
-    public static IRepository<Contrato> getInstance() {
+    public static ContratoRepository getInstance() {
         if (instance == null) {
             instance = new ContratoRepository();
         }

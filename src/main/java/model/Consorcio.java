@@ -1,9 +1,13 @@
 package model;
 
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 
+import com.itextpdf.layout.element.Paragraph;
 import enums.Premiacao;
 import lombok.Data;
 import lombok.ToString;
@@ -15,7 +19,7 @@ import java.util.HashMap;
 
 @Data
 @ToString(exclude = {"grupos", "contemplados", "parcelasPagas"})
-public class Consorcio /*implements Processo*/{
+public class Consorcio implements Processo{
     private Long id;
     private static Long numConsorcios= 0L;
     private LocalDate dataInicio;
@@ -48,19 +52,45 @@ public class Consorcio /*implements Processo*/{
 
     public void avaliarLance(){}
 
-    // @Override
-    // public Document sendRelatorio() throws IOException {
-    //     String title= "Relatorio Consorcio- " + String.valueOf(this.getIdConsorcio());
-    //     try {
-    //         PdfWriter writer = new PdfWriter(title + ".pdf");
-    //         PdfDocument pdfDoc = new PdfDocument(writer);
-    //         Document documentExport = new Document(pdfDoc);
-    //         documentExport.close();
-    //         return documentExport;
+    @Override
+    public Relatorio sendRelatorio() throws IOException {
+        Relatorio relatorio = new Relatorio();
+         String title= "Relatorio Consorcio- " + String.valueOf(this.getId() );
+         try {
+             PdfWriter writer = new PdfWriter(title + ".pdf");
+             PdfDocument pdfDoc = new PdfDocument(writer);
+             Document documentExport = new Document(pdfDoc);
+             PdfFont titleFont = PdfFontFactory.createFont(StandardFonts.TIMES_BOLDITALIC);
+             PdfFont defaultFont = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
+             documentExport.add(new Paragraph(title).setFont(titleFont));
+             documentExport.add(new Paragraph("data do relatório:" + LocalDate.now().toString()).setFont(titleFont));
+             documentExport.add(new Paragraph("ID do Consorcio: " + String.valueOf(this.getId())).setFont(defaultFont));
+             documentExport.add(new Paragraph("Premiação: " + String.valueOf(this.getPremiacao())).setFont(defaultFont));
+             documentExport.add(new Paragraph("Data de Inicio: " + String.valueOf(this.getDataInicio())).setFont(defaultFont));
+             documentExport.add(new Paragraph("Data de Sorteio: " + String.valueOf(this.getDataSorteio())).setFont(defaultFont));
+             documentExport.add(new Paragraph("Valor Restante: " + String.valueOf(this.getValorRestante())).setFont(defaultFont));
+             documentExport.add(new Paragraph("Contemplados: ").setFont(defaultFont));
+             for (Cliente c : contemplados.keySet()) {
+                 documentExport.add(new Paragraph("Cliente Contemplado: " + c.getNome() + " Data: " + contemplados.get(c)).setFont(defaultFont));
+                 documentExport.add(new Paragraph("Parcelas Pagas: " + parcelasPagas.get(c)).setFont(defaultFont));
+             }
 
-    //     }catch(Exception e){
-    //         throw new IOException("arquivo não encontrado ao gerar relatório");
-    //     }
+             for (Grupo g : grupos) {
+                 documentExport.add(new Paragraph("Grupo: " + g.getId()).setFont(defaultFont));
+                 documentExport.add(new Paragraph("Clientes: ").setFont(defaultFont));
+                 for (Cliente c : g.getParticipantes()) {
+                     documentExport.add(new Paragraph("Cliente: " + c.getNome()).setFont(defaultFont));
+                 }
+             }
 
-    // }
+
+             documentExport.close();
+             relatorio.setDadoPDF(documentExport);
+             return relatorio;
+
+         }catch(Exception e){
+             throw new IOException("arquivo não encontrado ao gerar relatório");
+         }
+
+     }
 }

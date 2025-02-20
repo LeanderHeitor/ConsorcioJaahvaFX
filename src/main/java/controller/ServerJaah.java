@@ -1,6 +1,6 @@
 package controller;
 
-import Screen.ScreenManager;
+import com.example.consorciojaahvafx.screen.ScreenManager;
 import lombok.Data;
 
 @Data

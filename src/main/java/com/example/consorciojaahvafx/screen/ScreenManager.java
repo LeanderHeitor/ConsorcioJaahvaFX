@@ -1,4 +1,4 @@
-package Screen;
+package com.example.consorciojaahvafx.screen;
 
 import exception.ArquivosDeTelaException;
 import javafx.fxml.FXMLLoader;

@@ -9,5 +9,5 @@ module com.example.consorciojaahvafx {
 
     opens com.example.consorciojaahvafx to javafx.fxml;
     exports com.example.consorciojaahvafx;
-    exports Screen to javafx.graphics;
+    exports com.example.consorciojaahvafx.screen to javafx.graphics;
 }
