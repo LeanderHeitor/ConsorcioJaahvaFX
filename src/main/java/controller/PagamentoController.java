@@ -107,24 +107,67 @@ public class PagamentoController {
         }
     }
 
-    public void gerarBoleto(Pagamento pagamento) {
-        System.out.println("----- BOLETO DE PAGAMENTO -----");
-        System.out.println("ID do Pagamento: " + pagamento.getId());
-
-        // Se você tiver um pagador definido
-        if (pagamento.getPagador() != null) {
-            System.out.println("Cliente: " + pagamento.getPagador().getNome());
-        } else {
-            System.out.println("Cliente: [Não informado]");
+    public void gerarBoletoTxt(Pagamento pagamento) {
+        // 1. Verificar se o pagamento é nulo
+        if (pagamento == null) {
+            System.out.println("Erro: Pagamento não pode ser nulo ao gerar boleto.");
+            return;
+        }
+        // 2. Verificar se o ID é válido
+        if (pagamento.getId() == 0) {
+            System.out.println("Erro: Pagamento sem ID válido.");
+            return;
+        }
+        // 3. Verificar se o valor é válido
+        if (pagamento.getValor() == null || pagamento.getValor() <= 0) {
+            System.out.println("Erro: Valor do pagamento inválido para gerar boleto.");
+            return;
         }
 
-        System.out.println(String.format("Valor: R$ %.2f", pagamento.getValor()));
-        System.out.println("Data de Emissão: " + LocalDate.now());
-        System.out.println("Data de Vencimento: " + LocalDate.now().plusDays(7));
-        System.out.println("-------------------------------");
-        System.out.println("Use este boleto para efetuar o pagamento.");
-        System.out.println("-----------------------------------------\n");
+        // Nome do arquivo de texto
+        String nomeArquivo = "boleto_pagamento_" + pagamento.getId() + ".txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
+
+            // Cabeçalho do boleto
+            writer.write("----- BOLETO DE PAGAMENTO -----\n");
+            writer.write("ID do Pagamento: " + pagamento.getId() + "\n");
+
+            // Caso tenha um pagador
+            if (pagamento.getPagador() != null) {
+                writer.write("Cliente: " + pagamento.getPagador().getNome() + "\n");
+            } else {
+                writer.write("Cliente: [Não informado]\n");
+            }
+
+            // Valor
+            writer.write(String.format("Valor: R$ %.2f\n", pagamento.getValor()));
+
+            // Status (Pago ou Pendente)
+            if (pagamento.getStatus() != null) {
+                String status = pagamento.getStatus() ? "Pago" : "Pendente";
+                writer.write("Status: " + status + "\n");
+            }
+
+            // Datas de emissão e vencimento
+            LocalDate hoje = LocalDate.now();
+            LocalDate vencimento = hoje.plusDays(7);
+            writer.write("Data de Emissão: " + hoje + "\n");
+            writer.write("Data de Vencimento: " + vencimento + "\n");
+
+            writer.write("-------------------------------\n");
+            writer.write("Use este boleto para efetuar o pagamento.\n");
+            writer.write("-----------------------------------------\n");
+
+            // Mensagem de sucesso no console
+            System.out.println("Boleto gerado com sucesso em: " + nomeArquivo);
+
+        } catch (IOException e) {
+            // Tratamento de erro ao criar/escrever no arquivo
+            System.err.println("Erro ao criar arquivo TXT: " + e.getMessage());
+        }
     }
+}
     public void ListarPagamentos(){
         System.out.println("---Listando todos os pagamentos---");
         for (Pagamento p : pagamentoRepository.getPagamentos()) {
