@@ -17,7 +17,7 @@ public class PagamentoController {
     private static PagamentoController instance;
     private PagamentoRepository pagamentoRepository;
 
-    public PagamentoController getInstance() {
+    public static PagamentoController getInstance() {
         if (instance == null) {
             instance = new PagamentoController();
         }
@@ -174,7 +174,7 @@ public class PagamentoController {
         }
     }
 
-    public void ListarPagamentos(){
+    public void listarPagamentos(){
         System.out.println("---Listando todos os pagamentos---");
         for (Pagamento p : pagamentoRepository.getPagamentos()) {
             System.out.println(p);

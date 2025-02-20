@@ -13,6 +13,7 @@ public class Relatorio {
     private static Long numeroRelatorios= 0L;
     private Long codigo= 0L;
 
+
     public Relatorio(){
         this.data= LocalDate.now();
         codigo= numeroRelatorios;

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsuarioController {
+    private static UsuarioController instance;
     private IRepository<Usuario> usuarioRepository;
     private IRepository<Grupo> grupoRepository;
     private Map<Long, Double> penalidades;
@@ -18,6 +19,13 @@ public class UsuarioController {
         this.usuarioRepository = UsuarioRepository.getInstance();
         this.grupoRepository = GrupoRepository.getInstance();
         this.penalidades = new HashMap<>();
+    }
+
+    public static UsuarioController getInstance() {
+        if (instance == null) {
+            instance = new UsuarioController();
+        }
+        return instance;
     }
 
 

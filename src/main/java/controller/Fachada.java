@@ -116,6 +116,6 @@ public class Fachada {
         pagamentoController.gerarBoletoTxt(pagamento);
     }
     public void listarPagamento(){
-        pagamentoController.listarPagamento();
+        pagamentoController.listarPagamentos();
     }
 }

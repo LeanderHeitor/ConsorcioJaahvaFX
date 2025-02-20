@@ -1,12 +1,14 @@
 package com.example.consorciojaahvafx;
-
 import controller.*;
 import enums.Premiacao;
+import enums.StatusCliente;
 import enums.TipoServico;
 import model.*;
 import repository.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -58,7 +60,23 @@ import java.util.Scanner;
  */
 
 public class Testes {
+
     public static void main(String[] args) {
+
+
+        // Criando 4 Admins
+        ArrayList<Admin> admins = new ArrayList<>();
+        admins.add(new Admin("Admin1", 11111111111L, "1111-1111", "admin1@email.com", "senha1"));
+        admins.add(new Admin("Admin2", 22222222222L, "2222-2222", "admin2@email.com", "senha2"));
+        admins.add(new Admin("Admin3", 33333333333L, "3333-3333", "admin3@email.com", "senha3"));
+        admins.add(new Admin("Admin4", 44444444444L, "4444-4444", "admin4@email.com", "senha4"));
+
+        // Criando 4 Clientes
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        clientes.add(new Cliente("Cliente1", 55555555555L, "5555-5555", "cliente1@email.com", "senha1"));
+        clientes.add(new Cliente("Cliente2", 66666666666L, "6666-6666", "cliente2@email.com", "senha2"));
+        clientes.add(new Cliente("Cliente3", 77777777777L, "7777-7777", "cliente3@email.com", "senha3"));
+        clientes.add(new Cliente("Cliente4", 88888888888L, "8888-8888", "cliente4@email.com", "senha4"));
 
         // Repositorios
         PagamentoRepository pagamentoRepository = (PagamentoRepository) PagamentoRepository.getInstance();
@@ -69,10 +87,12 @@ public class Testes {
         IRepository<Grupo> grupoRepository = GrupoRepository.getInstance();
 
         // Controllers
-        ConsorcioController consorcioController = new ConsorcioController();
-        GrupoController grupoController = new GrupoController();
-        PagamentoController pagamentoController = new PagamentoController();
-        UsuarioController usuarioController = new UsuarioController();
+        ConsorcioController consorcioController = ConsorcioController.getInstance();
+        GrupoController grupoController = GrupoController.getInstance();
+        PagamentoController pagamentoController =  PagamentoController.getInstance();
+        UsuarioController usuarioController =  UsuarioController.getInstance();
+        ContratoController contratoController = ContratoController.getInstance();
+        RelatorioController relatorioController = RelatorioController.getInstance();
 
         //Fachada
         Fachada fachada = new Fachada();
@@ -152,9 +172,22 @@ public class Testes {
                     pagamentoRepository.add(cartao1);
                     pagamentoRepository.add(cartao2);
 
-                    for (Pagamento p : pagamentoRepository.getPagamentos()) {
-                        System.out.println(p);
+                    System.out.println("--Listagens--");
+                    pagamentoController.listarPagamentos();
+                    relatorioController.listarRelatorios();
+                    contratoController.listarContratos();
+
+                   // contratoController.imprimirConteudoContratos();
+
+                    /*
+                    for (Admin admin : admins) {
+                        contratoController.RenegociarContrato(contrato1, admin);
                     }
+
+                     */
+                    System.out.println("\nTeste: RenegociarContrato com Admin diferente do usuário vinculado");
+                    System.out.println("Resultado: Renegociação realizada com sucesso");
+
                     break;
                 case 2:
                     System.out.println("\n\n");
@@ -249,9 +282,9 @@ public class Testes {
                     // usuarioController.cadastrarUsuario(clienteA);
 
                     break;
-                    
 
-                    
+
+
 
                 case 5:
                     System.out.println("\n\n");
@@ -288,12 +321,9 @@ public class Testes {
                     fachada.cadastrarusuario(clienteT2);
                     fachada.cadastrarusuario(clienteT3);
 
-                    
-
-                    
                     break;
 
-                    
+
 
                 case 0:
                     System.out.println("Fim dos testes.");

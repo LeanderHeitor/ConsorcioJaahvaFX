@@ -26,12 +26,13 @@ public class Contrato implements Processo{
     private Usuario usuarioVinculado;
     private TipoServico tipoServico; // é um enum
     private StatusCliente statusCliente; // é um enum
-    private Document documento;
+    private PdfDocument documento;
     private Grupo grupo;
     private boolean finalizado;
 
 
     public Contrato() {
+
     }
     public Contrato( Usuario usuarioVinculado, TipoServico tipoServico) {
         this.usuarioVinculado = usuarioVinculado;

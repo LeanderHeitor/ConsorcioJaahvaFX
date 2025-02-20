@@ -7,10 +7,18 @@ import model.Grupo;
 import repository.GrupoRepository;
 
 public class GrupoController {
+    private static GrupoController instance;
     private GrupoRepository grupoRepository; 
 
     public GrupoController() {
         this.grupoRepository = GrupoRepository.getInstance();  // Acesso correto ao repositório singleton
+    }
+
+    public static GrupoController getInstance() {
+        if (instance == null) {
+            instance = new GrupoController();
+        }
+        return instance;
     }
 
     public Grupo obterGrupo(Long grupoId) {

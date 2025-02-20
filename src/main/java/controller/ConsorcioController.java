@@ -8,7 +8,15 @@ import model.Grupo;
 import repository.ConsorcioRepository;
 
 public class ConsorcioController {
+    private static ConsorcioController instance;
     private ConsorcioRepository consorcioRepository;
+
+    public static ConsorcioController getInstance() {
+        if (instance == null) {
+            instance = new ConsorcioController();
+        }
+        return instance;
+    }
 
     public ConsorcioController() {
         this.consorcioRepository = ConsorcioRepository.getInstance();

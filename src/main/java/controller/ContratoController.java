@@ -5,6 +5,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
+import com.itextpdf.layout.Document;
 import enums.StatusCliente;
 import enums.TipoServico;
 import exception.*;
@@ -12,7 +13,6 @@ import lombok.Data;
 import model.*;
 import repository.ContratoRepository;
 import repository.IRepository;
-import repository.UsuarioRepository;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class ContratoController {
         this.penalidades = new HashMap<>();
     }
 
-    public void ListarContratos(){
+    public void listarContratos(){
         System.out.println("---Listando todos os Contratos---");
        // contratoRepository.findAll().forEach(System.out::println); -> forma de fazer usando Stream
         for (Contrato c : contratoRepository.findAll()) {
@@ -115,19 +115,19 @@ public class ContratoController {
             }
         }
     }
-    public void imprimirConteudoDocumentos(ArrayList<Contrato> contratos) {
+    public void imprimirConteudoContratos() {
+        ArrayList<Contrato> contratos = (ArrayList<Contrato>) contratoRepository.findAll();
         for (Contrato contrato : contratos) {
             System.out.println("=== Contrato ID: " + contrato.getIdContrato() + " ===");
             System.out.println("Usuário Vinculado: " + contrato.getUsuarioVinculado().getNome());
             System.out.println("Tipo de Serviço: " + contrato.getTipoServico());
             System.out.println("Status do Cliente: " + contrato.getStatusCliente());
-            System.out.println("Grupo: " + contrato.getGrupo().getId());
+            //System.out.println("Grupo: " + String.valueOf(contrato.getGrupo().getId()));
             System.out.println("Finalizado: " + (contrato.isFinalizado() ? "Sim" : "Não"));
 
             // Extrair e imprimir o conteúdo do documento PDF
             try {
-                byte[] documentoBytes = contrato.getDocumento().getBytes();
-                PdfDocument pdfDoc = new PdfDocument(new PdfReader(new ByteArrayInputStream(documentoBytes)));
+                PdfDocument pdfDoc = contrato.getDocumento();
                 StringBuilder conteudo = new StringBuilder();
 
                 for (int i = 1; i <= pdfDoc.getNumberOfPages(); i++) {
@@ -137,7 +137,7 @@ public class ContratoController {
 
                 System.out.println("Conteúdo do Documento:\n" + conteudo.toString());
                 pdfDoc.close();
-            } catch (IOException | java.io.IOException e) {
+            } catch (IOException e) {
                 System.err.println("Erro ao ler o documento do contrato ID: " + contrato.getIdContrato());
                 e.printStackTrace();
             }
@@ -149,5 +149,6 @@ public class ContratoController {
         Relatorio relatorio= contrato.sendRelatorio();
         relatorioController.salvarRelatorio(relatorio);
     }
+
 
 }
