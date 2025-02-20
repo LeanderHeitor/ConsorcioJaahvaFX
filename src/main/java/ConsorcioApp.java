@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class ConsorcioApp extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        System.out.println("Inicializando o consorcio App");
     }
 
     @Override
