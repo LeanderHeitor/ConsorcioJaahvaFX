@@ -46,6 +46,14 @@ public class Grupo /*implements Processo*/ {
         verificarAtivacaoGrupo();
     }
 
+    public void removerParticipante(Cliente cliente) {
+        if (this.participantes.contains(cliente)) {
+            this.participantes.remove(cliente);
+        } else {
+            throw new IllegalArgumentException("Cliente não encontrado no grupo.");
+        }
+    }
+
     private void verificarAtivacaoGrupo() {
         if (this.participantes.size() >= MIN_PARTICIPANTES) {
             this.grupoAtivo = true;
