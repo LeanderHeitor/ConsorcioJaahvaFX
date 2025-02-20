@@ -28,7 +28,11 @@ public class Fachada {
         usuarioController.cadastrarUsuario(usuario);
     }
 
-    //MÉTODOS GRUPO
+   // MÉTODOS GRUPO
+
+    public void obterGrupo(Long grupoId) {
+        grupoController.obterGrupo(grupoId);
+    }
 
     public Grupo criarGrupo(Admin admin, Consorcio consorcio) {
         return grupoController.criarGrupo(admin, consorcio);
@@ -38,23 +42,58 @@ public class Fachada {
         grupoController.adicionarParticipante(grupoId, cliente);
     }
 
-    public void imprimirGrupos(){
+    public void imprimirGrupos() {
         grupoController.imprimirGrupos();
     }
 
-    //MÉTODOS CONSORCIO
+    public void imprimirGrupo(Long grupoId) {
+        grupoController.imprimirGrupo(grupoId);
+    }
 
-    public Consorcio criarConsoricio(){
+    public void removerGrupo(Long grupoId) {
+        grupoController.removerGrupo(grupoId);
+    }
+
+    public void removerParticipanteGrupo(Long grupoId, Cliente cliente) {
+        grupoController.removerParticipante(grupoId, cliente);
+    }
+
+    public void atualizarGrupo() {
+        grupoController.atualizarGrupo();
+    }
+
+    // MÉTODOS CONSORCIO
+
+    public Consorcio criarConsoricio() {
         return consorcioController.criarConsorcio();
     }
 
-
-    public void escolherPremiacao(Grupo grupo, Consorcio consorcio){
+    public void escolherPremiacao(Grupo grupo, Consorcio consorcio) {
         consorcioController.escolherPremiacao(grupo, consorcio);
     }
 
-    public void adicionarGrupo(Long id, Grupo grupo){
-        adicionarGrupo(id, grupo);
+    public void obterConsorcio(Long id) {
+        consorcioController.obterConsorcio(id);
+    }
+
+    public void listarConsorcios() {
+        consorcioController.listarConsorcios();
+    }
+
+    public void imprimirConsorcios() {
+        consorcioController.imprimirConsorcios();
+    }
+
+    public void atualizarConsorcio(Long id, Consorcio consorcioAtualizado) {
+        consorcioController.atualizarConsorcio(id, consorcioAtualizado);
+    }
+
+    public void removerConsorcio(Long id) {
+        consorcioController.removerConsorcio(id);
+    }
+
+    public void adicionarGrupo(Long id, Grupo grupo) {
+        consorcioController.adicionarGrupo(id, grupo);
     }
 
     //MÉTODOS USUÁRIOS
@@ -75,5 +114,8 @@ public class Fachada {
 
     public void gerarBoletoTxt(Pagamento pagamento){
         pagamentoController.gerarBoletoTxt(pagamento);
+    }
+    public void listarPagamento(){
+        pagamentoController.listarPagamento();
     }
 }
