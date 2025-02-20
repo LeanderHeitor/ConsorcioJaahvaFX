@@ -5,7 +5,7 @@ import com.itextpdf.layout.Document;
 import lombok.Data;
 
 @Data
-public abstract class Pagamento /*implements Processo*/ {
+public abstract class Pagamento implements Processo {
     private long id;
     private Cliente pagador;
     private Double valor;
@@ -23,10 +23,10 @@ public abstract class Pagamento /*implements Processo*/ {
 
 
 
-    // @Override
-    // public Document sendRelatorio(){
-    //     return null;
-    // }
+    @Override
+    public Relatorio sendRelatorio(){
+        return null;
+    }
 
 
 }

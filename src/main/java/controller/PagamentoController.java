@@ -17,12 +17,7 @@ public class PagamentoController {
 
     private PagamentoRepository pagamentoRepository = new PagamentoRepository();
 
-    /**
-     * Processa o pagamento parcelado de um cartão de crédito.
-     * Inclui diversas validações (nulos, número do cartão, valor e parcelas).
-     *
-     * @param cartao Objeto que contém os dados do cartão de crédito e do pagamento.
-     */
+    
     public void processarParcelas(CartaoDeCredito cartao) {
         // 1. Verificar se o objeto cartão é nulo
         if (cartao == null) {
@@ -84,8 +79,7 @@ public class PagamentoController {
 
 
     private boolean autorizarPagamento(CartaoDeCredito cartao) {
-        // Simples checagem: se o número tiver 16 dígitos, retorna true.
-        // Em um cenário real, haveria integração com APIs de cartão.
+        //se o número tiver 16 dígitos, retorna true.
         String numCartaoLimpo = cartao.getNumeroCartao().replaceAll("-", "").replaceAll("\\s+", "");
         return (numCartaoLimpo.length() == 16);
     }

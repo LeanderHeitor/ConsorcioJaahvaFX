@@ -57,7 +57,7 @@ import java.util.Scanner;
    -
  */
 
-public class Main {
+public class Testes {
     public static void main(String[] args) {
 
         // Repositorios
@@ -184,21 +184,22 @@ public class Main {
                     Cliente clienteVinculado = (Cliente) pContrato.getUsuarioVinculado();
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
 
-                    pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
+                    fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
                     // Teste Pagamento
                     Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD );
-                    pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
-                    pagamentoController.processarPagamento(pPix, PgrupoInativo, pContrato);
+                    fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
+                    fachada.processarPagamento(pPix, PgrupoInativo, pContrato);
                     Pix pix12 = new Pix("alice@pix.com", 2, 200.0, pClienteE);
                     CartaoDeCredito cartao12 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, pClienteC);
-                    pagamentoController.processarPagamento(pPix, PgrupoAtivo, pContrato);
+                    fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
                     System.out.println("Saldo devedor: " + pix12.getValor());
-                    pagamentoController.atualizarSaldoDevedor(pix12, 500);
-                    pagamentoController.atualizarSaldoDevedor(pix12, 180);
+                    fachada.atualizarSaldoDevedor(pix12, 500);
+                    fachada.atualizarSaldoDevedor(pix12, 180);
                     System.out.println("Saldo devedor: " + pix12.getValor());
-                    pagamentoController.gerarBoletoTxt(pix12);
+                    fachada.gerarBoletoTxt(pix12);
+                    fachada.gerarBoletoTxt(pix5);
                     break;
                 case 3:
                     System.out.println("\n\n");

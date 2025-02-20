@@ -8,11 +8,13 @@ public class Fachada {
     private ConsorcioController consorcioController;
     private GrupoController grupoController;
     private static Fachada fachada;
+    private PagamentoController pagamentoController;
 
     public Fachada(){
         this.consorcioController = new ConsorcioController();
         this.grupoController = new GrupoController();
         this.usuarioController = new UsuarioController();
+        this.pagamentoController = new PagamentoController();
     }
 
     public static Fachada getInstance() {
@@ -57,6 +59,21 @@ public class Fachada {
 
     //MÉTODOS USUÁRIOS
 
+    //METODOS PAGAMENTOS
 
+    public void processarParcelas(CartaoDeCredito cartao){
+        pagamentoController.processarParcelas(cartao);
+    }
 
+    public void processarPagamento(Pagamento pagamento, Grupo grupo, Contrato Contrato){
+        pagamentoController.processarPagamento(pagamento, grupo, Contrato);
+    }
+
+    public void atualizarSaldoDevedor(Pagamento pagamento, double valor){
+        pagamentoController.atualizarSaldoDevedor(pagamento, valor);
+    }
+
+    public void gerarBoletoTxt(Pagamento pagamento){
+        pagamentoController.gerarBoletoTxt(pagamento);
+    }
 }
