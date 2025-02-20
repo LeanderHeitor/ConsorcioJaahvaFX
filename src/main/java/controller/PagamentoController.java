@@ -1,12 +1,18 @@
 package controller;
-import lombok.Data;
-import model .*;
+import model.CartaoDeCredito;
+import model.Contrato;
+import model.Grupo;
+import model.Pagamento;
+import model.Usuario;
 import repository.ContratoRepository;
 import repository.PagamentoRepository;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.time.LocalDate;
 
-@Data
+
 public class PagamentoController {
     private static PagamentoController instance;
     private PagamentoRepository pagamentoRepository;
@@ -167,7 +173,7 @@ public class PagamentoController {
             System.err.println("Erro ao criar arquivo TXT: " + e.getMessage());
         }
     }
-}
+
     public void ListarPagamentos(){
         System.out.println("---Listando todos os pagamentos---");
         for (Pagamento p : pagamentoRepository.getPagamentos()) {

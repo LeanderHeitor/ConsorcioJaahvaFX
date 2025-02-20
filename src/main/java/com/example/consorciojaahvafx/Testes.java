@@ -57,7 +57,7 @@ import java.util.Scanner;
    -
  */
 
-public class Main {
+public class Testes {
     public static void main(String[] args) {
 
         // Repositorios
@@ -111,11 +111,11 @@ public class Main {
                     Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com", "123456");
 
                     // criar Pagamento objects
-                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0);
-                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0);
+                    Pix pix1 = new Pix("alice@pix.com", 2, 200.0, cliente1);
+                    Pix pix2 = new Pix("bob@pix.com", 3, 400.0, cliente2);
                     pix1.setValor(500.0);
-                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5);
-                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5);
+                    CartaoDeCredito cartao1 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, cliente2);
+                    CartaoDeCredito cartao2 = new CartaoDeCredito(23, "1544-5678-9012-3456", 4, 525.5, cliente1);
 
                     // Criar objetos Consorcio
                     Consorcio consorcio1 = new Consorcio();
