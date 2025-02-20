@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.PasswordField?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Screen.CadastroUsuarioController" spacing="20" padding="20">
+    <!-- Cabeçalho -->
+    <HBox spacing="10">
+        <Label text="Cadastro de Usuário" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Formulário de Cadastro -->
+    <VBox spacing="15">
+        <HBox spacing="10">
+            <Label text="Nome:"/>
+            <TextField fx:id="txtNome" promptText="Digite o nome completo" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="CPF:"/>
+            <TextField fx:id="txtCpf" promptText="Digite o CPF" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Telefone:"/>
+            <TextField fx:id="txtTelefone" promptText="Digite o telefone" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Email:"/>
+            <TextField fx:id="txtEmail" promptText="Digite o email" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Senha:"/>
+            <PasswordField fx:id="txtSenha" promptText="Digite a senha" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Confirmar Senha:"/>
+            <PasswordField fx:id="txtConfirmarSenha" promptText="Confirme a senha" />
+        </HBox>
+
+        <!-- Botões -->
+        <HBox spacing="20" alignment="center">
+            <Button text="Cadastrar" fx:id="btnCadastrar" />
+            <Button text="Cancelar" fx:id="btnCancelar" />
+        </HBox>
+    </VBox>
+</VBox>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Screen.PainelAdminController" spacing="20" padding="20">
+    <!-- Cabeçalho -->
+    <HBox spacing="10">
+        <Label text="Painel de Administração" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Seção de Controle de Grupos -->
+    <VBox spacing="10">
+        <Label text="Gerenciamento de Grupos de Consórcio" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Cadastrar Novo Grupo" fx:id="btnCadastrarGrupo" />
+            <Button text="Visualizar Grupos" fx:id="btnVisualizarGrupos" />
+            <Button text="Editar Grupo" fx:id="btnEditarGrupo" />
+            <Button text="Excluir Grupo" fx:id="btnExcluirGrupo" />
+        </HBox>
+    </VBox>
+
+    <!-- Seção de Controle de Clientes -->
+    <VBox spacing="10">
+        <Label text="Gerenciamento de Clientes" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Consultar Clientes" fx:id="btnConsultarClientes" />
+            <Button text="Visualizar Histórico de Contemplações" fx:id="btnHistContemplacoes" />
+        </HBox>
+    </VBox>
+
+    <!-- Seção de Controle de Contratos -->
+    <VBox spacing="10">
+        <Label text="Gerenciamento de Contratos" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Consultar Contratos" fx:id="btnConsultarContratos" />
+            <Button text="Emitir Relatórios" fx:id="btnEmitirRelatorios" />
+        </HBox>
+    </VBox>
+
+    <!-- Seção de Logout -->
+    <HBox spacing="10" alignment="center">
+        <Button text="Sair" fx:id="btnSair" />
+    </HBox>
+</VBox>

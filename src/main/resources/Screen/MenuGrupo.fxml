@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Screen.MenuGrupoController" spacing="20" padding="20">
+    <!-- Cabeçalho -->
+    <HBox spacing="10">
+        <Label text="Menu do Grupo de Consórcio" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Seção de Ações de Grupo -->
+    <VBox spacing="10">
+        <Label text="Ações de Grupo" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Cadastrar Novo Grupo" fx:id="btnCadastrarGrupo" />
+            <Button text="Visualizar Grupos" fx:id="btnVisualizarGrupos" />
+            <Button text="Editar Grupo" fx:id="btnEditarGrupo" />
+            <Button text="Excluir Grupo" fx:id="btnExcluirGrupo" />
+        </HBox>
+    </VBox>
+
+    <!-- Seção de Consultas e Relatórios -->
+    <VBox spacing="10">
+        <Label text="Consultas e Relatórios" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Consultar Detalhes do Grupo" fx:id="btnConsultarGrupo" />
+            <Button text="Emitir Relatórios de Grupo" fx:id="btnEmitirRelatorioGrupo" />
+        </HBox>
+    </VBox>
+
+    <!-- Seção de Voltar -->
+    <HBox spacing="10" alignment="center">
+        <Button text="Voltar" fx:id="btnVoltar" />
+    </HBox>
+</VBox>

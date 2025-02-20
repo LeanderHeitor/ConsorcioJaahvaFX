@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Screen.MenuUsuarioController" spacing="20" padding="20">
+    <!-- Cabeçalho -->
+    <HBox spacing="10">
+        <Label text="Menu do Usuário" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Ações do Usuário -->
+    <VBox spacing="10">
+        <Label text="Ações" style="-fx-font-size: 16px;"/>
+        <HBox spacing="10">
+            <Button text="Visualizar Perfil" fx:id="btnVisualizarPerfil" />
+            <Button text="Alterar Senha" fx:id="btnAlterarSenha" />
+        </HBox>
+    </VBox>
+
+    <!-- Logout -->
+    <HBox spacing="10" alignment="center">
+        <Button text="Sair" fx:id="btnSair" />
+    </HBox>
+</VBox>
