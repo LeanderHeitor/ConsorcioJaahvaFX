@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="255.0" fitWidth="250.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/cone.png" />
+                  <Image url="@../../../images/cone.png" />
                </image>
                <VBox.margin>
                   <Insets top="10.0" />

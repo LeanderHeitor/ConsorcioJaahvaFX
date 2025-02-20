@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/zeca.png" />
+                        <Image url="@../../../images/zeca.png" />
                      </image>
                   </ImageView>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="140.0">

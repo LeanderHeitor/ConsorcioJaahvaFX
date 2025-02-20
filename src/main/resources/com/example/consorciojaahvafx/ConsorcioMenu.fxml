@@ -24,7 +24,7 @@
                   </Text>
                   <ImageView fitHeight="130.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/carrinho.png" />
+                        <Image url="@../../../images/carrinho.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="162.0" spacing="20.0">

@@ -1,3 +1,5 @@
+package com.example.consorciojaahvafx;
+
 import controller.*;
 import enums.Premiacao;
 import enums.TipoServico;

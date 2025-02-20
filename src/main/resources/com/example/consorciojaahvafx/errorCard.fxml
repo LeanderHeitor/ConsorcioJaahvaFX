@@ -18,7 +18,7 @@
          <children>
             <ImageView fitHeight="255.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/tonel.png" />
+                  <Image url="@../../../images/tonel.png" />
                </image>
             </ImageView>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="465.0">
