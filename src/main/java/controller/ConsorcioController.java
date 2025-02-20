@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import enums.Premiacao;
 import model.Consorcio;
 import model.Grupo;
@@ -27,59 +29,73 @@ public class ConsorcioController {
         }
     }
 
-    public void escolherPremiacao(Grupo grupo, Consorcio consorcio){
-        
-            if(grupo.getParticipantes().size() >= 3){
-                switch (consorcio.getPremiacao()) {
-                    case Casa:
-                        grupo.setNumeroParcelas(180);
-                        grupo.setTaxaAdm(60000);
-                        grupo.setValorTotal(300000 + grupo.getTaxaAdm());
-                        consorcio.setPremiacao(Premiacao.Casa);
-                        consorcio.setValorRestante(grupo.getValorTotal());
-                        grupo.setContemplacao(consorcio);
+    public void escolherPremiacao(Grupo grupo, Consorcio consorcio) {
 
-                        break;
-                    case Apartamento:
-                        grupo.setNumeroParcelas(280);
-                        grupo.setValorTotal(500000);
-                        grupo.setTaxaAdm(90000);
-                        consorcio.setPremiacao(Premiacao.Apartamento);
-                        consorcio.setValorRestante(grupo.getValorTotal());
-                        grupo.setContemplacao(consorcio);
-                        break;
-                    case Carro:
-                        grupo.setNumeroParcelas(72);
-                        grupo.setValorTotal(80000);
-                        grupo.setTaxaAdm(12000);
-                        consorcio.setPremiacao(Premiacao.Carro);
-                        consorcio.setValorRestante(grupo.getValorTotal());
-                        grupo.setContemplacao(consorcio);
-                        break;
-                    case Moto:
-                        grupo.setNumeroParcelas(180);
-                        grupo.setValorTotal(300000);
-                        grupo.setTaxaAdm(60000);
-                        consorcio.setPremiacao(Premiacao.Moto);
-                        consorcio.setValorRestante(grupo.getValorTotal());
-                        grupo.setContemplacao(consorcio);
-                        break;
-                    case Console:
-                        grupo.setNumeroParcelas(48);
-                        grupo.setValorTotal(25000);
-                        grupo.setTaxaAdm(3750);
-                        consorcio.setPremiacao(Premiacao.Console);
-                        consorcio.setValorRestante(grupo.getValorTotal());
-                        grupo.setContemplacao(consorcio);
-                        break;
-                
-                    default:
-                        System.out.println("Premiação Inválida.");
-                        break;
-                }
+        if (grupo.getParticipantes().size() >= 3) {
+            switch (consorcio.getPremiacao()) {
+                case Casa:
+                    grupo.setNumeroParcelas(180);
+                    grupo.setTaxaAdm(60000);
+                    grupo.setValorTotal(300000 + grupo.getTaxaAdm());
+                    consorcio.setPremiacao(Premiacao.Casa);
+                    consorcio.setValorRestante(grupo.getValorTotal());
+                    grupo.setContemplacao(consorcio);
 
+                    break;
+                case Apartamento:
+                    grupo.setNumeroParcelas(280);
+                    grupo.setValorTotal(500000);
+                    grupo.setTaxaAdm(90000);
+                    consorcio.setPremiacao(Premiacao.Apartamento);
+                    consorcio.setValorRestante(grupo.getValorTotal());
+                    grupo.setContemplacao(consorcio);
+                    break;
+                case Carro:
+                    grupo.setNumeroParcelas(72);
+                    grupo.setValorTotal(80000);
+                    grupo.setTaxaAdm(12000);
+                    consorcio.setPremiacao(Premiacao.Carro);
+                    consorcio.setValorRestante(grupo.getValorTotal());
+                    grupo.setContemplacao(consorcio);
+                    break;
+                case Moto:
+                    grupo.setNumeroParcelas(180);
+                    grupo.setValorTotal(300000);
+                    grupo.setTaxaAdm(60000);
+                    consorcio.setPremiacao(Premiacao.Moto);
+                    consorcio.setValorRestante(grupo.getValorTotal());
+                    grupo.setContemplacao(consorcio);
+                    break;
+                case Console:
+                    grupo.setNumeroParcelas(48);
+                    grupo.setValorTotal(25000);
+                    grupo.setTaxaAdm(3750);
+                    consorcio.setPremiacao(Premiacao.Console);
+                    consorcio.setValorRestante(grupo.getValorTotal());
+                    grupo.setContemplacao(consorcio);
+                    break;
+
+                default:
+                    System.out.println("Premiação Inválida.");
+                    break;
             }
-        
+
+        }
+
+    }
+
+    public Consorcio obterConsorcio(Long id) {
+        return consorcioRepository.findById(id);
+    }
+
+    public List<Consorcio> listarConsorcios() {
+        return consorcioRepository.findAll();
+    }
+
+    public void imprimirConsorcios() {
+        for (Consorcio consorcio : consorcioRepository.findAll()) {
+            System.out.println("O consórcio é formado por: " + consorcio);
+        }
     }
 
     public void adicionarGrupo(Long id, Grupo grupo) {
@@ -91,9 +107,34 @@ public class ConsorcioController {
         } else {
             System.out.println("Consórcio não encontrado com o ID " + id);
         }
-    
+
     }
 
+    public void atualizarConsorcio(Long id, Consorcio consorcioAtualizado) {
+        Consorcio consorcio = consorcioRepository.findById(id);
+        if (consorcio != null) {
+            consorcio.setDataInicio(consorcioAtualizado.getDataInicio());
+            consorcio.setDataSorteio(consorcioAtualizado.getDataSorteio());
+            consorcio.setGrupos(consorcioAtualizado.getGrupos());
+            consorcio.setValorRestante(consorcioAtualizado.getValorRestante());
+            consorcio.setPremiacao(consorcioAtualizado.getPremiacao());
+            consorcio.setContemplados(consorcioAtualizado.getContemplados());
+            consorcio.setParcelasPagas(consorcioAtualizado.getParcelasPagas());
+            consorcioRepository.update(consorcio);
+            System.out.println("Consórcio atualizado com sucesso.");
+        } else {
+            System.out.println("Consórcio não encontrado com o ID " + id);
+        }
+    }
 
+    public void removerConsorcio(Long id) {
+        Consorcio consorcio = consorcioRepository.findById(id);
+        if (consorcio != null) {
+            consorcioRepository.remove(consorcio);
+            System.out.println("Consórcio removido com sucesso.");
+        } else {
+            System.out.println("Consórcio não encontrado com o ID " + id);
+        }
+    }
 
 }
