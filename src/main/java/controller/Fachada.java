@@ -112,8 +112,8 @@ public class Fachada {
         pagamentoController.atualizarSaldoDevedor(pagamento, valor);
     }
 
-    public void gerarBoletoTxt(Pagamento pagamento){
-        pagamentoController.gerarBoletoTxt(pagamento);
+    public void gerarBoletoTxt(Boleto boleto){
+        pagamentoController.gerarBoletoTxt(boleto);
     }
     public void listarPagamento(){
         pagamentoController.listarPagamentos();

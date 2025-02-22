@@ -2,6 +2,7 @@ package com.example.consorciojaahvafx;
 import controller.*;
 import enums.Premiacao;
 import enums.StatusCliente;
+import java.time.LocalDate;
 import enums.TipoServico;
 import model.*;
 import repository.*;
@@ -221,19 +222,19 @@ public class Testes {
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
                     // Teste Pagamento
+                    Boleto boleto1 = new Boleto("1234-5678-ABCD", LocalDate.now().plusDays(5), 3L, 500.0, pClienteA);
                     Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD );
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
                     fachada.processarPagamento(pPix, PgrupoInativo, pContrato);
                     Pix pix12 = new Pix("alice@pix.com", 2, 200.0, pClienteE);
-                    CartaoDeCredito cartao12 = new CartaoDeCredito(23, "1234-5678-9012-3456", 5, 525.5, pClienteC);
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
-
                     System.out.println("Saldo devedor: " + pix12.getValor());
                     fachada.atualizarSaldoDevedor(pix12, 500);
+                    System.out.println("Saldo devedor: " + pix12.getValor());
                     fachada.atualizarSaldoDevedor(pix12, 180);
                     System.out.println("Saldo devedor: " + pix12.getValor());
-                    fachada.gerarBoletoTxt(pix12);
-                    fachada.gerarBoletoTxt(pix5);
+                    fachada.gerarBoletoTxt(boleto1);
+
                     break;
                 case 3:
                     System.out.println("\n\n");
