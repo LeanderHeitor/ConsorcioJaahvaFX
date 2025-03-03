@@ -241,17 +241,27 @@ public class Testes {
 
                     Consorcio jConsorcio = consorcioController.criarConsorcio();
 
-                    Admin jAdmin = new Admin("Lebron", 0010, "777787777", "TheKing@gmail.com", "123456");
+                    Admin jAdmin = new Admin("João", 0010, "777787777", "JL@gmail.com", "123456");
 
                     Cliente jClienteA = new Cliente("Luka", 0020, "888898888", "Tesouro@gmail.com", "654321");
-                    Cliente jClienteB = new Cliente("Reaves", 0030, "999909999", "TheWhiteKobe@gmail.com", "654123");
+                    Cliente jClienteB = new Cliente("Joabson", 0030, "999909999", "Joabson@gmail.com", "654123");
+                    Cliente jClienteC = new Cliente("Cleberson", 0040, "999909911", "Cleberson@gmail.com", "78787878");
+                    Cliente jClienteD = new Cliente("Deivson", 0050, "999909922", "Deivson@gmail.com", "89898989");
 
-                    Grupo grupoLakers = grupoController.criarGrupo(jAdmin, jConsorcio);
+                    Grupo grupoJAtivo = grupoController.criarGrupo(jAdmin, jConsorcio);
+                    Grupo grupoJInativo = grupoController.criarGrupo(jAdmin, jConsorcio);
 
-                    grupoController.adicionarParticipante(grupoLakers.getId(), jClienteA);
-                    grupoController.adicionarParticipante(grupoLakers.getId(), jClienteB);
+                    grupoController.adicionarParticipante(grupoJAtivo.getId(), jClienteA);
+                    grupoController.adicionarParticipante(grupoJAtivo.getId(), jClienteB);
+                    grupoController.adicionarParticipante(grupoJAtivo.getId(), jClienteC);
+                    grupoController.adicionarParticipante(grupoJAtivo.getId(), jClienteD);
 
-                    System.out.println("Grupo: " + grupoLakers);
+                    consorcioController.adicionarGrupo(jConsorcio.getId(), grupoJInativo);
+                    consorcioController.adicionarGrupo(jConsorcio.getId(), grupoJAtivo);
+
+                    System.out.println("Grupo Ativo: " + grupoJAtivo);
+                    System.out.println("Grupo Inativo: " + grupoJInativo);
+
 
                     break;
 

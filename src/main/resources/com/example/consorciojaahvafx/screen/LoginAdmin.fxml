@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screen.LoginAdminController">
+   <right>
+      <AnchorPane prefHeight="700.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#a020f0" layoutX="223.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login de Adminstrador" wrappingWidth="260.904296875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <PasswordField layoutX="187.0" layoutY="374.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+            <TextField layoutX="188.0" layoutY="310.0" prefHeight="30.0" prefWidth="270.0" promptText="Admin" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+            <Button fx:id="voltarButton" layoutX="347.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleVoltarButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #A020F0;" text="Voltar" textFill="WHITE" />
+            <Button fx:id="sairButton" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSairButtonAction" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
+            <Button fx:id="loginButton" layoutX="184.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #A020F0;" text="Login" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #A020F0;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="82.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JAAH Consórcio" textAlignment="CENTER" wrappingWidth="335.00780487060547">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
