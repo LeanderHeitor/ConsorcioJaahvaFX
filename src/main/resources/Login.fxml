@@ -26,7 +26,7 @@
          <children>
             <TextField layoutX="188.0" layoutY="310.0" prefHeight="30.0" prefWidth="270.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
             <PasswordField layoutX="187.0" layoutY="374.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
-            <Button fx:id="loginButton" layoutX="184.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #A020F0;" text="Login" textFill="WHITE" />
+            <Button fx:id="loginButton" layoutX="184.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Login" textFill="WHITE" />
             <Hyperlink fx:id="loginAdminLink" layoutX="238.0" layoutY="634.0" onAction="#handleAdminLinkAction" style="-fx-background-color: transparent;" text="Login como Administrador" textFill="#a020f0" />
             <Text fill="#a020f0" layoutX="223.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login de Usuário">
                <font>
@@ -34,7 +34,7 @@
                </font>
             </Text>
             <Button layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSairButtonAction" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
-            <Button fx:id="cadastrarButton" layoutX="347.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleCadastrarButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #A020F0;" text="Cadastrar" textFill="WHITE" />
+            <Button fx:id="cadastrarButton" layoutX="347.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleCadastrarButtonAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Cadastrar" textFill="WHITE" />
          </children>
       </AnchorPane>
    </right>

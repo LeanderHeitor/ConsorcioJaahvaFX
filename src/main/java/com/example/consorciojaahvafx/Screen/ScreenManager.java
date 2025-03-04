@@ -12,10 +12,12 @@ public class ScreenManager {
 
     //Declarações dos métodos
     private Scene loginScene;
+    private Scene cadastroUsuarioScene;
 
     //Controladores das telas
     private LoginController loginController;
     private LoginAdminController loginAdminController;
+    private CadastroController cadastroController;
 
 
 
@@ -43,6 +45,10 @@ public class ScreenManager {
         return loginScene;
     }
 
+    public Scene getCadastroUsuarioScene() {
+        return cadastroUsuarioScene;
+    }
+
     public LoginController getLoginController() {
         return loginController;
     }
@@ -51,11 +57,19 @@ public class ScreenManager {
         return loginAdminController;
     }
 
+    public CadastroController getCadastroController() {
+        return cadastroController;
+    }
+
     private void carregarTelas() {
         try {
             FXMLLoader loginPane = new FXMLLoader(getClass().getResource("Login.fxml"));
             this.loginScene = new Scene(loginPane.load());
             this.loginController = loginPane.getController();
+
+            FXMLLoader CadastroPane = new FXMLLoader(getClass().getResource("Cadastro.fxml"));
+            this.cadastroUsuarioScene = new Scene(CadastroPane.load());
+            this.cadastroController = CadastroPane.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,6 +78,7 @@ public class ScreenManager {
     public void changeScene(String fxml, String titulo) {
         switch (fxml) {
             case "Login.fxml": stg.setScene(loginScene);
+            case "Cadastro.fxml": stg.setScene(cadastroUsuarioScene);
         }
         stg.setTitle(titulo);
     }
