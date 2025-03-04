@@ -1,15 +1,14 @@
 package com.example.consorciojaahvafx;
-import controller.*;
-import enums.Premiacao;
-import enums.StatusCliente;
+import com.example.consorciojaahvafx.controller.*;
+import com.example.consorciojaahvafx.enums.Premiacao;
+
 import java.time.LocalDate;
-import enums.TipoServico;
-import model.*;
-import repository.*;
+import com.example.consorciojaahvafx.enums.TipoServico;
+import com.example.consorciojaahvafx.model.*;
+import com.example.consorciojaahvafx.repository.*;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -19,28 +18,28 @@ import java.util.Scanner;
     TODO ScreenManager
     - separar a tela que o usuário acessará caso seja cliente ou usuário
 
-    TODO controller dos relatorios
+    TODO com.example.consorciojaahvafx.controller dos relatorios
    - exportar relatorios para .pdf
    - gerar relatorios automaticamente mensalmente
    - Relatório detalhado do saldo devedor de todos os clientes de um grupo.
 
-   TODO controller dos usuarios
+   TODO com.example.consorciojaahvafx.controller dos usuarios
    - validação dos tipos de dados (CPF, email, etc)
    - proibir usuários duplicados
    - proibir usuário cliente e admin com qualquer dado em comum
 
-   TODO controller dos pagamentos
+   TODO com.example.consorciojaahvafx.controller dos pagamentos
    - atualização do saldo do usuario e das parcelas pagas/pendentes automaticamente
    - bloquear pagamento de lances ou parcelas com o grupo inativo ✔
    - gerar boletos de maneira automática e enviar pros relatorios
 
-   TODO controller dos contratos
+   TODO com.example.consorciojaahvafx.controller dos contratos
    - não permitir a realização do contrato para um usuário devedor
    - não permitir 2 contratos de um mesmo tipo para um mesmo usuário
 
    - atualizar o status dos contratos de maneira automática
 
-   TODO controller dos consorcios
+   TODO com.example.consorciojaahvafx.controller dos consorcios
    - cálculo das parcelas com base no valor, num de pessoas e taxa de admin
    - não permitir que um grupo seja criado com um valor de parcela menor que 100
    - não permitir que um usuário seja contemplado 2x no mesmo grupo
@@ -48,7 +47,7 @@ import java.util.Scanner;
     - Consulta ao histórico de contemplações de um grupo, incluindo data, cliente contemplado e status do grupo.
     - não permitir que o admin seja contemplado
 
-   TODO controller dos grupos
+   TODO com.example.consorciojaahvafx.controller dos grupos
    - não permitir que um grupo seja criado ativo com menos de 3 pessoas
    - não permitir que um grupo seja criado com um valor de taxa de administração maior que 10% e menor que 1%
    - excluir um participante caso ele esteja devendo mais da metade do número total de parcelas
