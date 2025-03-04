@@ -1,4 +1,4 @@
-module com.example.consorciojaahvafx {
+module com.example.consorcioJaahvaFX {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
@@ -7,7 +7,12 @@ module com.example.consorciojaahvafx {
     requires io;
 
 
-    opens com.example.consorciojaahvafx to javafx.fxml;
-    exports com.example.consorciojaahvafx;
-    exports com.example.consorciojaahvafx.screen to javafx.graphics;
+    opens Screen to javafx.fxml, javafx.base;
+    exports Screen;
+
+    opens model to javafx.fxml;
+    exports model;
+
+    opens controller to javafx.fxml;
+    exports controller;
 }

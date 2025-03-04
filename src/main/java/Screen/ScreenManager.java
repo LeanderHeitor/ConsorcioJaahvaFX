@@ -43,6 +43,14 @@ public class ScreenManager {
         return loginScene;
     }
 
+    public LoginController getLoginController() {
+        return loginController;
+    }
+
+    public LoginAdminController getLoginAdminController() {
+        return loginAdminController;
+    }
+
     private void carregarTelas() {
         try {
             FXMLLoader loginPane = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -51,6 +59,13 @@ public class ScreenManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void changeScene(String fxml, String titulo) {
+        switch (fxml) {
+            case "Login.fxml": stg.setScene(loginScene);
+        }
+        stg.setTitle(titulo);
     }
 
 }
