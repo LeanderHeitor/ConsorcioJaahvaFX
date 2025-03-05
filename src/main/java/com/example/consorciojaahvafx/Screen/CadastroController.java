@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import com.example.consorciojaahvafx.model.Usuario;
 import com.example.consorciojaahvafx.model.Admin;
 import com.example.consorciojaahvafx.model.Cliente;
-import jdk.internal.org.jline.terminal.TerminalBuilder;
 
 public class CadastroController {
 
@@ -17,6 +16,9 @@ public class CadastroController {
 
     @FXML
     private Button cadastrar;
+
+    @FXML
+    private Button sairButton;
 
     @FXML
     private RadioButton rbAdmin;
@@ -68,5 +70,10 @@ public class CadastroController {
         senha.clear();
         confirmacaoSenha.clear();
         rbAdmin.setSelected(false);
+    }
+
+    @FXML
+    private void sairButtonAction() {
+        System.exit(0);
     }
 }

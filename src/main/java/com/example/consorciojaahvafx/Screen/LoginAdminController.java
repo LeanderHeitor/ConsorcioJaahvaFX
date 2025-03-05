@@ -27,6 +27,7 @@ public class LoginAdminController {
 
     public void initialize() {}
 
+    @FXML
     private void handleLoginButtonAction() {
         String username = adminName.getText();
         String password = adminPassword.getText();
@@ -38,10 +39,12 @@ public class LoginAdminController {
         }
     }
 
+    @FXML
     private void handleSairButtonAction() {
         System.exit(0);
     }
 
+    @FXML
     private void handleVoltarButtonAction() {}
 
 }

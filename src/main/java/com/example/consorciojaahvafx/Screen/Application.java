@@ -24,7 +24,6 @@ public class Application extends javafx.application.Application {
         ScreenManager.setStg(stage);
         System.out.println(getClass().getResource("/Login.fxml"));
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
-        //FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/screen/Login.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("J aah Consorcio");
         stage.setResizable(true);

@@ -24,7 +24,7 @@
     <right>
         <AnchorPane prefHeight="700.0" prefWidth="727.0" BorderPane.alignment="CENTER">
             <children>
-                <Button layoutX="622.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
+                <Button fx:id="sairButton" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#sairButtonAction" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
             <Text fill="#a020f0" layoutX="288.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastre-se" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
@@ -36,7 +36,7 @@
             <TextField layoutX="215.0" layoutY="380.0" prefHeight="30.0" prefWidth="270.0" promptText="E-mail:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
             <PasswordField layoutX="215.0" layoutY="430.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
             <PasswordField layoutX="215.0" layoutY="480.0" prefHeight="30.0" prefWidth="270.0" promptText="Confirme sua senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <Button fx:id="finCadastro" layoutX="295.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleFinalizarCadastroButtonAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Finalizar Cadastro" textFill="WHITE" />
+            <Button fx:id="finCadastro" layoutX="295.0" layoutY="562.0" mnemonicParsing="false" onAction="#cadastrarUsuario" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Finalizar Cadastro" textFill="WHITE" />
             <RadioButton layoutX="262.0" layoutY="180.0" mnemonicParsing="false" text="Cadastrar Administrador" textFill="#a020f0">
                <font>
                   <Font size="14.0" />
