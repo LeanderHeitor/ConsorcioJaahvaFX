@@ -65,6 +65,16 @@ public class UsuarioRepository implements IRepository<Usuario> {
         }
     }
 
+    public Usuario findByCPF(long cpf) {
+        int i = getIndex(cpf);
+            if (i == indice) {
+                return this.usuarios.get(i);
+            } else {
+                System.out.println("Usuário não encontrado");
+                return null;
+            }
+    }
+
     @Override
     public List<Usuario> findAll() {
         return this.usuarios;
@@ -82,6 +92,7 @@ public class UsuarioRepository implements IRepository<Usuario> {
         }
         return resposta;
     }
+
     @Override
     public int getIndex(long id) {
         for (int i = 0; i < indice; i++) {

@@ -13,10 +13,14 @@ import lombok.Getter;
 
 @Getter
 public class Application extends javafx.application.Application {
-    private final Fachada server;
+    private Fachada server;
 
     public Application() {
         this.server = Fachada.getInstance();
+    }
+
+    public Fachada getServer() {
+        return server;
     }
 
     @Override

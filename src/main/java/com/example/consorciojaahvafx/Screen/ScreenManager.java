@@ -13,11 +13,13 @@ public class ScreenManager {
     //Declarações dos métodos
     private Scene loginScene;
     private Scene cadastroUsuarioScene;
+    private Scene abaClienteScene;
 
     //Controladores das telas
     private LoginController loginController;
     private LoginAdminController loginAdminController;
     private CadastroController cadastroController;
+    private AbaClienteController abaClienteController;
 
 
 
@@ -40,7 +42,7 @@ public class ScreenManager {
         ScreenManager.stg = stg;
     }
 
-    //Getters and Setters
+    //Getters and Setters Scenes
     public Scene getLoginScene() {
         return loginScene;
     }
@@ -48,7 +50,11 @@ public class ScreenManager {
     public Scene getCadastroUsuarioScene() {
         return cadastroUsuarioScene;
     }
+    public Scene getAbaClienteScene() {
+        return abaClienteScene;
+    }
 
+    //Getters ans Setters Controllers
     public LoginController getLoginController() {
         return loginController;
     }
@@ -60,6 +66,9 @@ public class ScreenManager {
     public CadastroController getCadastroController() {
         return cadastroController;
     }
+    public AbaClienteController getAbaClienteController() {
+        return abaClienteController;
+    }
 
     private void carregarTelas() {
         try {
@@ -70,6 +79,10 @@ public class ScreenManager {
             FXMLLoader CadastroPane = new FXMLLoader(getClass().getResource("Cadastro.fxml"));
             this.cadastroUsuarioScene = new Scene(CadastroPane.load());
             this.cadastroController = CadastroPane.getController();
+
+            FXMLLoader abaClientePane = new FXMLLoader(getClass().getResource("AbaCliente.fxml"));
+            this.abaClienteScene = new Scene(abaClientePane.load());
+            this.abaClienteController = abaClientePane.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -79,6 +92,7 @@ public class ScreenManager {
         switch (fxml) {
             case "Login.fxml": stg.setScene(loginScene);
             case "Cadastro.fxml": stg.setScene(cadastroUsuarioScene);
+            case "AbaCliente.fxml": stg.setScene(abaClienteScene);
         }
         stg.setTitle(titulo);
     }

@@ -1,6 +1,9 @@
 package com.example.consorciojaahvafx.Screen;
 
-import javafx.application.Application;
+import com.example.consorciojaahvafx.controller.Fachada;
+import com.example.consorciojaahvafx.exception.UsuarioNaoExisteException;
+import com.example.consorciojaahvafx.model.Admin;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 
+import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +24,7 @@ public class LoginController {
     private Application app;
 
     @FXML
-    private TextField usernameField;
+    private TextField CPF;
 
     @FXML
     private PasswordField passwordField;
@@ -40,17 +44,32 @@ public class LoginController {
     @FXML
     private Text mensagemText;
 
-    public void initialize(URL location, ResourceBundle resources) {}
+    @FXML
+    public void initialize() {
+        mensagemText.setVisible(false);
+    }
 
     @FXML
-    private void handleLoginButtonAction() {
-        String username = usernameField.getText();
+    private void handleLoginButtonAction(ActionEvent event) throws IOException, LoginException {
+        String cpf = String.valueOf(Long.valueOf(CPF.getText()));
         String password = passwordField.getText();
 
-        if (username.equals("cliente") && password.equals("123456")) {
-            mensagemText.setText("Login efetuado com sucesso!");
+        if (cpf.isEmpty() || password.isEmpty()) {
+            mensagemText.setVisible(true);
+            mensagemText.setText("Preencha os campos");
         } else {
-            mensagemText.setText("Usuário ou senha incorretos!");
+            try {
+                app.getServer().checarLogin(Long.valueOf(cpf), password);
+            } catch (UsuarioNaoExisteException e) {
+                mensagemText.setVisible(true);
+                mensagemText.setText("Usuário não encontrado");
+
+                ScreenManager sm = new ScreenManager().getInstance();
+
+               // if (e.getFxml().equals("abaCliente.fxml")) { IMPLEMENTAR TODA ESSA LÓGICA.
+                 //   sm.getAbaClienteController().setClienteLogado(e.getUsuario);
+                }
+            }
         }
     }
 

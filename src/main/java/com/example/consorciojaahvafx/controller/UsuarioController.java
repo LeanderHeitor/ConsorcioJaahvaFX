@@ -5,6 +5,9 @@ import com.example.consorciojaahvafx.model.*;
 import com.example.consorciojaahvafx.repository.IRepository;
 import com.example.consorciojaahvafx.repository.UsuarioRepository;
 import com.example.consorciojaahvafx.repository.GrupoRepository;
+import com.example.consorciojaahvafx.model.Admin;
+import com.itextpdf.io.exceptions.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,33 +30,24 @@ public class UsuarioController {
         return instance;
     }
 
-
-    // login
-    public void login(String login, String senha) throws RuntimeException{
-        Usuario usuario = null;
-        try{
-            if(login != null && senha != null) {
-                if (login.length() == 11) {
-                    usuario = usuarioRepository.findById(Long.parseLong(login));
+    public void checarLogin(Long cpf, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso, UsuarioNaoExisteException, UsuarioLogadoComSucessoException, CPFincorretoException {
+        UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
+        Usuario usuario = repoConcreto.findByCPF(cpf);
+        if (usuario.getCPF() == cpf) {
+            if (usuario.getCPF() == cpf && usuario.getSenha().equals(senha)) {
+                if (usuario instanceof Admin && ((Admin) usuario).isAdmin()) {
+                    throw new AdmLogadoComSucesso("Administrador logado com sucesso."); //fazer a lógica de telas a serem carregadas.
+                } else if (usuario instanceof  Admin && !((Admin) usuario).isAdmin()) {
+                    throw new ClienteLogadoComSucesso("Cliente Logado com sucesso.");
                 } else {
-                    usuario = usuarioRepository.findAll().stream().filter(u -> u.getEmail().equals(login)).findFirst().get();
+                    throw new CPFincorretoException("CPF incorreto.");
                 }
-                if (usuario != null) {
-                    if (usuario.getSenha().equals(senha)) {
-                        System.out.println("Login realizado com sucesso");
-                    } else {
-                        throw new FormularioIncorretoException("Senha incorreta");
-                    }
-                } else {
-                    throw new FormularioIncorretoException("Usuário não encontrado");
-                }
-            } else {
-                throw new FormularioIncorretoException("Preencha todos os campos!");
             }
-        }catch (Exception e){
-            throw new FormularioIncorretoException("Não foi possível fazer login");
+        } else {
+            throw new UsuarioNaoExisteException("Usuário não encontrado.");
         }
     }
+
 
     //Regras de negócio relacionadas ao usuario
     public void cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException {
@@ -124,7 +118,7 @@ public class UsuarioController {
         System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(cpf));
     }
 
-    public double consultarPenalidade(long cpf) {
+    public double consultarPenalidade(Long cpf ) {
         return penalidades.getOrDefault(cpf, 0.0);
     }
 
@@ -158,7 +152,7 @@ public class UsuarioController {
         System.out.println("Cliente reembolsado: " + cliente.getNome() + " | Valor: " + grupo.getLances());
     }
 
-    private double calcularValorParcela(double valorTotal, int numParcelas, double taxaAdm) {
+    public double calcularValorParcela(double valorTotal, int numParcelas, double taxaAdm) {
         double valorParcelaSemTaxa = valorTotal / numParcelas;
         double valorTaxaAdm = valorParcelaSemTaxa * (taxaAdm / 100);
         return valorParcelaSemTaxa + valorTaxaAdm;
