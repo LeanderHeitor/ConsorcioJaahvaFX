@@ -1,4 +1,5 @@
 package com.example.consorciojaahvafx;
+
 import com.example.consorciojaahvafx.controller.*;
 import com.example.consorciojaahvafx.enums.Premiacao;
 
@@ -6,7 +7,6 @@ import java.time.LocalDate;
 import com.example.consorciojaahvafx.enums.TipoServico;
 import com.example.consorciojaahvafx.model.*;
 import com.example.consorciojaahvafx.repository.*;
-
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -63,20 +63,18 @@ public class Testes {
 
     public static void main(String[] args) {
 
-
         // Criando 4 Admins
         ArrayList<Admin> admins = new ArrayList<>();
-        admins.add(new Admin("Admin1", 11111111111L, "1111-1111", "admin1@email.com", "senha1"));
-        admins.add(new Admin("Admin2", 22222222222L, "2222-2222", "admin2@email.com", "senha2"));
-        admins.add(new Admin("Admin3", 33333333333L, "3333-3333", "admin3@email.com", "senha3"));
-        admins.add(new Admin("Admin4", 44444444444L, "4444-4444", "admin4@email.com", "senha4"));
+        admins.add(new Admin("Admin1", "11111111111", "1111-1111", "admin1@email.com", "senha1", 1L));
+        admins.add(new Admin("Admin2", "22222222222", "2222-2222", "admin2@email.com", "senha2", 2L));
+        admins.add(new Admin("Admin3", "33333333333", "3333-3333", "admin3@email.com", "senha3", 3L));
+        admins.add(new Admin("Admin4", "44444444444", "4444-4444", "admin4@email.com", "senha4", 4L));
 
         // Criando 4 Clientes
         ArrayList<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente("Cliente1", 55555555555L, "5555-5555", "cliente1@email.com", "senha1"));
-        clientes.add(new Cliente("Cliente2", 66666666666L, "6666-6666", "cliente2@email.com", "senha2"));
-        clientes.add(new Cliente("Cliente3", 77777777777L, "7777-7777", "cliente3@email.com", "senha3"));
-        clientes.add(new Cliente("Cliente4", 88888888888L, "8888-8888", "cliente4@email.com", "senha4"));
+        clientes.add(new Cliente("Cliente1", "55555555555", "5555-5555", "cliente1@email.com", "senha1", 5L));
+        clientes.add(new Cliente("Cliente3", "77777777777", "7777-7777", "cliente3@email.com", "senha3", 7L));
+        clientes.add(new Cliente("Cliente4", "88888888888", "8888-8888", "cliente4@email.com", "senha4", 8L));
 
         // Repositorios
         PagamentoRepository pagamentoRepository = (PagamentoRepository) PagamentoRepository.getInstance();
@@ -89,15 +87,15 @@ public class Testes {
         // Controllers
         ConsorcioController consorcioController = ConsorcioController.getInstance();
         GrupoController grupoController = GrupoController.getInstance();
-        PagamentoController pagamentoController =  PagamentoController.getInstance();
-        UsuarioController usuarioController =  UsuarioController.getInstance();
+        PagamentoController pagamentoController = PagamentoController.getInstance();
+        UsuarioController usuarioController = UsuarioController.getInstance();
         ContratoController contratoController = ContratoController.getInstance();
         RelatorioController relatorioController = RelatorioController.getInstance();
 
-        //Fachada
+        // Fachada
         Fachada fachada = new Fachada();
 
-        Scanner dado = dado = new Scanner(System.in);
+        Scanner dado = new Scanner(System.in);
         boolean sair = false;
 
         while (!sair) {
@@ -107,28 +105,31 @@ public class Testes {
             System.out.println("2 - Testes Heitor:");
             System.out.println("3 - Testes João:");
             System.out.println("4 - Testes Antônio:");
-            System.out.println("5 - Testes Simulados:");
+            System.out.println("5 - Mostrar Requisitos:");
             System.out.println("0 - Sair:");
 
             int op = dado.nextInt();
             dado.nextLine();
 
             switch (op) {
+                case 0:
+                    sair = true;
+                    break;
                 case 1:
                     System.out.println("\n\n");
                     // first try
-                    Usuario usuario = new Cliente("Joao", 12345678901L, "123-456-7890", "joao.bolado@example.com", "123456");
+                    Usuario usuario = new Cliente("Joao", "12345678901", "123-456-7890", "joao.bolado@example.com", "123456", 9L);
                     Relatorio relatorio = new Relatorio("Monthly Report");
                     Pix pix = new Pix("john.doe@pix.com", 1, 100.0, (Cliente) usuario);
                     // Create Cliente objects
-                    Cliente cliente1 = new Cliente("Alice", 12345678901L, "123-456-7890", "alice@example.com", "123456");
-                    Cliente cliente2 = new Cliente("Bob", 23456789012L, "234-567-8901", "bob@example.com", "123456");
-                    Cliente cliente3 = new Cliente("Charlie", 34567890123L, "345-678-9012", "charlie@example.com", "123456");
-                    Cliente cliente4 = new Cliente("Diana", 45678901234L, "456-789-0123", "diana@example.com", "123456");
+                    Cliente cliente1 = new Cliente("Alice", "12345678901", "123-456-7890", "alice@example.com", "123456", 10L);
+                    Cliente cliente2 = new Cliente("Bob", "23456789012", "234-567-8901", "bob@example.com", "123456", 11L);
+                    Cliente cliente3 = new Cliente("Charlie", "34567890123", "345-678-9012", "charlie@example.com", "123456", 12L);
+                    Cliente cliente4 = new Cliente("Diana", "45678901234", "456-789-0123", "diana@example.com", "123456", 13L);
 
                     // fazendo Admin objects
-                    Admin admin1 = new Admin("Eve", 56789012345L, "567-890-1234", "eve@example.com", "123456");
-                    Admin admin2 = new Admin("Frank", 67890123456L, "678-901-2345", "frank@example.com", "123456");
+                    Admin admin1 = new Admin("Eve", "56789012345", "567-890-1234", "eve@example.com", "123456", 14L);
+                    Admin admin2 = new Admin("Frank", "67890123456", "678-901-2345", "frank@example.com", "123456", 15L);
 
                     // criar Pagamento objects
                     Pix pix1 = new Pix("alice@pix.com", 2, 200.0, cliente1);
@@ -177,14 +178,6 @@ public class Testes {
                     relatorioController.listarRelatorios();
                     contratoController.listarContratos();
 
-                   // contratoController.imprimirConteudoContratos();
-
-                    /*
-                    for (Admin admin : admins) {
-                        contratoController.RenegociarContrato(contrato1, admin);
-                    }
-
-                     */
                     System.out.println("\nTeste: RenegociarContrato com Admin diferente do usuário vinculado");
                     System.out.println("Resultado: Renegociação realizada com sucesso");
 
@@ -194,14 +187,14 @@ public class Testes {
 
                     /// Recursos para teste
                     Consorcio pConsorcio = consorcioController.criarConsorcio();
-                    Admin pAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com", "123456");
-                    Cliente pClienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
-                    Cliente pClienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
-                    Cliente pClienteC = new Cliente("Seabro", 00004, "819999989002", "seabra@gmail.com", "123456");
+                    Admin pAdmin = new Admin("Heitor", "00001", "81984951", "eito@gmail.com", "123456", 16L);
+                    Cliente pClienteA = new Cliente("Antonio", "00002", "819999989002", "antonio@gmail.com", "123456", 17L);
+                    Cliente pClienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", 18L);
+                    Cliente pClienteC = new Cliente("Seabro", "00004", "819999989002", "seabra@gmail.com", "123456", 19L);
 
-                    Cliente pClienteD = new Cliente ("Jonas", 00005, "819999989022", "jonas@gmail.com", "234567");
-                    Cliente pClienteE = new Cliente ("Alice", 00007, "819999989052", "Alice@gmail.com", "234567");
-                    Cliente pClienteF = new Cliente ("Joao", 22222, "819999989062", "joao@gmail.com", "234567");
+                    Cliente pClienteD = new Cliente("Jonas", "00005", "819999989022", "jonas@gmail.com", "234567", 20L);
+                    Cliente pClienteE = new Cliente("Alice", "00007", "819999989052", "Alice@gmail.com", "234567", 21L);
+                    Cliente pClienteF = new Cliente("Joao", "22222", "819999989062", "joao@gmail.com", "234567", 22L);
                     Pix pPix = new Pix("pix@example.com", 1, 100.2, pClienteA);
                     Grupo PgrupoAtivo = grupoController.criarGrupo(pAdmin, pConsorcio);
                     Grupo PgrupoInativo = grupoController.criarGrupo(pAdmin, pConsorcio);
@@ -210,10 +203,8 @@ public class Testes {
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteB);
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteC);
 
-
                     Contrato pContrato = new Contrato(pAdmin, TipoServico.CONTRATACAO);
                     pContrato.setUsuarioVinculado(pClienteA);
-
 
                     Cliente clienteVinculado = (Cliente) pContrato.getUsuarioVinculado();
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
@@ -222,7 +213,7 @@ public class Testes {
 
                     // Teste Pagamento
                     Boleto boleto1 = new Boleto("1234-5678-ABCD", LocalDate.now().plusDays(5), 3L, 500.0, pClienteA);
-                    Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD );
+                    Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD);
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
                     fachada.processarPagamento(pPix, PgrupoInativo, pContrato);
                     Pix pix12 = new Pix("alice@pix.com", 2, 200.0, pClienteE);
@@ -240,12 +231,12 @@ public class Testes {
 
                     Consorcio jConsorcio = consorcioController.criarConsorcio();
 
-                    Admin jAdmin = new Admin("João", 0010, "777787777", "JL@gmail.com", "123456");
+                    Admin jAdmin = new Admin("João", "0010", "777787777", "JL@gmail.com", "123456", 23L);
 
-                    Cliente jClienteA = new Cliente("Luka", 0020, "888898888", "Tesouro@gmail.com", "654321");
-                    Cliente jClienteB = new Cliente("Joabson", 0030, "999909999", "Joabson@gmail.com", "654123");
-                    Cliente jClienteC = new Cliente("Cleberson", 0040, "999909911", "Cleberson@gmail.com", "78787878");
-                    Cliente jClienteD = new Cliente("Deivson", 0050, "999909922", "Deivson@gmail.com", "89898989");
+                    Cliente jClienteA = new Cliente("Luka", "0020", "888898888", "Tesouro@gmail.com", "654321", 24L);
+                    Cliente jClienteB = new Cliente("Joabson", "0030", "999909999", "Joabson@gmail.com", "654123", 25L);
+                    Cliente jClienteC = new Cliente("Cleberson", "0040", "999909911", "Cleberson@gmail.com", "78787878", 26L);
+                    Cliente jClienteD = new Cliente("Deivson", "0050", "999909922", "Deivson@gmail.com", "89898989", 27L);
 
                     Grupo grupoJAtivo = grupoController.criarGrupo(jAdmin, jConsorcio);
                     Grupo grupoJInativo = grupoController.criarGrupo(jAdmin, jConsorcio);
@@ -261,7 +252,6 @@ public class Testes {
                     System.out.println("Grupo Ativo: " + grupoJAtivo);
                     System.out.println("Grupo Inativo: " + grupoJInativo);
 
-
                     break;
 
                 case 4:
@@ -271,10 +261,10 @@ public class Testes {
                     Consorcio consorcio = consorcioController.criarConsorcio();
 
                     // CLASSE GRUPO
-                    Admin cAdmin = new Admin("Heitor", 00001, "81984951", "eito@gmail.com", "123456");
-                    Cliente clienteA = new Cliente("Antonio", 00002, "819999989002", "antonio@gmail.com", "123456");
-                    Cliente clienteB = new Cliente("Joao", 00003, "819999989002", "Joao@gmail.com", "123456");
-                    Cliente clienteC = new Cliente("Eito", 00004, "819999989002", "seabra@gmail.com", "123456");
+                    Admin cAdmin = new Admin("Antônio", "00001", "81984951","Email","senha",323232);
+                    Cliente clienteA = new Cliente("Antonio", "01823", "9999999", "null", "null", 123456);
+                    Cliente clienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", 123456);
+                    Cliente clienteC = new Cliente("Eito", "00004", "819999989002", "seabra@gmail.com", "123456", 123456);
 
                     Grupo grupoAtivo = grupoController.criarGrupo(cAdmin, consorcio);
                     Grupo grupoInativo = grupoController.criarGrupo(cAdmin, consorcio);
@@ -289,58 +279,16 @@ public class Testes {
                     System.out.println("Grupo Ativo: " + grupoAtivo);
                     System.out.println("Grupo Inativo: " + grupoInativo);
 
-                    // usuarioController.cadastrarUsuario(clienteA);
-
                     break;
-
-
-
 
                 case 5:
                     System.out.println("\n\n");
                     // TESTE DE USABILIDADE
-                    System.out.println("\n\n----TESTES DE USABILIDADE-----\n\n");
+                    System.out.println("\n\n----REQUISITOS-----\n\n");
+                    System.out.println(
+                            "REQ01: Gerenciamento de clientes, incluindo informações como nome, CPF, telefone e e-mail.");
+                    Cliente cliente = new Cliente("Nome", "123456789101", "(81)99876-5432)", "email.ficticio@gmail.com", "senha.senha", 28L);
 
-                    Consorcio uConsorcio = consorcioController.criarConsorcio(); // É aberto um consórcio
-
-                    Admin admin = new Admin("Seabra", 00001, "1985198", "Seabra@gmail.com", "saas"); // Admin é criado
-
-                    Grupo grupo = fachada.criarGrupo(admin, uConsorcio); // Grupo é criado inativo
-
-                    consorcioController.adicionarGrupo(uConsorcio.getId(), grupo); // Grupo é adicionado ao consórcio
-
-                    System.out.println("Consorcio criado: " + uConsorcio);
-
-                    System.out.println("Grupo criado: " + grupo);
-
-                    Cliente clienteT1 = new Cliente("Antonio", 00001, "819999989002", "a.guedes.cn@gmail.com", "123456");
-                    Cliente clienteT2 = new Cliente("Eito", 00002, "4984984", "eito@gmail.com", "123456");
-                    Cliente clienteT3 = new Cliente("joao", 00003, "123456789", "joao@example.com", "123456");
-
-                    fachada.adicionarParticipante(grupo.getId(), clienteT1);
-                    fachada.adicionarParticipante(grupo.getId(), clienteT2);
-                    fachada.adicionarParticipante(grupo.getId(), clienteT3);
-
-                    uConsorcio.setPremiacao(Premiacao.Casa);
-
-                    fachada.escolherPremiacao(grupo, uConsorcio);
-
-                    System.out.println("Grupo Ativo: " + grupo);
-
-                    fachada.cadastrarusuario(clienteT1);
-                    fachada.cadastrarusuario(clienteT2);
-                    fachada.cadastrarusuario(clienteT3);
-
-                    break;
-
-
-
-                case 0:
-                    System.out.println("Fim dos testes.");
-                    sair = true;
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
                     break;
             }
 

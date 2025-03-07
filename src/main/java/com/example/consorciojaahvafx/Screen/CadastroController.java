@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CadastroController {
 
     @FXML
-    private TextField nome, CPF, Telefone, Email;
+    private TextField nome, cpf, telefone, email;
 
     @FXML
     private PasswordField senha, confirmacaoSenha;
@@ -32,33 +32,33 @@ public class CadastroController {
     @FXML
     private void cadastrarUsuario() {
         String nome = this.nome.getText();
-        long CPF;
-        try {CPF = Long.parseLong(this.CPF.getText());
-        } catch (NumberFormatException e) {
-            System.out.println("Erro, insira apenas números. ");
-            return;
-        }
-        String telefone = this.Telefone.getText();
-        String email = this.Email.getText();
+        String cpf = this.cpf.getText().trim(); // CPF agora é String
+        String telefone = this.telefone.getText();
+        String email = this.email.getText();
         String senha = this.senha.getText();
         String confirmacaoSenha = this.confirmacaoSenha.getText();
 
-        if (nome.isEmpty() || telefone.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+        if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             exibirAlerta("Erro", "Preencha todos os campos!");
+            return;
+        }
+
+        if (!cpf.matches("\\d+")) { // Verifica se o CPF contém apenas números
+            exibirAlerta("Erro", "CPF inválido! Digite apenas números.");
             return;
         }
 
         Usuario usuario;
         if(senha.equals(confirmacaoSenha)) {
             if(rbAdmin.isSelected()) {
-                usuario = new Admin(nome, CPF, telefone, email, senha);
-                exibirAlerta("Sucesso.", "Administrador cadastrado com sucesso.");
-                carregarTelaLogin();
+                usuario = new Admin(nome, cpf, telefone, email, senha, (Long) null);
+                exibirAlerta("Sucesso", "Administrador cadastrado com sucesso.");
             } else {
-                usuario = new Cliente(nome, CPF, telefone, email, senha);
-                exibirAlerta("Sucesso.", "Cliente cadastrado com sucesso.");
-                carregarTelaLogin();
+                usuario = new Cliente(nome, cpf, telefone, email, senha, (Long) null);
+                exibirAlerta("Sucesso", "Cliente cadastrado com sucesso.");
             }
+            limparCampos();
+            carregarTelaLogin();
         } else {
             exibirAlerta("Erro", "Senhas não são iguais. Tente novamente.");
         }
@@ -74,16 +74,16 @@ public class CadastroController {
 
     private void limparCampos() {
         nome.clear();
-        CPF.clear();
-        Telefone.clear();
-        Email.clear();
+        cpf.clear();
+        telefone.clear();
+        email.clear();
         senha.clear();
         confirmacaoSenha.clear();
         rbAdmin.setSelected(false);
     }
 
     private void carregarTelaLogin() {
-        try{
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Login.fxml"));
             Parent root = fxmlLoader.load();
 

@@ -30,11 +30,11 @@ public class UsuarioController {
         return instance;
     }
 
-    public void checarLogin(Long cpf, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso, UsuarioNaoExisteException, UsuarioLogadoComSucessoException, CPFincorretoException {
+    public void checarLogin(long id, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso, UsuarioNaoExisteException, UsuarioLogadoComSucessoException, CPFincorretoException {
         UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
-        Usuario usuario = repoConcreto.findByCPF(cpf);
-        if (usuario.getCPF() == cpf) {
-            if (usuario.getCPF() == cpf && usuario.getSenha().equals(senha)) {
+        Usuario usuario = repoConcreto.findById(id);
+        if (usuario.getId().equals(id)) {
+            if (usuario.getId().equals(id) && usuario.getSenha().equals(senha)) {
                 if (usuario instanceof Admin && ((Admin) usuario).isAdmin()) {
                     throw new AdmLogadoComSucesso("Administrador logado com sucesso."); //fazer a lógica de telas a serem carregadas.
                 } else if (usuario instanceof  Admin && !((Admin) usuario).isAdmin()) {
@@ -47,7 +47,6 @@ public class UsuarioController {
             throw new UsuarioNaoExisteException("Usuário não encontrado.");
         }
     }
-
 
     //Regras de negócio relacionadas ao usuario
     public void cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException {
@@ -71,10 +70,10 @@ public class UsuarioController {
         }
     }
 
-    public boolean isAdmin(long cpf) throws CPFNaoPodeSerNuloException, UsuarioNuloException {
-        Usuario usuario = usuarioRepository.findById(cpf);
+    public boolean isAdmin(long id) throws CPFNaoPodeSerNuloException, UsuarioNuloException {
+        Usuario usuario = usuarioRepository.findById(id);
         if (usuario == null) {
-            throw new UsuarioNuloException("Usuário com CPF " + cpf + " não encontrado.");
+            throw new UsuarioNuloException("Usuário com ID " + id + " não encontrado.");
         }
         return usuario instanceof Admin;
     }
@@ -84,7 +83,7 @@ public class UsuarioController {
             throw new UsuarioNuloException("Usuário não pode ser nulo.");
         }
         if (usuario.getNome() != null) {
-            if (isAdmin(usuario.getCPF()) == true) {
+            if (isAdmin(usuario.getId()) == true) {
                 usuarioRepository.add(usuario); //confirmar se seria cadastrado como usuário apenas
             }
         } else {
@@ -98,7 +97,7 @@ public class UsuarioController {
             throw new UsuarioNuloException("Usuario não pode ser nulo.");
         }
         if (usuario.getNome() != null) {
-            if (isAdmin(usuario.getCPF()) == false) {
+            if (isAdmin(usuario.getId()) == false) {
                 usuarioRepository.add(usuario); // confirmar método
             } else {
                 throw new CPFNaoPodeSerNuloException("Usuário não pode ser um cliente");
@@ -106,30 +105,30 @@ public class UsuarioController {
         }
     }
 
-    public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {
+    public void penalizarUsuario(long id, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {
         if (valorPenalidade <= 0) { throw new ValorDaPenalidadePositivoException("O valor da penalidade precisa ser positivo.");}
 
-        Usuario usuario = usuarioRepository.findById(cpf);
+        Usuario usuario = usuarioRepository.findById(id);
         if (usuario == null) {
-            throw new UsuarioNuloException(" Usuário com o CPF " + cpf + "não encontrado.");
+            throw new UsuarioNuloException(" Usuário com o ID " + id + "não encontrado.");
         }
 
-        penalidades.put(cpf, penalidades.getOrDefault(cpf, 0.0) + valorPenalidade);
-        System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(cpf));
+        penalidades.put(usuario.getId(), valorPenalidade);
+        System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(id));
     }
 
-    public double consultarPenalidade(Long cpf ) {
-        return penalidades.getOrDefault(cpf, 0.0);
+    public double consultarPenalidade(String id ) {
+        return penalidades.getOrDefault(id, 0.0);
     }
 
-    public void cancelarLance(long cpfAdmin, long cpfCliente, int idGrupo) {
+    public void cancelarLance(long idAdmin, long idCliente, int idGrupo) {
 
-        Admin admin = (Admin) usuarioRepository.findById(cpfAdmin);
+        Admin admin = (Admin) usuarioRepository.findById(idAdmin);
         if (admin == null) {
             throw new IllegalArgumentException("Administrador não encontrado.");
         }
 
-        Cliente cliente = (Cliente) usuarioRepository.findById(cpfCliente);
+        Cliente cliente = (Cliente) usuarioRepository.findById(idCliente);
         if (cliente == null) {
             throw new IllegalArgumentException("Cliente não encontrado.");
         }
@@ -139,11 +138,9 @@ public class UsuarioController {
             throw new IllegalArgumentException("Grupo não encontrado.");
         }
 
-
         if (grupo.getLances() == null) {
             throw new IllegalArgumentException("O cliente não fez um lance neste grupo.");
         }
-
 
         grupo.cancelarLance(grupo.getLances());
         grupo.reembolsarLance(grupo.getValorTotal());
@@ -158,9 +155,8 @@ public class UsuarioController {
         return valorParcelaSemTaxa + valorTaxaAdm;
     }
 
-
-    public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {
-        Admin admin = (Admin) usuarioRepository.findById(cpf);
+    public void alterarTaxaAdmin(long id, int idGrupo, double valorTaxa) {
+        Admin admin = (Admin) usuarioRepository.findById(id);
         if (admin == null) {
             throw new IllegalArgumentException("Administrador não encontrado. ");
         }
@@ -178,5 +174,4 @@ public class UsuarioController {
 
         double novoValorParcela = calcularValorParcela(grupo.getValorTotal(), grupo.getNumeroParcelas(), valorTaxa);
     }
-    
 }

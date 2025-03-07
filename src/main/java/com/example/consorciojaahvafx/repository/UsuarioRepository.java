@@ -35,7 +35,7 @@ public class UsuarioRepository implements IRepository<Usuario> {
 
     @Override
     public void remove(Usuario usuario) {
-        int i = getIndex(usuario.getCPF()); // busca pelo cpf
+        int i = getIndex(usuario.getId()); // busca pelo cpf
         if (i == indice) {
             this.usuarios.remove(i);
             indice = indice - 1;
@@ -46,7 +46,7 @@ public class UsuarioRepository implements IRepository<Usuario> {
 
     @Override
     public void update(Usuario usuario) {
-        int i = getIndex(usuario.getCPF());  //busquei pelo cpf
+        int i = getIndex(usuario.getId());  
         if (i == indice) {
             this.usuarios.set(i, usuario);
         } else {
@@ -96,7 +96,7 @@ public class UsuarioRepository implements IRepository<Usuario> {
     @Override
     public int getIndex(long id) {
         for (int i = 0; i < indice; i++) {
-            if (usuarios.get(i).getCPF() == id) {
+            if (usuarios.get(i) != null && usuarios.get(i).getCPF().equals(String.valueOf(id))) {
                 return i;
             }
         }

@@ -13,8 +13,9 @@ public class Admin extends Usuario {
     public Admin(){
         this.gruposVistoria = new ArrayList<>();
     }
-    public Admin(String nome, long CPF, String telefone, String email, String senha) {
-        super(nome, CPF, telefone, email, senha);
+
+    public Admin(String nome, String CPF, String telefone, String email, String senha, long id) {
+        super(nome, CPF, telefone, email, senha, id);
         this.gruposVistoria = new ArrayList<>();
     }
 
