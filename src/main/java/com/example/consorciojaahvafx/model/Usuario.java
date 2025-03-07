@@ -12,13 +12,13 @@ public abstract class Usuario {
     private Long id;
 
     public Usuario(){}
-    public Usuario(String nome, String CPF, String telefone, String email, String senha, long id) {
+    public Usuario(String nome, String CPF, String telefone, String email, String senha) {
         this.nome = nome;
         this.CPF = CPF;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
-        this.id = id;
+        this.id = null;
     }
 
     

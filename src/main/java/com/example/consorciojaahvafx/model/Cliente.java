@@ -1,18 +1,20 @@
 package com.example.consorciojaahvafx.model;
 
 import lombok.Data;
+import lombok.ToString;
 import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 public class Cliente extends Usuario {
 
     private ArrayList<Grupo> consorciosAtivos;
     private ArrayList<Contrato> historicoContratos;
 
-    public Cliente(String nome, String CPF, String telefone, String email, String senha, long id) {
-        super(nome, CPF, telefone, email, senha, id);
+    public Cliente(String nome, String CPF, String telefone, String email, String senha, Long id) {
+        super(nome, CPF, telefone, email, senha);
         this.consorciosAtivos = new ArrayList<>();
         this.historicoContratos = new ArrayList<>();
     }

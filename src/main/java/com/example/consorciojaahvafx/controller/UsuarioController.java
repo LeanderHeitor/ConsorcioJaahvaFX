@@ -92,13 +92,13 @@ public class UsuarioController {
         }
     }
 
-    public void cadastrarCliente (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException {
-        if (usuario == null) {
+    public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {
+        if (cliente == null) {
             throw new UsuarioNuloException("Usuario não pode ser nulo.");
         }
-        if (usuario.getNome() != null) {
-            if (isAdmin(usuario.getId()) == false) {
-                usuarioRepository.add(usuario); // confirmar método
+        if (cliente.getNome() != null) {
+            if (isAdmin(cliente.getId()) == false) {
+                usuarioRepository.add(cliente); // confirmar método
             } else {
                 throw new CPFNaoPodeSerNuloException("Usuário não pode ser um cliente");
             }
@@ -173,5 +173,19 @@ public class UsuarioController {
         grupo.setTaxaAdm(valorTaxa);
 
         double novoValorParcela = calcularValorParcela(grupo.getValorTotal(), grupo.getNumeroParcelas(), valorTaxa);
+    }
+
+    public void mostrarClientes() {
+        UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
+        for (Cliente cliente : repoConcreto.findAllCliente()) {
+            System.out.println("Cliente: " + cliente);
+        }
+    }
+
+    public void mostrarUsuarios() {
+        UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
+        for (Usuario usuario : repoConcreto.findAll()) {
+            System.out.println("Cliente: " + usuario);
+        }
     }
 }

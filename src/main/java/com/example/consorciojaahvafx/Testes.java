@@ -261,10 +261,10 @@ public class Testes {
                     Consorcio consorcio = consorcioController.criarConsorcio();
 
                     // CLASSE GRUPO
-                    Admin cAdmin = new Admin("Antônio", "00001", "81984951","Email","senha",323232);
-                    Cliente clienteA = new Cliente("Antonio", "01823", "9999999", "null", "null", 123456);
-                    Cliente clienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", 123456);
-                    Cliente clienteC = new Cliente("Eito", "00004", "819999989002", "seabra@gmail.com", "123456", 123456);
+                    Admin cAdmin = new Admin("Antônio", "00001", "81984951","Email","senha",null);
+                    Cliente clienteA = new Cliente("Antonio", "01823", "9999999", "null", "null", null);
+                    Cliente clienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", null);
+                    Cliente clienteC = new Cliente("saas", "13241", "1234134", "3245123", "23451234", null);
 
                     Grupo grupoAtivo = grupoController.criarGrupo(cAdmin, consorcio);
                     Grupo grupoInativo = grupoController.criarGrupo(cAdmin, consorcio);
@@ -285,10 +285,13 @@ public class Testes {
                     System.out.println("\n\n");
                     // TESTE DE USABILIDADE
                     System.out.println("\n\n----REQUISITOS-----\n\n");
-                    System.out.println(
-                            "REQ01: Gerenciamento de clientes, incluindo informações como nome, CPF, telefone e e-mail.");
-                    Cliente cliente = new Cliente("Nome", "123456789101", "(81)99876-5432)", "email.ficticio@gmail.com", "senha.senha", 28L);
-
+                    System.out.println("REQ01: Gerenciamento de clientes, incluindo informações como nome, CPF, telefone e e-mail.");
+                    Cliente clienteF = new Cliente("Joao", "12345678901", "123-456-7890", "adio", "senha", null);
+                    Cliente clienteF1 = new Cliente("asda", "1231248901", "1241890", "a135", "s246246a", null);
+                    fachada.cadastrarCliente(clienteF);
+                    fachada.cadastrarCliente(clienteF1);
+                    usuarioController.mostrarUsuarios();
+                    
                     break;
             }
 

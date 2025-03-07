@@ -14,6 +14,8 @@ public class UsuarioRepository implements IRepository<Usuario> {
     private static IRepository<Usuario> instance;
     private ArrayList<Usuario> usuarios;
     private int indice;
+    private static long nextId = 1;
+
 
     public UsuarioRepository() {
         this.usuarios = new ArrayList<>();
@@ -29,6 +31,7 @@ public class UsuarioRepository implements IRepository<Usuario> {
 
     @Override
     public void add(Usuario usuario) {
+        usuario.setId(nextId++);
         this.usuarios.add(usuario);
         indice = indice + 1;
     }

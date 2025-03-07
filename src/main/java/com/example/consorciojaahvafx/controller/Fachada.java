@@ -127,7 +127,7 @@ public class Fachada {
     public void  cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException{usuarioController.cadastrarUsuario(usuario);}
     public boolean isAdmin(long cpf) throws CPFNaoPodeSerNuloException, UsuarioNuloException {usuarioController.isAdmin(cpf); return true;}
     public void cadastrarAdmin (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {usuarioController.cadastrarUsuario(usuario);}
-    public void cadastrarCliente (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(usuario);}
+    public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(cliente);}
     public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(cpf, valorPenalidade);}
     public void cancelarLance(long cpfAdmin, long cpfCliente, int idGrupo){usuarioController.cancelarLance(cpfAdmin, cpfCliente, idGrupo);}
     public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {usuarioController.alterarTaxaAdmin(cpf, idGrupo, valorTaxa);}
