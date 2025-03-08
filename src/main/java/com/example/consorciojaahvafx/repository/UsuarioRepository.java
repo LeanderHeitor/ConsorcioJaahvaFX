@@ -68,14 +68,13 @@ public class UsuarioRepository implements IRepository<Usuario> {
         }
     }
 
-    public Usuario findByCPF(long cpf) {
-        int i = getIndex(cpf);
-            if (i == indice) {
-                return this.usuarios.get(i);
-            } else {
-                System.out.println("Usuário não encontrado");
-                return null;
+    public Usuario findByCPF(String CPF) {
+        for (Usuario usuario : this.usuarios) {
+            if (usuario.getCPF().equals(CPF)) {
+                return usuario;
             }
+        }
+        return null;
     }
 
     @Override
@@ -125,4 +124,5 @@ public class UsuarioRepository implements IRepository<Usuario> {
         }
         return clientes;
     }
+
 }

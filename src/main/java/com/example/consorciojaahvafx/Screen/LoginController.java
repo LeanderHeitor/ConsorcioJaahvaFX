@@ -24,10 +24,10 @@ public class LoginController {
     private Application app;
 
     @FXML
-    private TextField CPF;
+    private TextField tfLoginCpf;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField tfSenhaLogin;
 
     @FXML
     private Button loginButton;
@@ -35,11 +35,9 @@ public class LoginController {
     @FXML
     private Button cadastrarButton;
 
-    @FXML
-    private Hyperlink adminLink;
 
     @FXML
-    private Button sairButton;
+    private Button btSair;
 
     @FXML
     private Text mensagemText;
@@ -51,23 +49,30 @@ public class LoginController {
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) throws IOException, LoginException {
-        String cpf = String.valueOf(Long.valueOf(CPF.getText()));
-        String password = passwordField.getText();
+        String cpf = tfLoginCpf.getText();
+        String password = tfSenhaLogin.getText();
 
         if (cpf.isEmpty() || password.isEmpty()) {
             mensagemText.setVisible(true);
             mensagemText.setText("Preencha os campos");
         } else {
             try {
-                app.getServer().checarLogin(Long.valueOf(cpf), password);
+                app.getServer().checarLogin(cpf, password);
             } catch (UsuarioNaoExisteException e) {
                 mensagemText.setVisible(true);
                 mensagemText.setText("Usuário não encontrado");
 
-                ScreenManager sm = new ScreenManager().getInstance();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaCliente.fxml"));
+                Parent root = loader.load();
 
-               // if (e.getFxml().equals("abaCliente.fxml")) { IMPLEMENTAR TODA ESSA LÓGICA.
-                 //   sm.getAbaClienteController().setClienteLogado(e.getUsuario);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setTitle("Clientes");
+                stage.setScene(scene);
+                stage.show();
+
+                Stage telaLogin = (Stage) loginButton.getScene().getWindow();
+                telaLogin.close();
                 }
             }
         }
@@ -79,10 +84,6 @@ public class LoginController {
         System.exit(0);
     }
 
-    @FXML
-    private void handleAdminLinkAction() {
-        mensagemText.setText("Redirecionando para o login de administrador...");
-    }
 
     @FXML
     private void abrirTelaCadastro() {

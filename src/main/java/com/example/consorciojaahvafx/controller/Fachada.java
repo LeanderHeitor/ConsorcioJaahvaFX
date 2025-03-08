@@ -123,9 +123,9 @@ public class Fachada {
     }
 
     //MÉTODOS USUÁRIOS
-    public void checarLogin(Long cpf, String senha){usuarioController.checarLogin(cpf, senha);}
+    public void checarLogin(String CPF, String senha){usuarioController.checarLogin(CPF, senha);}
     public void  cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException{usuarioController.cadastrarUsuario(usuario);}
-    public boolean isAdmin(long cpf) throws CPFNaoPodeSerNuloException, UsuarioNuloException {usuarioController.isAdmin(cpf); return true;}
+    public boolean isAdmin(String CPF) throws CPFNaoPodeSerNuloException, UsuarioNuloException {usuarioController.isAdmin(CPF); return true;}
     public void cadastrarAdmin (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {usuarioController.cadastrarUsuario(usuario);}
     public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(cliente);}
     public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(cpf, valorPenalidade);}

@@ -30,21 +30,21 @@ public class UsuarioController {
         return instance;
     }
 
-    public void checarLogin(long id, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso, UsuarioNaoExisteException, UsuarioLogadoComSucessoException, CPFincorretoException {
+    public void checarLogin(String CPF, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso,SenhaIncorretaException, UsuarioNaoExisteException,UsuarioEAdminException, UsuarioNaoEAdminException, UsuarioLogadoComSucessoException, CPFincorretoException {
         UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
-        Usuario usuario = repoConcreto.findById(id);
-        if (usuario.getId().equals(id)) {
-            if (usuario.getId().equals(id) && usuario.getSenha().equals(senha)) {
-                if (usuario instanceof Admin && ((Admin) usuario).isAdmin()) {
-                    throw new AdmLogadoComSucesso("Administrador logado com sucesso."); //fazer a lógica de telas a serem carregadas.
-                } else if (usuario instanceof  Admin && !((Admin) usuario).isAdmin()) {
-                    throw new ClienteLogadoComSucesso("Cliente Logado com sucesso.");
-                } else {
-                    throw new CPFincorretoException("CPF incorreto.");
-                }
-            }
+        Usuario usuario = repoConcreto.findByCPF(CPF);
+        if (usuario == null) {
+            throw new UsuarioNaoExisteException("Usuário não existe.");
+        }
+        if (!usuario.getSenha().equals(senha)) {
+            throw new SenhaIncorretaException("Senha incorreta, digite novamente.");
+        }
+
+        if (usuario instanceof Admin) {
+            throw new UsuarioEAdminException("O usuário é um admnistrador.");
         } else {
-            throw new UsuarioNaoExisteException("Usuário não encontrado.");
+            throw new UsuarioNaoEAdminException("O usuário não é um admnistrador.");
+
         }
     }
 
@@ -70,10 +70,11 @@ public class UsuarioController {
         }
     }
 
-    public boolean isAdmin(long id) throws CPFNaoPodeSerNuloException, UsuarioNuloException {
-        Usuario usuario = usuarioRepository.findById(id);
+    public boolean isAdmin(String CPF) throws CPFNaoPodeSerNuloException, UsuarioNuloException {
+        UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
+        Usuario usuario = repoConcreto.findByCPF(CPF);
         if (usuario == null) {
-            throw new UsuarioNuloException("Usuário com ID " + id + " não encontrado.");
+            throw new UsuarioNuloException("Usuário com CPF " + CPF + " não encontrado.");
         }
         return usuario instanceof Admin;
     }
@@ -83,7 +84,7 @@ public class UsuarioController {
             throw new UsuarioNuloException("Usuário não pode ser nulo.");
         }
         if (usuario.getNome() != null) {
-            if (isAdmin(usuario.getId()) == true) {
+            if (isAdmin(usuario.getCPF()) == true) {
                 usuarioRepository.add(usuario); //confirmar se seria cadastrado como usuário apenas
             }
         } else {
@@ -97,7 +98,7 @@ public class UsuarioController {
             throw new UsuarioNuloException("Usuario não pode ser nulo.");
         }
         if (cliente.getNome() != null) {
-            if (isAdmin(cliente.getId()) == false) {
+            if (isAdmin(cliente.getCPF()) == false) {
                 usuarioRepository.add(cliente); // confirmar método
             } else {
                 throw new CPFNaoPodeSerNuloException("Usuário não pode ser um cliente");

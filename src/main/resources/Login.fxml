@@ -23,8 +23,8 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="188.0" layoutY="310.0" prefHeight="30.0" prefWidth="270.0" promptText="CPF:" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
-            <PasswordField layoutX="187.0" layoutY="374.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+            <TextField fx:id="tfLoginCpf" layoutX="188.0" layoutY="310.0" prefHeight="30.0" prefWidth="270.0" promptText="CPF:" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+            <PasswordField fx:id="tfSenhaLogin" layoutX="187.0" layoutY="374.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
             <Button fx:id="loginButton" layoutX="184.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Login" textFill="WHITE" />
             <Text fill="#a020f0" layoutX="223.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login de Usuário">
                <font>
@@ -33,6 +33,7 @@
             </Text>
             <Button fx:id="btSair" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#sairButtonAction" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
             <Button fx:id="cadastrarButton" layoutX="347.0" layoutY="452.0" mnemonicParsing="false" onAction="#abrirTelaCadastro" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Cadastrar" textFill="WHITE" />
+            <Text fx:id="mensagemText" layoutX="312.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
    </right>
