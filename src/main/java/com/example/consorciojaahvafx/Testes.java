@@ -284,14 +284,33 @@ public class Testes {
                 case 5:
                     System.out.println("\n\n");
                     // TESTE DE USABILIDADE
+                    Consorcio consorcioF = fachada.criarConsoricio();
+
                     System.out.println("\n\n----REQUISITOS-----\n\n");
                     System.out.println("REQ01: Gerenciamento de clientes, incluindo informações como nome, CPF, telefone e e-mail.");
-                    Cliente clienteF = new Cliente("Joao", "12345678901", "123-456-7890", "adio", "senha", null);
-                    Cliente clienteF1 = new Cliente("asda", "1231248901", "1241890", "a135", "s246246a", null);
+                    Cliente clienteF = new Cliente("Joao", "12345678", "1234567", "João@com", "joaose", null);
+                    Cliente clienteF1 = new Cliente("Heitor", "12345678", "1234567", "heitor@com", "heitorse", null);
+                    Cliente clienteF2 = new Cliente("Arthur", "12345678", "1234567", "arthur@com", "arthurse", null);
+                    
                     fachada.cadastrarCliente(clienteF);
                     fachada.cadastrarCliente(clienteF1);
+                    fachada.cadastrarCliente(clienteF2);
+
                     usuarioController.mostrarUsuarios();
+
+                    System.out.println("\n\nREQ02: Gerenciamento de grupos de consórcio, com informações como nome do grupo, valor total do consórcio, número de participantes e taxa de administração.");
+                    Admin adminF = new Admin("Antônio", "12345678", "1234567", "antio@com", "antoose", null);
+                    fachada.cadastrarAdmin(adminF);
+            
+                    Grupo grupoAtivoF = fachada.criarGrupo(adminF, consorcioF);
+                    Grupo grupoInativoF = fachada.criarGrupo(adminF, consorcioF);
                     
+                    fachada.adicionarParticipante(grupoAtivoF.getId(), clienteF2);
+                    fachada.adicionarParticipante(grupoAtivoF.getId(), clienteF2);
+                    fachada.adicionarParticipante(grupoAtivoF.getId(), clienteF2);
+                    fachada.escolherPremiacao(grupoAtivoF, consorcioF, Premiacao.Casa);
+                    System.out.println("\n");
+                    fachada.imprimirGrupos();
                     break;
             }
 

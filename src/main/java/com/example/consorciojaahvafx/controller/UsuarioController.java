@@ -79,13 +79,13 @@ public class UsuarioController {
         return usuario instanceof Admin;
     }
 
-    public void cadastrarAdmin (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {
-        if (usuario == null) {
+    public void cadastrarAdmin (Admin admin) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {
+        if (admin == null) {
             throw new UsuarioNuloException("Usuário não pode ser nulo.");
         }
-        if (usuario.getNome() != null) {
-            if (isAdmin(usuario.getCPF()) == true) {
-                usuarioRepository.add(usuario); //confirmar se seria cadastrado como usuário apenas
+        if (admin.getNome() != null) {
+            if (isAdmin(admin.getCPF()) == true) {
+                usuarioRepository.add(admin); //confirmar se seria cadastrado como usuário apenas
             }
         } else {
             throw new CPFNaoPodeSerNuloException("Admin não encontrado.");
@@ -120,34 +120,6 @@ public class UsuarioController {
 
     public double consultarPenalidade(String id ) {
         return penalidades.getOrDefault(id, 0.0);
-    }
-
-    public void cancelarLance(long idAdmin, long idCliente, int idGrupo) {
-
-        Admin admin = (Admin) usuarioRepository.findById(idAdmin);
-        if (admin == null) {
-            throw new IllegalArgumentException("Administrador não encontrado.");
-        }
-
-        Cliente cliente = (Cliente) usuarioRepository.findById(idCliente);
-        if (cliente == null) {
-            throw new IllegalArgumentException("Cliente não encontrado.");
-        }
-
-        Grupo grupo = grupoRepository.findById(idGrupo);
-        if (grupo == null) {
-            throw new IllegalArgumentException("Grupo não encontrado.");
-        }
-
-        if (grupo.getLances() == null) {
-            throw new IllegalArgumentException("O cliente não fez um lance neste grupo.");
-        }
-
-        grupo.cancelarLance(grupo.getLances());
-        grupo.reembolsarLance(grupo.getValorTotal());
-
-        System.out.println("Lance cancelado pelo administrador: " + admin.getNome());
-        System.out.println("Cliente reembolsado: " + cliente.getNome() + " | Valor: " + grupo.getLances());
     }
 
     public double calcularValorParcela(double valorTotal, int numParcelas, double taxaAdm) {

@@ -2,10 +2,12 @@ package com.example.consorciojaahvafx.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 public class Admin extends Usuario {
     private ArrayList<Grupo> gruposVistoria;
     private boolean admin;

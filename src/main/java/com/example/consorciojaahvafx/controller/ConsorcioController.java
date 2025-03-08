@@ -37,18 +37,15 @@ public class ConsorcioController {
         }
     }
 
-    public void escolherPremiacao(Grupo grupo, Consorcio consorcio) {
-
+    public void escolherPremiacao(Grupo grupo, Consorcio consorcio, Premiacao premiacao) {
         if (grupo.getParticipantes().size() >= 3) {
-            switch (consorcio.getPremiacao()) {
+            switch (premiacao) {
                 case Casa:
                     grupo.setNumeroParcelas(180);
                     grupo.setTaxaAdm(60000);
                     grupo.setValorTotal(300000 + grupo.getTaxaAdm());
                     consorcio.setPremiacao(Premiacao.Casa);
                     consorcio.setValorRestante(grupo.getValorTotal());
-                    grupo.setContemplacao(consorcio);
-
                     break;
                 case Apartamento:
                     grupo.setNumeroParcelas(280);
@@ -56,7 +53,6 @@ public class ConsorcioController {
                     grupo.setTaxaAdm(90000);
                     consorcio.setPremiacao(Premiacao.Apartamento);
                     consorcio.setValorRestante(grupo.getValorTotal());
-                    grupo.setContemplacao(consorcio);
                     break;
                 case Carro:
                     grupo.setNumeroParcelas(72);
@@ -64,7 +60,6 @@ public class ConsorcioController {
                     grupo.setTaxaAdm(12000);
                     consorcio.setPremiacao(Premiacao.Carro);
                     consorcio.setValorRestante(grupo.getValorTotal());
-                    grupo.setContemplacao(consorcio);
                     break;
                 case Moto:
                     grupo.setNumeroParcelas(180);
@@ -72,7 +67,6 @@ public class ConsorcioController {
                     grupo.setTaxaAdm(60000);
                     consorcio.setPremiacao(Premiacao.Moto);
                     consorcio.setValorRestante(grupo.getValorTotal());
-                    grupo.setContemplacao(consorcio);
                     break;
                 case Console:
                     grupo.setNumeroParcelas(48);
@@ -80,16 +74,14 @@ public class ConsorcioController {
                     grupo.setTaxaAdm(3750);
                     consorcio.setPremiacao(Premiacao.Console);
                     consorcio.setValorRestante(grupo.getValorTotal());
-                    grupo.setContemplacao(consorcio);
                     break;
-
                 default:
                     System.out.println("Premiação Inválida.");
                     break;
             }
-
+        } else {
+            System.out.println("O grupo não possui participantes suficientes para escolher a premiação.");
         }
-
     }
 
     public Consorcio obterConsorcio(Long id) {

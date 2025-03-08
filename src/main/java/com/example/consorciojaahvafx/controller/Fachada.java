@@ -1,5 +1,6 @@
 package com.example.consorciojaahvafx.controller;
 
+import com.example.consorciojaahvafx.enums.Premiacao;
 import com.example.consorciojaahvafx.exception.CPFNaoPodeSerNuloException;
 import com.example.consorciojaahvafx.exception.LimiteEmailException;
 import com.example.consorciojaahvafx.exception.UsuarioNuloException;
@@ -71,8 +72,8 @@ public class Fachada {
         return consorcioController.criarConsorcio();
     }
 
-    public void escolherPremiacao(Grupo grupo, Consorcio consorcio) {
-        consorcioController.escolherPremiacao(grupo, consorcio);
+    public void escolherPremiacao(Grupo grupo, Consorcio consorcio, Premiacao premiacao) {
+        consorcioController.escolherPremiacao(grupo, consorcio, premiacao);
     }
 
     public void obterConsorcio(Long id) {
@@ -129,6 +130,5 @@ public class Fachada {
     public void cadastrarAdmin (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {usuarioController.cadastrarUsuario(usuario);}
     public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(cliente);}
     public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(cpf, valorPenalidade);}
-    public void cancelarLance(long cpfAdmin, long cpfCliente, int idGrupo){usuarioController.cancelarLance(cpfAdmin, cpfCliente, idGrupo);}
     public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {usuarioController.alterarTaxaAdmin(cpf, idGrupo, valorTaxa);}
 }
