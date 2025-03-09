@@ -78,5 +78,10 @@ public class AbaClienteController  {
         }
     }
 
+    @FXML
+    private void sairButtonAction() {
+        System.exit(0);
+    }
+
 
 }

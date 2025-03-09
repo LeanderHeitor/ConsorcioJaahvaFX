@@ -17,7 +17,6 @@ public class ScreenManager {
 
     //Controladores das telas
     private LoginController loginController;
-    private LoginAdminController loginAdminController;
     private CadastroController cadastroController;
     private AbaClienteController abaClienteController;
 
@@ -57,10 +56,6 @@ public class ScreenManager {
     //Getters ans Setters Controllers
     public LoginController getLoginController() {
         return loginController;
-    }
-
-    public LoginAdminController getLoginAdminController() {
-        return loginAdminController;
     }
 
     public CadastroController getCadastroController() {

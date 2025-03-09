@@ -71,10 +71,12 @@ public class UsuarioController {
     }
 
     public boolean isAdmin(String CPF) throws CPFNaoPodeSerNuloException, UsuarioNuloException {
-        UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
-        Usuario usuario = repoConcreto.findByCPF(CPF);
+        if (CPF == null || CPF.trim().isEmpty()) {
+            throw new CPFNaoPodeSerNuloException("O CPF não pode ser nulo ou vazio.");
+        }
+        Usuario usuario = ((UsuarioRepository) usuarioRepository).findByCPF(CPF);
         if (usuario == null) {
-            throw new UsuarioNuloException("Usuário com CPF " + CPF + " não encontrado.");
+            throw new UsuarioNuloException("Usuário com CPF" + CPF + "não encontrado.");
         }
         return usuario instanceof Admin;
     }

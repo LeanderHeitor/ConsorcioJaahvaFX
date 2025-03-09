@@ -55,12 +55,12 @@
                   <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                </children>
             </VBox>
-            <TableView layoutX="201.0" layoutY="300.0" prefHeight="188.0" prefWidth="302.0">
+            <TableView layoutX="166.0" layoutY="300.0" prefHeight="188.0" prefWidth="373.0">
               <columns>
-                <TableColumn id="colIdGrupo" prefWidth="75.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
-                <TableColumn id="colParcelas" prefWidth="75.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="N° Parcelas" />
-                  <TableColumn id="colValorTotal" prefWidth="75.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Total:" />
-                  <TableColumn id="colAdminConsorcio" prefWidth="75.0" style="-fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Administrador:" />
+                <TableColumn id="colIdGrupo" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
+                <TableColumn id="colParcelas" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="N° Parcelas" />
+                  <TableColumn id="colValorTotal" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Total:" />
+                  <TableColumn id="colAdminConsorcio" prefWidth="92.0" style="-fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Administrador:" />
               </columns>
             </TableView>
             <Text fill="#a020f0" layoutX="147.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione um grupo para ver todas as informações:">

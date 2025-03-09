@@ -62,17 +62,32 @@ public class LoginController {
                 mensagemText.setVisible(true);
                 mensagemText.setText("Usuário não encontrado");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaCliente.fxml"));
-                Parent root = loader.load();
+                if (!app.getServer().isAdmin(cpf)) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaCliente.fxml"));
+                    Parent root = loader.load();
 
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setTitle("Clientes");
-                stage.setScene(scene);
-                stage.show();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setTitle("Clientes");
+                    stage.setScene(scene);
+                    stage.show();
 
-                Stage telaLogin = (Stage) loginButton.getScene().getWindow();
-                telaLogin.close();
+                    Stage telaLogin = (Stage) loginButton.getScene().getWindow();
+                    telaLogin.close();
+                } else {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaAdmin.fxml"));
+                    Parent root = loader.load();
+
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setTitle("Administrador");
+                    stage.setScene(scene);
+                    stage.show();
+
+                    Stage telaLogin = (Stage) loginButton.getScene().getWindow();
+                    telaLogin.close();
+                }
+
                 }
             }
         }
