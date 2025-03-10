@@ -34,55 +34,55 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfGrupo" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="ID:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 4px 0px; -fx-border-color: #A020F0;" />
+                  <TextField fx:id="tfID" editable="false" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 4px 0px; -fx-border-color: #A020F0;" />
                   <Label text="Parcelas pagas até o momento:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfParcelasPagas" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="Valor Total">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfValorTotal" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="Supervisor:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfSupervisor" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="Taxa do Spervisor:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfTaxaSupervisor" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="Valor Total Atualizado:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfValorAtualizado" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participantes:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TableView prefHeight="155.0" prefWidth="462.0">
+                  <TableView fx:id="tabelaParticipantes" prefHeight="155.0" prefWidth="462.0">
                     <columns>
-                      <TableColumn prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Nome:" />
-                      <TableColumn prefWidth="84.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="CPF:" />
-                        <TableColumn prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Telefone:" />
-                        <TableColumn prefWidth="108.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="E-mail:" />
-                        <TableColumn prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
+                      <TableColumn fx:id="colNome" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Nome:" />
+                      <TableColumn fx:id="colCPF" prefWidth="84.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="CPF:" />
+                        <TableColumn fx:id="colTelefone" prefWidth="117.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Telefone:" />
+                        <TableColumn fx:id="colEmail" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="E-mail:" />
+                        <TableColumn fx:id="colId" prefWidth="117.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
                     </columns>
                   </TableView>
                </children>

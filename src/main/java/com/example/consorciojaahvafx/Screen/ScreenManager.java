@@ -11,14 +11,18 @@ public class ScreenManager {
     private static Stage stg;
 
     //Declarações dos métodos
-    private Scene loginScene;
-    private Scene cadastroUsuarioScene;
-    private Scene abaClienteScene;
+    private Scene loginScene; //cena do login
+    private Scene cadastroUsuarioScene; //cena para a tela de cadastro
+    private Scene abaClienteScene; //cena da cena de login para a tela do cliente
+    private Scene abaGrupoClienteScene; //cena da tela de cliente para a tela dos grupos dos clientes
+    private Scene abaClienteConsorcios; //Cena da tela de grupos do cliente para a tela do consorcio do cliente
 
     //Controladores das telas
     private LoginController loginController;
     private CadastroController cadastroController;
     private AbaClienteController abaClienteController;
+    private AbaGrupoClienteController abaGrupoClienteController;
+    private AbaConsorciosClienteController abaConsorciosClienteController;
 
 
 
@@ -45,25 +49,27 @@ public class ScreenManager {
     public Scene getLoginScene() {
         return loginScene;
     }
-
     public Scene getCadastroUsuarioScene() {
         return cadastroUsuarioScene;
     }
     public Scene getAbaClienteScene() {
         return abaClienteScene;
     }
+    public Scene getAbaGrupoClienteScene() {return abaGrupoClienteScene;}
+    public Scene getAbaClienteConsorcios() {return abaClienteConsorcios;}
 
     //Getters ans Setters Controllers
     public LoginController getLoginController() {
         return loginController;
     }
-
     public CadastroController getCadastroController() {
         return cadastroController;
     }
     public AbaClienteController getAbaClienteController() {
         return abaClienteController;
     }
+    public AbaGrupoClienteController getAbaGrupoClienteController() {return abaGrupoClienteController;}
+    public AbaConsorciosClienteController getAbaConsorciosClienteController() {return abaConsorciosClienteController;}
 
     private void carregarTelas() {
         try {
@@ -78,6 +84,14 @@ public class ScreenManager {
             FXMLLoader abaClientePane = new FXMLLoader(getClass().getResource("AbaCliente.fxml"));
             this.abaClienteScene = new Scene(abaClientePane.load());
             this.abaClienteController = abaClientePane.getController();
+
+            FXMLLoader abaGrupoClientePane = new FXMLLoader(getClass().getResource("AbaGrupoCliente.fxml"));
+            this.abaGrupoClienteScene = new Scene(abaClientePane.load());
+            this.abaGrupoClienteController = abaClientePane.getController();
+
+            FXMLLoader abaClienteConsorciosPane = new FXMLLoader(getClass().getResource("AbaClienteConsorcios.fxml"));
+            this.abaClienteConsorcios = new Scene(abaClientePane.load());
+            this.abaConsorciosClienteController = abaClientePane.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -88,6 +102,8 @@ public class ScreenManager {
             case "Login.fxml": stg.setScene(loginScene);
             case "Cadastro.fxml": stg.setScene(cadastroUsuarioScene);
             case "AbaCliente.fxml": stg.setScene(abaClienteScene);
+            case "AbaGrupoCliente.fxml": stg.setScene(abaGrupoClienteScene);
+            case "AbaConsorciosCliente.fxml": stg.setScene(abaClienteConsorcios);
         }
         stg.setTitle(titulo);
     }

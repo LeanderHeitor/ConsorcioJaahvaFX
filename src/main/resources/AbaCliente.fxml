@@ -34,33 +34,33 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparente; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfNome" editable="false" style="-fx-background-color: transparente; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="CPF:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfCPF" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="Telefone:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfTelefone" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                   <Label text="E-mail:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <TextField fx:id="tfEmail" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                </children>
             </VBox>
-            <TableView layoutX="166.0" layoutY="300.0" prefHeight="188.0" prefWidth="373.0">
+            <TableView fx:id="tabelaGrupos" layoutX="166.0" layoutY="300.0" prefHeight="188.0" prefWidth="373.0">
               <columns>
-                <TableColumn id="colIdGrupo" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
-                <TableColumn id="colParcelas" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="N° Parcelas" />
-                  <TableColumn id="colValorTotal" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Total:" />
-                  <TableColumn id="colAdminConsorcio" prefWidth="92.0" style="-fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Administrador:" />
+                <TableColumn id="colIdGrupo" fx:id="colID" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
+                <TableColumn id="colParcelas" fx:id="colParcelas" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="N° Parcelas" />
+                  <TableColumn id="colValorTotal" fx:id="colValorTotal" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Total:" />
+                  <TableColumn id="colAdminConsorcio" fx:id="colAdmin" prefWidth="92.0" style="-fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" text="Administrador:" />
               </columns>
             </TableView>
             <Text fill="#a020f0" layoutX="147.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione um grupo para ver todas as informações:">

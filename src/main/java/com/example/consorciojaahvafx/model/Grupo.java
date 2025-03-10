@@ -3,6 +3,7 @@ package com.example.consorciojaahvafx.model;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Grupo {
@@ -58,7 +59,7 @@ public class Grupo {
         return grupoAtivo;
     }
 
-    public ArrayList<Cliente> getParticipantes() {
+    public List<Grupo> getParticipantes() {
         return participantes;
     }
 

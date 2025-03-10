@@ -21,4 +21,19 @@ public class Cliente extends Usuario {
 
     public void darLance(Grupo grupo, Double valor) { }
 
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    public ArrayList<Grupo> getConsorciosAtivos() {
+        return consorciosAtivos;
+    }
+
+    public void setConsorciosAtivos(ArrayList<Grupo> consorciosAtivos) {
+        this.consorciosAtivos = consorciosAtivos;
+    }
+
+    public ArrayList<Contrato> getHistoricoContratos() {
+        return historicoContratos;
+    }
+
+    public void setHistoricoContratos(ArrayList<Contrato> historicoContratos) {
+        this.historicoContratos = historicoContratos;
+    }
+}
