@@ -28,8 +28,6 @@ public class AbaAdminController {
     @FXML
     private TextField tfEmailAdmin;
 
-    @FXML
-    private Button btAcessarInfoCliente;
 
     @FXML
     private Button btAcessarInfoGrupo;
@@ -46,7 +44,7 @@ public class AbaAdminController {
         this.admin = admin;
     }
 
-    private void preencherCampos() {
+    private void preencherCampos () {
         if (admin != null) {
             tfNomeAdmin.setText(admin.getNome());
             tfCPFAdmin.setText(admin.getCPF());
@@ -56,19 +54,43 @@ public class AbaAdminController {
         }
     }
 
+
     @FXML
-    private void acessarInfoClienteAction() {
-        abrirNovaTela("/abaClienteInfo.fxml", "Informações do Cliente");
+    private void acessarGrupoAction () {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AbaAdminGrupoInfo.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Grupo");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage stage1 = (Stage) btAcessarInfoGrupo.getScene().getWindow();
+            stage1.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void acessarIngoGrupoAction() {
-        abrirNovaTela("/abaGrupoInfo.fxml", "Informações do Grupo");
-    }
+    private void acessarConsorcioAction() {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AbaAdminConsorcioInfo.fxml"));
+            Parent root = fxmlLoader.load();
 
-    @FXML
-    private void acessarIngoConsorcioAction() {
-        abrirNovaTela("/abaConsorcioInfo.fxml", "Informações do Consórcio");
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Consorcio");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage stage1 = (Stage) btAcessarInfoConsorcio.getScene().getWindow();
+            stage1.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -91,4 +113,5 @@ public class AbaAdminController {
             e.printStackTrace();
         }
     }
+
 }

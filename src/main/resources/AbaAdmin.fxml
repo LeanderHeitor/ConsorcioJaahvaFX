@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.consorciojaahvafx.Screen.AbaClienteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.consorciojaahvafx.Screen.AbaAdminController">
     <left>
         <AnchorPane prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #A020F0;" BorderPane.alignment="CENTER">
             <children>
@@ -59,24 +59,18 @@
                         <TextField fx:id="tfEmailAdmin" editable="false" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
                     </children>
                 </VBox>
-                <Text fill="#a020f0" layoutX="149.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mudar informações de um cliente clique aqui:">
+                <Button fx:id="btAcessarInfoGrupo" layoutX="295.0" layoutY="435.0" mnemonicParsing="false" onAction="#acessarGrupoAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Acessar Grupo" textFill="WHITE" />
+                <Text fill="#a020f0" layoutX="142.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mudar as informações de um grupo clique aqui:">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Text>
-                <Button fx:id="btAcessarInfoCliente" layoutX="297.0" layoutY="405.0" mnemonicParsing="false" onAction="#acessarInfoClienteAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Acessar Cliente" textFill="WHITE" />
-                <Button fx:id="btAcessarInfoGrupo" layoutX="295.0" layoutY="503.0" mnemonicParsing="false" onAction="#acessarIngoGrupoAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Acessar Grupo" textFill="WHITE" />
-                <Text fill="#a020f0" layoutX="149.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mudar as informações de um grupo clique aqui:">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Text>
-            <Text fill="#a020f0" layoutX="149.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mudar informações de um consórcio clique aqui:">
+            <Text fill="#a020f0" layoutX="139.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mudar informações de um consórcio clique aqui:">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button fx:id="btAcessarInfoConsorcio" layoutX="297.0" layoutY="605.0" mnemonicParsing="false" onAction="#acessarIngoConsorcioAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Acessar Consórcio" textFill="WHITE" />
+            <Button fx:id="btAcessarInfoConsorcio" layoutX="295.0" layoutY="530.0" mnemonicParsing="false" onAction="#acessarConsorcioAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Acessar Consórcio" textFill="WHITE" />
             </children>
         </AnchorPane>
    </center>

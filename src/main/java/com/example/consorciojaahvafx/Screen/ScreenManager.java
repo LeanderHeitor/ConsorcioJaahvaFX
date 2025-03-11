@@ -14,6 +14,7 @@ public class ScreenManager {
     private Scene loginScene; //cena do login
     private Scene cadastroUsuarioScene; //cena para a tela de cadastro
     private Scene abaClienteScene; //cena da cena de login para a tela do cliente
+    private Scene abaAdminScene; //cena para de login para a tela do Admin
     private Scene abaGrupoClienteScene; //cena da tela de cliente para a tela dos grupos dos clientes
     private Scene abaClienteConsorcios; //Cena da tela de grupos do cliente para a tela do consorcio do cliente
 
@@ -21,6 +22,7 @@ public class ScreenManager {
     private LoginController loginController;
     private CadastroController cadastroController;
     private AbaClienteController abaClienteController;
+    private AbaAdminController abaAdminController;
     private AbaGrupoClienteController abaGrupoClienteController;
     private AbaConsorciosClienteController abaConsorciosClienteController;
 
@@ -55,6 +57,7 @@ public class ScreenManager {
     public Scene getAbaClienteScene() {
         return abaClienteScene;
     }
+    public Scene getAbaAdmin(){return abaGrupoClienteScene;}
     public Scene getAbaGrupoClienteScene() {return abaGrupoClienteScene;}
     public Scene getAbaClienteConsorcios() {return abaClienteConsorcios;}
 
@@ -68,6 +71,7 @@ public class ScreenManager {
     public AbaClienteController getAbaClienteController() {
         return abaClienteController;
     }
+    public AbaAdminController getAbaAdminController() {return abaAdminController;}
     public AbaGrupoClienteController getAbaGrupoClienteController() {return abaGrupoClienteController;}
     public AbaConsorciosClienteController getAbaConsorciosClienteController() {return abaConsorciosClienteController;}
 
@@ -102,6 +106,7 @@ public class ScreenManager {
             case "Login.fxml": stg.setScene(loginScene);
             case "Cadastro.fxml": stg.setScene(cadastroUsuarioScene);
             case "AbaCliente.fxml": stg.setScene(abaClienteScene);
+            case "AbaAdmin.fxml": stg.setScene(abaAdminScene);
             case "AbaGrupoCliente.fxml": stg.setScene(abaGrupoClienteScene);
             case "AbaConsorciosCliente.fxml": stg.setScene(abaClienteConsorcios);
         }
