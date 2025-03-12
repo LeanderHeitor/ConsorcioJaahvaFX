@@ -9,12 +9,10 @@ import java.util.List;
 public class ContratoRepository implements IRepository<Contrato> {
 
     private static ContratoRepository instance;
-    private ArrayList<Contrato> contratos;
-    private int indice;
+    private List<Contrato> contratos;
 
-    public ContratoRepository(){
+    private ContratoRepository() {
         this.contratos = new ArrayList<>();
-        this.indice = 0;
     }
 
     public static ContratoRepository getInstance() {
@@ -27,29 +25,21 @@ public class ContratoRepository implements IRepository<Contrato> {
     @Override
     public void add(Contrato contrato) {
         this.contratos.add(contrato);
-        indice = indice + 1;
     }
 
     @Override
     public void remove(Contrato contrato) {
-        int i = getIndex(contrato.getIdContrato());
-        if (i != -1) {
-            this.contratos.remove(i);
-            indice = indice - 1;
-        } else {
-            System.out.println("Contrato não encontrado");
-        }
+        contratos.remove(contrato);
     }
 
     @Override
     public void update(Contrato contrato) {
-        int i = getIndex(contrato.getIdContrato());
-        if (i != -1) {
-            this.contratos.set(i, contrato);
-            System.out.println("Contrato atualizado com sucesso.");
-        } else {
-            System.out.println("Contrato não encontrado.");
-        }
+        // Implementar lógica de atualização, se necessário
+    }
+
+    @Override
+    public List<Contrato> findAll() {
+        return this.contratos;
     }
 
     @Override
@@ -64,12 +54,6 @@ public class ContratoRepository implements IRepository<Contrato> {
     }
 
     @Override
-    public List<Contrato> findAll() {
-        return this.contratos;
-    }
-
-
-    @Override
     public boolean existsById(long id) {
         int i = getIndex(id);
         return i != -1;
@@ -77,7 +61,7 @@ public class ContratoRepository implements IRepository<Contrato> {
 
     @Override
     public int getIndex(long id) {
-        for (int i = 0; i < indice; i++) {
+        for (int i = 0; i < contratos.size(); i++) {
             if (contratos.get(i).getIdContrato() == id) {
                 return i;
             }

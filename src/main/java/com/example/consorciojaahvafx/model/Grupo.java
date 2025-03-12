@@ -59,7 +59,7 @@ public class Grupo {
         return grupoAtivo;
     }
 
-    public List<Grupo> getParticipantes() {
+    public ArrayList<Cliente> getParticipantes() {
         return participantes;
     }
 

@@ -13,12 +13,14 @@ public class Fachada {
     private GrupoController grupoController;
     private static Fachada fachada;
     private PagamentoController pagamentoController;
+    private ContratoController contratoController;
 
     public Fachada(){
         this.consorcioController = new ConsorcioController();
         this.grupoController = new GrupoController();
         this.usuarioController = new UsuarioController();
         this.pagamentoController = new PagamentoController();
+        this.contratoController = new ContratoController();
     }
 
     public static Fachada getInstance() {
@@ -100,9 +102,9 @@ public class Fachada {
         consorcioController.adicionarGrupo(id, grupo);
     }
 
-    //MÉTODOS USUÁRIOS
+    // MÉTODOS USUÁRIOS
 
-    //METODOS PAGAMENTOS
+    // METODOS PAGAMENTOS
 
     public void processarParcelas(CartaoDeCredito cartao){
         pagamentoController.processarParcelas(cartao);
@@ -123,7 +125,7 @@ public class Fachada {
         pagamentoController.listarPagamentos();
     }
 
-    //MÉTODOS USUÁRIOS
+    // MÉTODOS USUÁRIOS
     public void checarLogin(String CPF, String senha){usuarioController.checarLogin(CPF, senha);}
     public void  cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException{usuarioController.cadastrarUsuario(usuario);}
     public boolean isAdmin(String CPF) throws CPFNaoPodeSerNuloException, UsuarioNuloException {usuarioController.isAdmin(CPF); return true;}
@@ -131,4 +133,38 @@ public class Fachada {
     public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(cliente);}
     public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(cpf, valorPenalidade);}
     public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {usuarioController.alterarTaxaAdmin(cpf, idGrupo, valorTaxa);}
+
+    // MÉTODOS CONTRATO
+
+    public void listarContratos() {
+        contratoController.listarContratos();
+    }
+
+    public void realizarContratoConsorcio(Cliente user, Grupo grupo) throws RuntimeException {
+        contratoController.realizarContratoConsorcio(user, grupo);
+    }
+
+    public void renegociarContrato(Contrato contrato, Usuario admin) throws RuntimeException {
+        contratoController.renegociarContrato(contrato, admin);
+    }
+
+    public void imprimirConteudoContratos() {
+        contratoController.imprimirConteudoContratos();
+    }
+
+    public void sendRelatorio(Contrato contrato) {
+        contratoController.sendRelatorio(contrato);
+    }
+
+    public void adicionarParcelaPaga(Long idContrato, double valorParcela) {
+        contratoController.adicionarParcelaPaga(idContrato, valorParcela);
+    }
+
+    public void atualizarSaldoDevedor(Long idContrato, double novoSaldo) {
+        contratoController.atualizarSaldoDevedor(idContrato, novoSaldo);
+    }
+
+    public void encerrarContrato(Long idContrato) {
+        contratoController.encerrarContrato(idContrato);
+    }
 }

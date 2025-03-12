@@ -311,6 +311,35 @@ public class Testes {
                     fachada.escolherPremiacao(grupoAtivoF, consorcioF, Premiacao.Casa);
                     System.out.println("\n");
                     fachada.imprimirGrupos();
+
+                    System.out.println("\n\nREQ03: Gerenciamento de contratos de participação, vinculando clientes a grupos com informações sobre parcelas pagas, saldo devedor e status (ativo, contemplado ou encerrado).");
+
+                    // Adicionar parcelas pagas suficientes para o cliente
+                    consorcioF.getParcelasPagas().put(clienteF2, grupoAtivoF.getNumeroParcelas() / 2 + 1);
+
+                    // Criar e realizar contrato de consórcio
+                    fachada.realizarContratoConsorcio(clienteF2, grupoAtivoF);
+
+                    // Obter o ID do contrato recém-criado
+                    Long idContrato = ContratoRepository.getInstance().findAll().stream()
+                            .filter(c -> c.getUsuarioVinculado().equals(clienteF2) && c.getGrupo().equals(grupoAtivoF))
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("Contrato não encontrado"))
+                            .getIdContrato();
+
+                    // Adicionar parcelas pagas
+                    fachada.adicionarParcelaPaga(idContrato, 100.0);
+                    fachada.adicionarParcelaPaga(idContrato, 150.0);
+
+                    // Atualizar saldo devedor
+                    fachada.atualizarSaldoDevedor(idContrato, 500.0);
+
+                    // Encerrar contrato
+                    fachada.encerrarContrato(idContrato);
+
+                    // Listar contratos para verificar as alterações
+                    fachada.listarContratos();
+
                     break;
             }
 

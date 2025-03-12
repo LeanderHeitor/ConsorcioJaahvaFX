@@ -6,6 +6,7 @@ import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrategy;
 import com.example.consorciojaahvafx.enums.StatusCliente;
 import com.example.consorciojaahvafx.enums.TipoServico;
+import com.example.consorciojaahvafx.enums.StatusContrato;
 import com.example.consorciojaahvafx.exception.*;
 import lombok.Data;
 import com.example.consorciojaahvafx.model.*;
@@ -15,7 +16,7 @@ import com.example.consorciojaahvafx.repository.IRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Optional;
 
 @Data
 public class ContratoController {
@@ -39,7 +40,6 @@ public class ContratoController {
 
     public void listarContratos(){
         System.out.println("---Listando todos os Contratos---");
-       // contratoRepository.findAll().forEach(System.out::println); -> forma de fazer usando Stream
         for (Contrato c : contratoRepository.findAll()) {
             System.out.println(c);
         }
@@ -51,8 +51,14 @@ public class ContratoController {
         contrato.setUsuarioVinculado(user);
         contrato.setGrupo(grupo);
         boolean duplicata = contratoRepository.findAll().stream().anyMatch(c -> c.getUsuarioVinculado().equals(user) && c.getGrupo().equals(grupo));
-        boolean devedor = grupo.getNumeroParcelas() /2 > grupo.getContemplacao().getParcelasPagas().get(user);
+        boolean devedor = grupo.getNumeroParcelas() / 2 > grupo.getContemplacao().getParcelasPagas().getOrDefault(user, 0);
         boolean premiado = (grupo.getParticipantes().contains(user)) && (grupo.getContemplacao().getContemplados().containsKey(user));
+
+        System.out.println("Grupo Ativo: " + grupo.isGrupoAtivo());
+        System.out.println("Duplicata: " + duplicata);
+        System.out.println("Devedor: " + devedor);
+        System.out.println("Premiado: " + premiado);
+
         if(grupo.isGrupoAtivo()){
             if(!duplicata){
                 if(!devedor){
@@ -66,13 +72,15 @@ public class ContratoController {
                 }else {
                     throw new UsuarioPenalizadoException("Usuário penalizado, não pode realizar contratos");
                 }
+            } else {
+                throw new UsuarioPenalizadoException("Usuário já possui um contrato com este grupo");
             }
-
         }else{
             throw new GrupoInativoException("Grupo inativo, não pode realizar contratos");
         }
     }
-    public void RenegociarContrato(Contrato contrato, Usuario admin)throws RuntimeException{
+
+    public void renegociarContrato(Contrato contrato, Usuario admin) throws RuntimeException {
         contrato.setTipoServico(TipoServico.RENEGOCIACAO);
         if (contrato.getUsuarioVinculado().equals(admin)){
             throw new AcessoNegadoException("Usuário não tem permissão para renegociar o próprio contrato");
@@ -112,6 +120,7 @@ public class ContratoController {
             }
         }
     }
+
     public void imprimirConteudoContratos() {
         ArrayList<Contrato> contratos = (ArrayList<Contrato>) contratoRepository.findAll();
         for (Contrato contrato : contratos) {
@@ -119,7 +128,6 @@ public class ContratoController {
             System.out.println("Usuário Vinculado: " + contrato.getUsuarioVinculado().getNome());
             System.out.println("Tipo de Serviço: " + contrato.getTipoServico());
             System.out.println("Status do Cliente: " + contrato.getStatusCliente());
-            //System.out.println("Grupo: " + String.valueOf(contrato.getGrupo().getId()));
             System.out.println("Finalizado: " + (contrato.isFinalizado() ? "Sim" : "Não"));
 
             // Extrair e imprimir o conteúdo do documento PDF
@@ -142,10 +150,52 @@ public class ContratoController {
             System.out.println("=============================\n");
         }
     }
+
     public void sendRelatorio(Contrato contrato){
         Relatorio relatorio= contrato.sendRelatorio();
         relatorioController.salvarRelatorio(relatorio);
     }
 
+    // Novos métodos para gerenciar parcelas pagas e saldo devedor
+    public void adicionarParcelaPaga(Long idContrato, double valorParcela) {
+        Optional<Contrato> contratoOpt = contratoRepository.findAll().stream()
+                .filter(contrato -> contrato.getIdContrato().equals(idContrato))
+                .findFirst();
 
+        if (contratoOpt.isPresent()) {
+            Contrato contrato = contratoOpt.get();
+            contrato.adicionarParcelaPaga(valorParcela);
+            contratoRepository.update(contrato);
+        } else {
+            throw new IllegalArgumentException("Contrato não encontrado");
+        }
+    }
+
+    public void atualizarSaldoDevedor(Long idContrato, double novoSaldo) {
+        Optional<Contrato> contratoOpt = contratoRepository.findAll().stream()
+                .filter(contrato -> contrato.getIdContrato().equals(idContrato))
+                .findFirst();
+
+        if (contratoOpt.isPresent()) {
+            Contrato contrato = contratoOpt.get();
+            contrato.atualizarSaldoDevedor(novoSaldo);
+            contratoRepository.update(contrato);
+        } else {
+            throw new IllegalArgumentException("Contrato não encontrado");
+        }
+    }
+
+    public void encerrarContrato(Long idContrato) {
+        Optional<Contrato> contratoOpt = contratoRepository.findAll().stream()
+                .filter(contrato -> contrato.getIdContrato().equals(idContrato))
+                .findFirst();
+
+        if (contratoOpt.isPresent()) {
+            Contrato contrato = contratoOpt.get();
+            contrato.encerrarContrato();
+            contratoRepository.update(contrato);
+        } else {
+            throw new IllegalArgumentException("Contrato não encontrado");
+        }
+    }
 }
