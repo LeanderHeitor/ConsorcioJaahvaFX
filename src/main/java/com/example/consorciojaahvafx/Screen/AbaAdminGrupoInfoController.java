@@ -98,6 +98,9 @@ public class AbaAdminGrupoInfoController {
     }
 
     @FXML
+    public void FinalizarPenalidadeClienteAction(){}
+
+    @FXML
     private void sairButtonAdminInfoClienteAction() {
         System.exit(0);
     }

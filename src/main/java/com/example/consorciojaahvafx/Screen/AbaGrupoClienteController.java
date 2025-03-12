@@ -85,8 +85,8 @@ public class AbaGrupoClienteController implements Initializable {
     @FXML
     private void VoltarTelaClienteAction() {
         try{
-            System.out.println(getClass().getResource("/abaCliente.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaCliente.fxml"));
+            System.out.println(getClass().getResource("/AbaCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AbaCliente.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

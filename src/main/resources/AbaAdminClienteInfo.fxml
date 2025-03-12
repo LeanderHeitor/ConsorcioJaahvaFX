@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.consorciojaahvafx.Screen.AbaAdminClienteInfoController">
     <left>
         <AnchorPane prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #A020F0;" BorderPane.alignment="CENTER">
             <children>
@@ -19,11 +21,53 @@
             </children>
         </AnchorPane>
     </left>
-    <right>
+   <center>
         <AnchorPane prefHeight="700.0" prefWidth="727.0" BorderPane.alignment="CENTER">
             <children>
-                <Button layoutX="622.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
+                <Button fx:id="btSair" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#sairButtonAction" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
+                <VBox layoutX="170.0" layoutY="42.0" prefHeight="279.0" prefWidth="363.0">
+                    <children>
+                        <Label text="Nome:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfNomeAdminInfo" style="-fx-background-color: transparente; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                        <Label text="CPF:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfCPFAdminInfo" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                        <Label text="Telefone:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfTelefoneAdminInfo" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                        <Label text="E-mail:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfEmailAdminInfo" prefHeight="14.0" prefWidth="363.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o valor da taxa:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfTaxaAdmin" layoutX="10.0" layoutY="177.0" prefHeight="14.0" prefWidth="363.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
+                    </children>
+                </VBox>
+                <Text fill="#a020f0" layoutX="182.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite aqui uma penalidade para o cliente:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+                <Button fx:id="btAcessarGrupo" layoutX="295.0" layoutY="487.0" mnemonicParsing="false" onAction="#acessarGrupoAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Finalizar penalidade." textFill="WHITE" />
+                <Button fx:id="btVoltarTelaAdmin" layoutX="297.0" layoutY="612.0" mnemonicParsing="false" onAction="#VoltarParaTelaDeAdminAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Consórcios" textFill="WHITE" />
+            <TextField fx:id="tfPenalidadeCliente" layoutX="168.0" layoutY="442.0" prefHeight="14.0" prefWidth="363.0" style="-fx-background-color: transparent; -fx-border-color: #A020F0; -fx-border-width: 0px 0px 4px 0px;" />
             </children>
         </AnchorPane>
-    </right>
+   </center>
 </BorderPane>

@@ -45,6 +45,12 @@
                         <Font size="18.0" />
                     </font>
                 </Text>
+            <Button fx:id="btFinalizarPenalidade" layoutX="297.0" layoutY="594.0" mnemonicParsing="false" onAction="#FinalizarPenalidadeClienteAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #A020F0;" text="Finalizar" textFill="WHITE" />
+            <Text fill="#a020f0" layoutX="131.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clique aqui caso queira excluir um cliente de um grupo:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
             </children>
         </AnchorPane>
     </center>
