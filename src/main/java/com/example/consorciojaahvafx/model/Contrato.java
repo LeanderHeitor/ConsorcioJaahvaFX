@@ -35,9 +35,11 @@ public class Contrato implements Processo {
     private StatusContrato statusContrato; // Novo atributo
 
     public Contrato() {
+        this.idContrato = ++numContratos;
     }
 
     public Contrato(Usuario usuarioVinculado, TipoServico tipoServico) {
+        this();
         this.usuarioVinculado = usuarioVinculado;
         this.tipoServico = tipoServico;
         if (usuarioVinculado instanceof Cliente) {
@@ -46,8 +48,6 @@ public class Contrato implements Processo {
             this.statusCliente = StatusCliente.NOTCLIENTE;
         }
         this.finalizado = false;
-        this.idContrato = numContratos;
-        numContratos++;
         this.parcelasPagas = 0;
         this.saldoDevedor = 0.0;
         this.statusContrato = StatusContrato.ATIVO;
