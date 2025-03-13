@@ -1,5 +1,6 @@
 package com.example.consorciojaahvafx.Screen;
 
+import com.example.consorciojaahvafx.model.Cliente;
 import com.example.consorciojaahvafx.model.Grupo;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,12 +18,12 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class AbaAdminGrupoInfoController {
 
     @FXML
-    private TableView<Grupo> tabelaGrupos;
+    private TableView<Cliente> tabelaGrupos;
 
     @FXML
     private TableColumn<Grupo, Long> colIDAdminInfo;
@@ -62,8 +63,8 @@ public class AbaAdminGrupoInfoController {
 
     public void carregarGrupo() {
         if (grupo != null) {
-            List<Grupo> grupoList = grupo.getParticipantes();
-            ObservableList<Grupo> listarParticipantesGrupos = FXCollections.observableArrayList(grupoList);
+            ArrayList<Cliente> grupoList = grupo.getParticipantes();
+            ObservableList<Cliente> listarParticipantesGrupos = FXCollections.observableArrayList(grupoList);
             tabelaGrupos.setItems(listarParticipantesGrupos);
         }
     }

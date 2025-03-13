@@ -102,7 +102,9 @@ public class LoginController {
 
     @FXML
     private void abrirTelaCadastro() {
-        try{
+        /*ScreenManager sm = ScreenManager.getInstance();
+        sm.changeScene("Cadastro.fxml", "Tela de Cadastro");*/
+       try{
             System.out.println(getClass().getResource("/cadastro.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cadastro.fxml"));
             Parent root = loader.load();

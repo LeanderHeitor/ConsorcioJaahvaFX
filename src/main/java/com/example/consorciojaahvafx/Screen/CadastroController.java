@@ -9,34 +9,41 @@ import com.example.consorciojaahvafx.model.Usuario;
 import com.example.consorciojaahvafx.model.Admin;
 import com.example.consorciojaahvafx.model.Cliente;
 import javafx.stage.Stage;
+import com.example.consorciojaahvafx.controller.Fachada;
 
 import java.io.IOException;
 
 public class CadastroController {
+    private Fachada fachada;
 
     @FXML
-    private TextField nome, cpf, telefone, email;
+    private TextField tfNome, tfCPF,tfTelefone, tfEmail;
 
     @FXML
-    private PasswordField senha, confirmacaoSenha;
+    private PasswordField pfSenha, pfConfirmacaoSenha;
 
     @FXML
-    private Button cadastrar;
+    private Button btFinCadastro;
 
     @FXML
     private Button sairButton;
 
     @FXML
-    private RadioButton rbAdmin;
+    private RadioButton btCadastrarAdmin;
 
     @FXML
-    private void cadastrarUsuario() {
-        String nome = this.nome.getText();
-        String cpf = this.cpf.getText().trim(); // CPF agora é String
-        String telefone = this.telefone.getText();
-        String email = this.email.getText();
-        String senha = this.senha.getText();
-        String confirmacaoSenha = this.confirmacaoSenha.getText();
+    public void initialize() {
+        this.fachada = new Fachada();
+    }
+
+    @FXML
+    private void cadastrarUsuario() throws IOException {
+        String nome = this.tfNome.getText();
+        String cpf = this.tfCPF.getText().trim(); // CPF agora é String
+        String telefone = this.tfTelefone.getText();
+        String email = this.tfEmail.getText();
+        String senha = this.pfSenha.getText();
+        String confirmacaoSenha = this.pfConfirmacaoSenha.getText();
 
         if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             exibirAlerta("Erro", "Preencha todos os campos!");
@@ -50,15 +57,21 @@ public class CadastroController {
 
         Usuario usuario;
         if(senha.equals(confirmacaoSenha)) {
-            if(rbAdmin.isSelected()) {
+            if(btCadastrarAdmin.isSelected()) {
                 usuario = new Admin(nome, cpf, telefone, email, senha, (Long) null);
+                fachada.cadastrarUsuario((Admin)usuario);
                 exibirAlerta("Sucesso", "Administrador cadastrado com sucesso.");
+                limparCampos();
+                carregarTelaLogin();
+
             } else {
                 usuario = new Cliente(nome, cpf, telefone, email, senha, (Long) null);
+                fachada.cadastrarCliente((Cliente) usuario);
                 exibirAlerta("Sucesso", "Cliente cadastrado com sucesso.");
+                limparCampos();
+                carregarTelaLogin();
             }
-            limparCampos();
-            carregarTelaLogin();
+
         } else {
             exibirAlerta("Erro", "Senhas não são iguais. Tente novamente.");
         }
@@ -73,13 +86,13 @@ public class CadastroController {
     }
 
     private void limparCampos() {
-        nome.clear();
-        cpf.clear();
-        telefone.clear();
-        email.clear();
-        senha.clear();
-        confirmacaoSenha.clear();
-        rbAdmin.setSelected(false);
+        tfNome.clear();
+        tfCPF.clear();
+        tfTelefone.clear();
+        tfEmail.clear();
+        pfSenha.clear();
+        pfConfirmacaoSenha.clear();
+        btCadastrarAdmin.setSelected(false);
     }
 
     private void carregarTelaLogin() {
@@ -93,7 +106,7 @@ public class CadastroController {
             stage.setScene(scene);
             stage.show();
 
-            Stage stage1 = (Stage) cadastrar.getScene().getWindow();
+            Stage stage1 = (Stage) btFinCadastro.getScene().getWindow();
             stage1.close();
         } catch (IOException e) {
             e.printStackTrace();

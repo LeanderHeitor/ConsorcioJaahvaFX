@@ -96,10 +96,10 @@ public class AbaConsorciosClienteController implements Initializable {
     }
 
     @FXML
-    private void simularLanceAction() {
+    public void simularLanceAction() {
         try{
-            System.out.println(getClass().getResource("/abaClienteSimulacao.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaClienteSimulacao.fxml"));
+            System.out.println(getClass().getResource("/AbaClienteSimulacao.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AbaClienteSimulacao.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
@@ -117,7 +117,7 @@ public class AbaConsorciosClienteController implements Initializable {
     }
 
     @FXML
-    private void darLanceAction() {
+    public void darLanceAction() {
         try{
             System.out.println(getClass().getResource("/AbaClienteDarLance.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AbaClienteDarLance.fxml"));

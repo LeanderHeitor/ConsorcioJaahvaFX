@@ -30,14 +30,14 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField layoutX="215.0" layoutY="230.0" prefHeight="30.0" prefWidth="270.0" promptText="Nome:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <TextField layoutX="215.0" layoutY="280.0" prefHeight="30.0" prefWidth="270.0" promptText="CPF:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <TextField layoutX="215.0" layoutY="330.0" prefHeight="30.0" prefWidth="270.0" promptText="Telefone:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <TextField layoutX="215.0" layoutY="380.0" prefHeight="30.0" prefWidth="270.0" promptText="E-mail:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <PasswordField layoutX="215.0" layoutY="430.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <PasswordField layoutX="215.0" layoutY="480.0" prefHeight="30.0" prefWidth="270.0" promptText="Confirme sua senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
-            <Button fx:id="finCadastro" layoutX="295.0" layoutY="562.0" mnemonicParsing="false" onAction="#cadastrarUsuario" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Finalizar Cadastro" textFill="WHITE" />
-            <RadioButton layoutX="262.0" layoutY="180.0" mnemonicParsing="false" text="Cadastrar Administrador" textFill="#a020f0">
+            <TextField fx:id="tfNome" layoutX="215.0" layoutY="230.0" prefHeight="30.0" prefWidth="270.0" promptText="Nome:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <TextField fx:id="tfCPF" layoutX="215.0" layoutY="280.0" prefHeight="30.0" prefWidth="270.0" promptText="CPF:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <TextField fx:id="tfTelefone" layoutX="215.0" layoutY="330.0" prefHeight="30.0" prefWidth="270.0" promptText="Telefone:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <TextField fx:id="tfEmail" layoutX="215.0" layoutY="380.0" prefHeight="30.0" prefWidth="270.0" promptText="E-mail:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <PasswordField fx:id="pfSenha" layoutX="215.0" layoutY="430.0" prefHeight="30.0" prefWidth="270.0" promptText="Senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <PasswordField fx:id="pfConfirmacaoSenha" layoutX="215.0" layoutY="480.0" prefHeight="30.0" prefWidth="270.0" promptText="Confirme sua senha:" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" />
+            <Button fx:id="btFinCadastro" layoutX="295.0" layoutY="562.0" mnemonicParsing="false" onAction="#cadastrarUsuario" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Finalizar Cadastro" textFill="WHITE" />
+            <RadioButton fx:id="btCadastrarAdmin" layoutX="262.0" layoutY="180.0" mnemonicParsing="false" text="Cadastrar Administrador" textFill="#a020f0">
                <font>
                   <Font size="14.0" />
                </font>

@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class AbaClienteController  {
 
@@ -27,7 +27,7 @@ public class AbaClienteController  {
     private TextField tfNome, tfCPF, tfTelefone, tfEmail;
 
     @FXML
-    private TableView<Grupo> tabelaGrupos;
+    private TableView<Cliente> tabelaGrupos;
 
     @FXML
     private TableColumn<Grupo, String> colAdmin;
@@ -75,8 +75,8 @@ public class AbaClienteController  {
     }
     public void carregarGrupo() {
         if (grupo != null) {
-            List<Grupo> grupoList = grupo.getParticipantes();
-            ObservableList<Grupo> listarParticipantesGrupos = FXCollections.observableArrayList(grupoList);
+            ArrayList<Cliente> grupoList = grupo.getParticipantes();
+            ObservableList<Cliente> listarParticipantesGrupos = FXCollections.observableArrayList(grupoList);
             tabelaGrupos.setItems(listarParticipantesGrupos);
         }
     }

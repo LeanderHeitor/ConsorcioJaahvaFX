@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class AbaAdminGrupoInfoDetalhesController {
 
@@ -40,7 +40,7 @@ public class AbaAdminGrupoInfoDetalhesController {
     private TextField tfValorAtualizadoAdminInfo;
 
     @FXML
-    private TableView<Grupo> tabelaParticipantes;
+    private TableView<Cliente> tabelaParticipantes;
 
     @FXML
     private TableColumn<Cliente, String> colNomeClienteAdminInfo, colCPFClienteAdminInfo, colTelefoneClienteAdminInfo, colEmailClienteAdminInfo;
@@ -84,8 +84,8 @@ public class AbaAdminGrupoInfoDetalhesController {
 
     private void carregarParticipantes() {
         if (grupoSelecionado != null) {
-            List<Grupo> participantes = grupoSelecionado.getParticipantes();
-            ObservableList<Grupo> listaParticipantes = FXCollections.observableList(participantes);
+            ArrayList<Cliente> participantes = grupoSelecionado.getParticipantes();
+            ObservableList<Cliente> listaParticipantes = FXCollections.observableList(participantes);
             tabelaParticipantes.setItems(listaParticipantes);
         }
     }

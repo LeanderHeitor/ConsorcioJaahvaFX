@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.List;
 
 public class AbaGrupoClienteController implements Initializable {
 
@@ -28,7 +28,7 @@ public class AbaGrupoClienteController implements Initializable {
     private TextField tfGrupo, tfID, tfParcelasPagas, tfValorTotal, tfSupervisor, tfTaxaSupervisor, tfValorAtualizado;
 
     @FXML
-    private TableView<Grupo> tabelaParticipantes;
+    private TableView<Cliente> tabelaParticipantes;
 
     @FXML
     private TableColumn<Cliente, String> colNome, colCPF, colTelefone, colEmail;
@@ -68,8 +68,8 @@ public class AbaGrupoClienteController implements Initializable {
 
     private void carregarParticipantes() {
         if (grupoSelecionado != null) {
-            List<Grupo> participantes = grupoSelecionado.getParticipantes();
-            ObservableList<Grupo> listaParticipantes = FXCollections.observableList(participantes);
+            ArrayList<Cliente> participantes = grupoSelecionado.getParticipantes();
+            ObservableList<Cliente> listaParticipantes = FXCollections.observableList(participantes);
             tabelaParticipantes.setItems(listaParticipantes);
         }
     }

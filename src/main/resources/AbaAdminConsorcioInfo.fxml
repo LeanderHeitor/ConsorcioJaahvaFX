@@ -26,28 +26,23 @@
                 <Button fx:id="btSair" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="64.0" style="-fx-background-color: #A020F0;" text="Sair" textFill="WHITE" />
                 <TableView fx:id="tabelaConsorcios" layoutX="9.0" layoutY="150.0" prefHeight="200.0" prefWidth="685.0">
                     <columns>
-                        <TableColumn fx:id="colID" prefWidth="75.0" style="-fx-backgound-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
-                        <TableColumn fx:id="colInicio" prefWidth="77.0" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Início:" />
-                        <TableColumn fx:id="colDataSorteio" prefWidth="103.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Data Sorteio:" />
-                        <TableColumn fx:id="colValorRestante" prefWidth="136.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Restante:" />
-                        <TableColumn fx:id="colContemplado" prefWidth="128.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Contemplado:" />
-                        <TableColumn fx:id="colParcelasPagas" prefWidth="92.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Parcelas Pagas" />
-                        <TableColumn fx:id="colPremio" prefWidth="69.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Prêmio:" />
+                        <TableColumn fx:id="colIDAdminInfo" prefWidth="75.0" style="-fx-backgound-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="ID:" />
+                        <TableColumn fx:id="colInicioAdmin" prefWidth="77.0" style="-fx-background-color: transparent; -fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Início:" />
+                        <TableColumn fx:id="colDataSorteioAdmin" prefWidth="103.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Data Sorteio:" />
+                        <TableColumn fx:id="colValorRestanteAdmin" prefWidth="136.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Valor Restante:" />
+                        <TableColumn fx:id="colContempladoAdmin" prefWidth="128.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Contemplado:" />
+                        <TableColumn fx:id="colParcelasPagasAdmin" prefWidth="92.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Parcelas Pagas" />
+                        <TableColumn fx:id="colPremioAdmin" prefWidth="69.0" style="-fx-border-color: #a020f0; -fx-border-width: 0px 0px 4px 0px;" text="Prêmio:" />
                     </columns>
                 </TableView>
-                <Text fill="#a020f0" layoutX="257.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meus Consórcios:">
+                <Text fill="#a020f0" layoutX="288.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consórcios:">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <Button fx:id="btDarLance" layoutX="297.0" layoutY="614.0" mnemonicParsing="false" onAction="#darLanceAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Dar Lance" textFill="WHITE" />
-                <Button fx:id="btSimularLance" layoutX="297.0" layoutY="476.0" mnemonicParsing="false" onAction="#simularLanceAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Simular Lance" textFill="WHITE" />
-                <Text fill="#a020f0" layoutX="151.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para realizar a simulação de um lance, clique aqui:">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Text>
-                <Text fill="#a020f0" layoutX="191.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para dar um lance concreto, clique aqui:">
+                <Button fx:id="btVoltar" layoutX="297.0" layoutY="614.0" mnemonicParsing="false" onAction="#voltarAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Voltar" textFill="WHITE" />
+                <Button fx:id="btSortear" layoutX="297.0" layoutY="476.0" mnemonicParsing="false" onAction="#sortearConsorcioAction" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #a020f0;" text="Sortear" textFill="WHITE" />
+                <Text fill="#a020f0" layoutX="208.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para realizar um sorteio clique aqui:">
                     <font>
                         <Font size="18.0" />
                     </font>
