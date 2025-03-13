@@ -216,6 +216,9 @@ public class Testes {
 
                     Cliente clienteVinculado = (Cliente) pContrato.getUsuarioVinculado();
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
+                    grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
+
+
 
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
@@ -267,29 +270,46 @@ public class Testes {
                 case 4:
                     System.out.println("\n\n");
 
-                    // CLASSE CONSÓRCIO
+                    // Criando um consórcio
                     Consorcio consorcio = consorcioController.criarConsorcio();
 
-                    // CLASSE GRUPO
+                    // Criando usuários
                     Admin cAdmin = new Admin("Antônio", "00001", "81984951", "Email", "senha", null);
-                    Cliente clienteA = new Cliente("Antonio", "01823", "9999999", "null", "null", null);
-                    Cliente clienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", null);
-                    Cliente clienteC = new Cliente("saas", "13241", "1234134", "3245123", "23451234", null);
+                    Cliente clienteA = new Cliente("Antonio", "01823", "9999999", "null", "null", 1L);
+                    Cliente clienteB = new Cliente("Joao", "00003", "819999989002", "Joao@gmail.com", "123456", 2L);
+                    Cliente clienteC = new Cliente("saas", "13241", "1234134", "3245123", "23451234", 3L);
+                    Cliente clienteD = new Cliente("Jess", "13251", "1233134", "jess@gmail.com", "1234456", 21L);
 
+                    // **Adicionando usuários ao repositório**
+                    usuarioRepository.add(clienteA);
+                    usuarioRepository.add(clienteB);
+                    usuarioRepository.add(clienteC);
+                    usuarioRepository.add(clienteD);
+
+                    // Criando grupos
                     Grupo grupoAtivo = grupoController.criarGrupo(cAdmin, consorcio);
                     Grupo grupoInativo = grupoController.criarGrupo(cAdmin, consorcio);
 
+                    // Adicionando participantes ao grupo ativo
                     grupoController.adicionarParticipante(grupoAtivo.getId(), clienteA);
+                    System.out.println("grupoAtivo.getId()" + grupoAtivo.getId());
                     grupoController.adicionarParticipante(grupoAtivo.getId(), clienteB);
                     grupoController.adicionarParticipante(grupoAtivo.getId(), clienteC);
+                    grupoController.adicionarParticipante(grupoAtivo.getId(), clienteD);
+                    grupoController.imprimirGrupo(1L);
 
+
+
+                    // Adicionando grupos ao consórcio
                     consorcioController.adicionarGrupo(consorcio.getId(), grupoInativo);
                     consorcioController.adicionarGrupo(consorcio.getId(), grupoAtivo);
+                    usuarioController.removerUsuario("13251");
+                    grupoController.imprimirGrupo(1L);
+                    grupoController.listarGrupos();
 
-                    System.out.println("Grupo Ativo: " + grupoAtivo);
-                    System.out.println("Grupo Inativo: " + grupoInativo);
 
                     break;
+
 
                 case 5:
                     System.out.println("\n\n");
@@ -357,6 +377,7 @@ public class Testes {
                     fachada.listarContratos();
 
                     break;
+
             }
 
         }

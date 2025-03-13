@@ -8,6 +8,7 @@ import com.example.consorciojaahvafx.repository.GrupoRepository;
 import com.example.consorciojaahvafx.model.Admin;
 import com.itextpdf.io.exceptions.IOException;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ public class UsuarioController {
     private IRepository<Usuario> usuarioRepository;
     private IRepository<Grupo> grupoRepository;
     private Map<Long, Double> penalidades;
+
+
 
     public UsuarioController() {
         this.usuarioRepository = UsuarioRepository.getInstance();
@@ -113,12 +116,28 @@ public class UsuarioController {
 
         Usuario usuario = usuarioRepository.findById(id);
         if (usuario == null) {
-            throw new UsuarioNuloException(" Usuário com o ID " + id + "não encontrado.");
+            throw new UsuarioNuloException("Usuário com o ID " + id + " não encontrado.");
         }
 
         penalidades.put(usuario.getId(), valorPenalidade);
-        System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(id));
+        System.out.println("Usuário penalizado com sucesso: " + usuario.getNome() + " | Penalidade: " + penalidades.get(id));
+
     }
+
+    public void removerUsuario(String cpf) {
+        Usuario usuario = ((UsuarioRepository) usuarioRepository).findByCPF(cpf);
+        if (usuario == null) {
+            throw new UsuarioNuloException("Usuário com CPF " + cpf + " não encontrado.");
+        }
+
+        for (Grupo grupo : grupoRepository.findAll()) {
+            grupo.getParticipantes().removeIf(participante -> participante.getCPF().equals(cpf));
+        }
+
+        usuarioRepository.remove(usuario);
+        System.out.println("Usuário com CPF " + cpf + " removido com sucesso.");
+    }
+
 
     public double consultarPenalidade(String id ) {
         return penalidades.getOrDefault(id, 0.0);

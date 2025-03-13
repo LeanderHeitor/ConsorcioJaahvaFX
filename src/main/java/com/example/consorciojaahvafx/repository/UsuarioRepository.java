@@ -38,14 +38,13 @@ public class UsuarioRepository implements IRepository<Usuario> {
 
     @Override
     public void remove(Usuario usuario) {
-        int i = getIndex(usuario.getId()); // busca pelo cpf
-        if (i == indice) {
-            this.usuarios.remove(i);
-            indice = indice - 1;
+        if (usuarios.contains(usuario)) {
+            usuarios.remove(usuario); // Remove o elemento diretamente
         } else {
-            System.out.println("Usuário não encontrado");
+            System.out.println("Usuário não encontrado na lista.");
         }
     }
+
 
     @Override
     public void update(Usuario usuario) {

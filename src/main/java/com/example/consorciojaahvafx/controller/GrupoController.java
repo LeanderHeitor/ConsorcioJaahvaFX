@@ -1,9 +1,6 @@
 package com.example.consorciojaahvafx.controller;
 
-import com.example.consorciojaahvafx.model.Admin;
-import com.example.consorciojaahvafx.model.Cliente;
-import com.example.consorciojaahvafx.model.Consorcio;
-import com.example.consorciojaahvafx.model.Grupo;
+import com.example.consorciojaahvafx.model.*;
 import com.example.consorciojaahvafx.repository.GrupoRepository;
 
 public class GrupoController {
@@ -90,7 +87,15 @@ public class GrupoController {
         }
     }
 
+    public void listarGrupos(){
+        System.out.println("---Listando todos os pagamentos---");
+        for (Grupo g : grupoRepository.getGrupos()) {
+            if (g != null) {
+                System.out.println(g);
+            }
 
+        }
+    }
 
     
 }
