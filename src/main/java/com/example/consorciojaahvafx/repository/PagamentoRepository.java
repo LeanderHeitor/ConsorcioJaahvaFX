@@ -52,13 +52,13 @@ public class PagamentoRepository implements IRepository<Pagamento> {
     @Override
     public void update(Pagamento pagamento) throws BuscaInvalidaException {
         int i = getIndex(pagamento.getId());
-        if (i == indice) {
+        if (i != -1) {
             pagamentos.set(i, pagamento);
         } else {
-            System.out.println("Pagamento não encontrado");
+            throw new BuscaInvalidaException("Pagamento não encontrado no repositório.");
         }
-
     }
+
 
     public Pagamento findById(long id) {
         for (Pagamento pagamento : pagamentos) {

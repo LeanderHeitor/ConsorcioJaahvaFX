@@ -199,36 +199,70 @@ public class Testes {
                     Cliente pClienteD = new Cliente("Jonas", "00005", "819999989022", "jonas@gmail.com", "234567");
                     Cliente pClienteE = new Cliente("Alice", "00007", "819999989052", "Alice@gmail.com", "234567");
                     Cliente pClienteF = new Cliente("Joao", "22222", "819999989062", "joao@gmail.com", "234567");
+
+                    // Pagamento via Pix
                     Pix pPix = new Pix("pix@example.com", 1, 100.2, pClienteA);
+
+                    // Criar grupos
                     Grupo PgrupoAtivo = grupoController.criarGrupo(pAdmin, pConsorcio);
                     Grupo PgrupoInativo = grupoController.criarGrupo(pAdmin, pConsorcio);
 
+                    // Adicionar participantes ao grupo ativo
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteA);
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteB);
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), pClienteC);
 
+                    // Criar contrato
                     Contrato pContrato = new Contrato(pAdmin, TipoServico.CONTRATACAO);
                     pContrato.setUsuarioVinculado(pClienteA);
 
+                    // Vincular contrato a um cliente
                     Cliente clienteVinculado = (Cliente) pContrato.getUsuarioVinculado();
                     grupoController.adicionarParticipante(PgrupoAtivo.getId(), clienteVinculado);
 
+                    // Processar pagamento no grupo ativo
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
 
-                    // Teste Pagamento
-                    Boleto boleto1 = new Boleto("1234-5678-ABCD", LocalDate.now().plusDays(5), 3L, 500.0, pClienteA);
+                    // Teste com boleto
+                    Boleto boleto1 = new Boleto("1234-5678-ABCD", LocalDate.now().plusDays(5), 3L, 500.0, pClienteB);
+                    Boleto boleto2 = new Boleto("1234-5678-EFGH", LocalDate.now().plusDays(5), 5L, 500.0, pClienteC);
                     Pix pix5 = new Pix("jonas@pix.com", 3, 200.0, pClienteD);
-                    fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
-                    fachada.processarPagamento(pPix, PgrupoInativo, pContrato);
+
+                    // Processar pagamento novamente
+                    fachada.processarPagamento(pPix, PgrupoAtivo, pContrato); // Deve funcionar
+                    fachada.processarPagamento(pPix, PgrupoInativo, pContrato); // Deve falhar
+
+                    // Novo pagamento via Pix
                     Pix pix12 = new Pix("alice@pix.com", 2, 200.0, pClienteE);
                     fachada.processarPagamento(pPix, PgrupoAtivo, pContrato);
-                    System.out.println("Saldo devedor: " + pix12.getValor());
-                    fachada.atualizarSaldoDevedor(pix12, 500);
-                    System.out.println("Saldo devedor: " + pix12.getValor());
-                    fachada.atualizarSaldoDevedor(pix12, 180);
-                    System.out.println("Saldo devedor: " + pix12.getValor());
-                    fachada.gerarBoletoTxt(boleto1);
 
+                    PagamentoRepository.getInstance().add(pix12);
+
+
+                    // Testar saldo devedor antes da atualização
+                    System.out.println("Saldo devedor inicial: " + pix12.getValor());
+
+                    // Atualizar saldo devedor
+                    fachada.atualizarSaldoDevedor(pix12, 150);
+                    System.out.println("Saldo após abater R$150: " + pix12.getValor());
+
+                    // Abater um valor que ultrapassa o saldo restante (deve falhar)
+                    fachada.atualizarSaldoDevedor(pix12, 300);
+                    System.out.println("Saldo após tentativa de abater R$300: " + pix12.getValor());
+                    pagamentoController.listarPagamentos();
+                    // Abater o restante do saldo
+                    fachada.atualizarSaldoDevedor(pix12, 50);
+                    pagamentoController.registrarPagamento(pix12, pContrato);
+                    System.out.println("Saldo final: " + pix12.getValor());
+                    System.out.println("ID Boleto 1: " + boleto1.getId());
+                    System.out.println("ID Boleto 2: " + boleto2.getId());
+
+
+
+                    // Gerar boleto em arquivo
+                    fachada.gerarBoletoTxt(boleto1);
+                    fachada.gerarBoletoTxt(boleto2);
+                    fachada.listarPagamento();
                     break;
                 case 3:
                     System.out.println("\n\n");

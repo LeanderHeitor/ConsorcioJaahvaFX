@@ -1,0 +1,10 @@
+----- BOLETO DE PAGAMENTO -----
+Código do Boleto: 1234-5678-EFGH
+ID do Pagamento: 5
+Cliente: Seabro
+Valor: R$ 500,00
+Status: Pendente
+Data de Vencimento: 2025-03-18
+-------------------------------
+Use este boleto para efetuar o pagamento até o vencimento.
+-----------------------------------------

@@ -1,0 +1,10 @@
+----- BOLETO DE PAGAMENTO -----
+Código do Boleto: 1234-5678-ABCD
+ID do Pagamento: 3
+Cliente: Joao
+Valor: R$ 500,00
+Status: Pendente
+Data de Vencimento: 2025-03-18
+-------------------------------
+Use este boleto para efetuar o pagamento até o vencimento.
+-----------------------------------------

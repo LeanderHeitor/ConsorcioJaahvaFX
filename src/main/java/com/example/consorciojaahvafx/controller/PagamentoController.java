@@ -162,57 +162,88 @@ public class PagamentoController {
 
 
     public void atualizarSaldoDevedor(Pagamento pagamento, double valor) {
-        // 1. Verificar se o pagamento é nulo
         if (pagamento == null) {
             System.out.println("Pagamento não encontrado ou é nulo.");
             return;
         }
 
-        // 2. Verificar se o valor é válido
         if (valor <= 0) {
             System.out.println("Erro: Valor inválido para abater do saldo devedor.");
             return;
         }
 
-        // 3. Se o pagamento já está concluído, talvez não possa ser alterado
         if (Boolean.TRUE.equals(pagamento.getStatus())) {
             System.out.println("Não é possível atualizar saldo devedor de um pagamento já concluído.");
             return;
         }
 
-        // 4. Verificar se o novo saldo não fica negativo
         double novoSaldo = pagamento.getValor() - valor;
+
         if (novoSaldo < 0) {
-            System.out.println("Erro: O valor a ser subtraído excede o saldo devedor.");
+            System.out.println("Erro: O valor a ser abatido excede o saldo devedor.");
             return;
         }
 
-        // 5. Atualizar o saldo
         pagamento.setValor(novoSaldo);
+
+        // Salvar a atualização no repositório
+        pagamentoRepository.update(pagamento);
+
         System.out.println("Saldo devedor atualizado com sucesso. Novo saldo: R$" + pagamento.getValor());
     }
 
 
+    public void registrarPagamento(Pagamento pagamento, Contrato contrato) {
+        if (pagamento == null || contrato == null) {
+            System.out.println("Erro: Pagamento ou contrato nulo.");
+            return;
+        }
+
+        // Verificar se o pagamento já foi processado
+        if (Boolean.TRUE.equals(pagamento.getStatus())) {
+            System.out.println("Pagamento já realizado.");
+            return;
+        }
+
+        // Atualizar o saldo devedor usando o método que já existe
+        atualizarSaldoDevedor(pagamento, pagamento.getValor());
+
+        // Salvar o pagamento no repositório
+        pagamentoRepository.add(pagamento);
+
+        // Atualizar o contrato no repositório
+        ContratoRepository.getInstance().update(contrato);
+
+        System.out.println("Pagamento registrado com sucesso.");
+    }
+
+
+
 
     public void gerarBoletoTxt(Boleto boleto) {
-        if (boleto.getCodigoBoleto() == null || boleto.getCodigoBoleto().isEmpty()) {
-            System.out.println("Erro: Código do Boleto não informado.");
-            return;
-        }
-        if (boleto.getVencimento() == null) {
-            System.out.println("Erro: Data de vencimento não informada.");
+        if (boleto == null) {
+            System.err.println("Erro: Boleto nulo não pode ser gerado.");
             return;
         }
 
-        // Nome do arquivo de texto
-        String nomeArquivo = "boleto_pagamento_" + boleto.getId() + ".txt";
+        if (boleto.getCodigoBoleto() == null || boleto.getCodigoBoleto().isEmpty()) {
+            System.err.println("Erro: Código do Boleto não informado.");
+            return;
+        }
+
+        if (boleto.getVencimento() == null) {
+            System.err.println("Erro: Data de vencimento não informada.");
+            return;
+        }
+
+        // Nome do arquivo de texto (corrigido para evitar confusão com ID)
+        String nomeArquivo = "boleto_pagamento_" + boleto.getCodigoBoleto() + ".txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
-
             // Cabeçalho do boleto
             writer.write("----- BOLETO DE PAGAMENTO -----\n");
             writer.write("Código do Boleto: " + boleto.getCodigoBoleto() + "\n");
-            writer.write("ID do Pagamento: " + boleto.getId() + "\n");
+            writer.write("ID do Pagamento: " + (boleto.getId() > 0 ? boleto.getId() : "N/A") + "\n");
 
             // Pagador
             if (boleto.getPagador() != null) {
@@ -225,10 +256,8 @@ public class PagamentoController {
             writer.write(String.format("Valor: R$ %.2f\n", boleto.getValor()));
 
             // Status (Pago ou Pendente)
-            if (boleto.getStatus() != null) {
-                String status = boleto.getStatus() ? "Pago" : "Pendente";
-                writer.write("Status: " + status + "\n");
-            }
+            String status = (boleto.getStatus() != null && boleto.getStatus()) ? "Pago" : "Pendente";
+            writer.write("Status: " + status + "\n");
 
             // Data de vencimento
             writer.write("Data de Vencimento: " + boleto.getVencimento() + "\n");
