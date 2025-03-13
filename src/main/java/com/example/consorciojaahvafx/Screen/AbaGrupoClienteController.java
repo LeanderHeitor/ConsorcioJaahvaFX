@@ -79,7 +79,6 @@ public class AbaGrupoClienteController implements Initializable {
         colCPF.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCPF()));
         colTelefone.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefone()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colId.setCellValueFactory(cellData -> new SimpleLongProperty(cellData.getValue().getId()).asObject());
     }
 
     @FXML

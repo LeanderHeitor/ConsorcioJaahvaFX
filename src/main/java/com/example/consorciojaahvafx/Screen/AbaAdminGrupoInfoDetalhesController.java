@@ -95,7 +95,6 @@ public class AbaAdminGrupoInfoDetalhesController {
         colCPFClienteAdminInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCPF()));
         colTelefoneClienteAdminInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefone()));
         colEmailClienteAdminInfo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colIdClienteAdminInfo.setCellValueFactory(cellData -> new SimpleLongProperty(cellData.getValue().getId()).asObject());
     }
 
     @FXML

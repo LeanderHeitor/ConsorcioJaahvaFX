@@ -1,10 +1,8 @@
 package com.example.consorciojaahvafx.controller;
 
 import com.example.consorciojaahvafx.enums.Premiacao;
-import com.example.consorciojaahvafx.exception.CPFNaoPodeSerNuloException;
-import com.example.consorciojaahvafx.exception.LimiteEmailException;
-import com.example.consorciojaahvafx.exception.UsuarioNuloException;
-import com.example.consorciojaahvafx.exception.ValorDaPenalidadePositivoException;
+import com.example.consorciojaahvafx.enums.TipoUsuario;
+import com.example.consorciojaahvafx.exception.*;
 import com.example.consorciojaahvafx.model.*;
 
 public class Fachada {
@@ -126,12 +124,14 @@ public class Fachada {
     }
 
     // MÉTODOS USUÁRIOS
-    public void checarLogin(String CPF, String senha){usuarioController.checarLogin(CPF, senha);}
+    public TipoUsuario checarLogin(String CPF, String senha){usuarioController.checarLogin(CPF, senha);
+        return null;
+    }
     public void  cadastrarUsuario(Usuario usuario) throws UsuarioNuloException, LimiteEmailException{usuarioController.cadastrarUsuario(usuario);}
     public boolean isAdmin(String CPF) throws CPFNaoPodeSerNuloException, UsuarioNuloException {usuarioController.isAdmin(CPF); return true;}
     public void cadastrarAdmin (Usuario usuario) throws UsuarioNuloException, CPFNaoPodeSerNuloException, LimiteEmailException {usuarioController.cadastrarUsuario(usuario);}
     public void cadastrarCliente (Cliente cliente) throws UsuarioNuloException, CPFNaoPodeSerNuloException {usuarioController.cadastrarUsuario(cliente);}
-    public void penalizarUsuario(long cpf, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(cpf, valorPenalidade);}
+    public void penalizarUsuario(String CPF, double valorPenalidade) throws UsuarioNuloException, ValorDaPenalidadePositivoException {usuarioController.penalizarUsuario(Long.parseLong(CPF), valorPenalidade);}
     public void alterarTaxaAdmin(long cpf,int idGrupo, double valorTaxa) {usuarioController.alterarTaxaAdmin(cpf, idGrupo, valorTaxa);}
 
     // MÉTODOS CONTRATO

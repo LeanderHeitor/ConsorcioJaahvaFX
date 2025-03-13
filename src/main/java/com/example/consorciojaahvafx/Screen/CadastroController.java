@@ -58,20 +58,19 @@ public class CadastroController {
         Usuario usuario;
         if(senha.equals(confirmacaoSenha)) {
             if(btCadastrarAdmin.isSelected()) {
-                usuario = new Admin(nome, cpf, telefone, email, senha, (Long) null);
+                usuario = new Admin(nome, cpf, telefone, email, senha);
                 fachada.cadastrarUsuario((Admin)usuario);
                 exibirAlerta("Sucesso", "Administrador cadastrado com sucesso.");
                 limparCampos();
                 carregarTelaLogin();
 
             } else {
-                usuario = new Cliente(nome, cpf, telefone, email, senha, (Long) null);
+                usuario = new Cliente(nome, cpf, telefone, email, senha);
                 fachada.cadastrarCliente((Cliente) usuario);
                 exibirAlerta("Sucesso", "Cliente cadastrado com sucesso.");
                 limparCampos();
                 carregarTelaLogin();
             }
-
         } else {
             exibirAlerta("Erro", "Senhas não são iguais. Tente novamente.");
         }

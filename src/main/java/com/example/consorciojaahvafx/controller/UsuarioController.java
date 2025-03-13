@@ -1,5 +1,6 @@
 package com.example.consorciojaahvafx.controller;
 
+import com.example.consorciojaahvafx.enums.TipoUsuario;
 import com.example.consorciojaahvafx.exception.*;
 import com.example.consorciojaahvafx.model.*;
 import com.example.consorciojaahvafx.repository.IRepository;
@@ -8,7 +9,6 @@ import com.example.consorciojaahvafx.repository.GrupoRepository;
 import com.example.consorciojaahvafx.model.Admin;
 import com.itextpdf.io.exceptions.IOException;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +17,6 @@ public class UsuarioController {
     private IRepository<Usuario> usuarioRepository;
     private IRepository<Grupo> grupoRepository;
     private Map<Long, Double> penalidades;
-
-
 
     public UsuarioController() {
         this.usuarioRepository = UsuarioRepository.getInstance();
@@ -33,22 +31,17 @@ public class UsuarioController {
         return instance;
     }
 
-    public void checarLogin(String CPF, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso,SenhaIncorretaException, UsuarioNaoExisteException,UsuarioEAdminException, UsuarioNaoEAdminException, UsuarioLogadoComSucessoException, CPFincorretoException {
+    public TipoUsuario checarLogin(String CPF, String senha) throws IOException, AdmLogadoComSucesso, ClienteLogadoComSucesso,SenhaIncorretaException, UsuarioNaoExisteException,UsuarioEAdminException, UsuarioNaoEAdminException, UsuarioLogadoComSucessoException, CPFincorretoException {
         UsuarioRepository repoConcreto = (UsuarioRepository) usuarioRepository;
         Usuario usuario = repoConcreto.findByCPF(CPF);
+
         if (usuario == null) {
-            throw new UsuarioNaoExisteException("Usuário não existe.");
+            return TipoUsuario.NAO_ENCONTRADO;
         }
         if (!usuario.getSenha().equals(senha)) {
-            throw new SenhaIncorretaException("Senha incorreta, digite novamente.");
+            return TipoUsuario.SENHA_INCORRETA;
         }
-
-        if (usuario instanceof Admin) {
-            throw new UsuarioEAdminException("O usuário é um admnistrador.");
-        } else {
-            throw new UsuarioNaoEAdminException("O usuário não é um admnistrador.");
-
-        }
+        return (usuario instanceof Admin) ? TipoUsuario.ADMIN : TipoUsuario.CLIENTE;
     }
 
     //Regras de negócio relacionadas ao usuario
@@ -116,28 +109,12 @@ public class UsuarioController {
 
         Usuario usuario = usuarioRepository.findById(id);
         if (usuario == null) {
-            throw new UsuarioNuloException("Usuário com o ID " + id + " não encontrado.");
+            throw new UsuarioNuloException(" Usuário com o ID " + id + "não encontrado.");
         }
 
-        penalidades.put(usuario.getId(), valorPenalidade);
-        System.out.println("Usuário penalizado com sucesso: " + usuario.getNome() + " | Penalidade: " + penalidades.get(id));
-
+        penalidades.put(Long.valueOf(usuario.getCPF()), valorPenalidade);
+        System.out.println("Usuário penalizado com sucesso" + usuario.getNome() + "| Penalidade: " + penalidades.get(id));
     }
-
-    public void removerUsuario(String cpf) {
-        Usuario usuario = ((UsuarioRepository) usuarioRepository).findByCPF(cpf);
-        if (usuario == null) {
-            throw new UsuarioNuloException("Usuário com CPF " + cpf + " não encontrado.");
-        }
-
-        for (Grupo grupo : grupoRepository.findAll()) {
-            grupo.getParticipantes().removeIf(participante -> participante.getCPF().equals(cpf));
-        }
-
-        usuarioRepository.remove(usuario);
-        System.out.println("Usuário com CPF " + cpf + " removido com sucesso.");
-    }
-
 
     public double consultarPenalidade(String id ) {
         return penalidades.getOrDefault(id, 0.0);

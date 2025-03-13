@@ -1,6 +1,7 @@
 package com.example.consorciojaahvafx.Screen;
 
 import com.example.consorciojaahvafx.controller.Fachada;
+import com.example.consorciojaahvafx.enums.TipoUsuario;
 import com.example.consorciojaahvafx.exception.UsuarioNaoExisteException;
 import com.example.consorciojaahvafx.model.Admin;
 import javafx.event.ActionEvent;
@@ -21,10 +22,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController {
-    private Application app;
+    private Fachada fachada;
 
     @FXML
-    private TextField tfLoginCpf;
+    private TextField tfLoginCpf, tfTipoUsuario;
 
     @FXML
     private PasswordField tfSenhaLogin;
@@ -45,6 +46,7 @@ public class LoginController {
     @FXML
     public void initialize() {
         mensagemText.setVisible(false);
+        this.fachada = new Fachada();
     }
 
     @FXML
@@ -55,41 +57,55 @@ public class LoginController {
         if (cpf.isEmpty() || password.isEmpty()) {
             mensagemText.setVisible(true);
             mensagemText.setText("Preencha os campos");
-        } else {
-            try {
-                app.getServer().checarLogin(cpf, password);
-            } catch (UsuarioNaoExisteException e) {
+            return;
+        }
+
+        TipoUsuario tipo = TipoUsuario.valueOf(tfTipoUsuario.getText());
+        fachada.checarLogin(cpf, password);
+
+
+        System.out.println("Tipo do usuário: " + tipo);
+
+
+        if (tipo == null) {
+            mensagemText.setVisible(true);
+            mensagemText.setText("Erro interno no login.");
+            return;
+        }
+
+        switch (tipo) {
+            case NAO_ENCONTRADO:
                 mensagemText.setVisible(true);
                 mensagemText.setText("Usuário não encontrado");
+                return;
 
-                if (!app.getServer().isAdmin(cpf)) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaCliente.fxml"));
-                    Parent root = loader.load();
+            case SENHA_INCORRETA:
+                mensagemText.setVisible(true);
+                mensagemText.setText("Senha incorreta");
+                return;
 
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setTitle("Clientes");
-                    stage.setScene(scene);
-                    stage.show();
+            case CLIENTE:
+                abrirTela("/abaCliente.fxml", "Cliente");
+                break;
 
-                    Stage telaLogin = (Stage) loginButton.getScene().getWindow();
-                    telaLogin.close();
-                } else {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/abaAdmin.fxml"));
-                    Parent root = loader.load();
+            case ADMIN:
+                abrirTela("/abaAdmin.fxml", "Administrador");
+                break;
+        }
 
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setTitle("Administrador");
-                    stage.setScene(scene);
-                    stage.show();
+        Stage telaLogin = (Stage) loginButton.getScene().getWindow();
+        telaLogin.close();
+    }
 
-                    Stage telaLogin = (Stage) loginButton.getScene().getWindow();
-                    telaLogin.close();
-                }
+    private void abrirTela(String caminhoFXML, String titulo) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+        Parent root = loader.load();
 
-                }
-            }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle(titulo);
+        stage.setScene(scene);
+        stage.show();
         }
     
 
@@ -102,8 +118,6 @@ public class LoginController {
 
     @FXML
     private void abrirTelaCadastro() {
-        /*ScreenManager sm = ScreenManager.getInstance();
-        sm.changeScene("Cadastro.fxml", "Tela de Cadastro");*/
        try{
             System.out.println(getClass().getResource("/cadastro.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cadastro.fxml"));

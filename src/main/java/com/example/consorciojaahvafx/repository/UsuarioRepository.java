@@ -31,24 +31,24 @@ public class UsuarioRepository implements IRepository<Usuario> {
 
     @Override
     public void add(Usuario usuario) {
-        usuario.setId(nextId++);
         this.usuarios.add(usuario);
         indice = indice + 1;
     }
 
     @Override
     public void remove(Usuario usuario) {
-        if (usuarios.contains(usuario)) {
-            usuarios.remove(usuario); // Remove o elemento diretamente
+        int i = getIndex(Long.parseLong(usuario.getCPF())); // busca pelo cpf
+        if (i == indice) {
+            this.usuarios.remove(i);
+            indice = indice - 1;
         } else {
-            System.out.println("Usuário não encontrado na lista.");
+            System.out.println("Usuário não encontrado");
         }
     }
 
-
     @Override
     public void update(Usuario usuario) {
-        int i = getIndex(usuario.getId());  
+        int i = getIndex(Long.parseLong(usuario.getCPF()));
         if (i == indice) {
             this.usuarios.set(i, usuario);
         } else {

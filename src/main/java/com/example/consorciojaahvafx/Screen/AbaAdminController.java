@@ -50,7 +50,6 @@ public class AbaAdminController {
             tfCPFAdmin.setText(admin.getCPF());
             tfTelefoneAdmin.setText(admin.getTelefone());
             tfEmailAdmin.setText(admin.getEmail());
-            tfIDAdmin.setText(String.valueOf(admin.getId()));
         }
     }
 

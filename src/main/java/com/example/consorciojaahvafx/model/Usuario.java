@@ -9,7 +9,6 @@ public abstract class Usuario {
     private String telefone;
     private String email;
     private String senha;
-    private Long id;
 
     public Usuario(){}
     public Usuario(String nome, String CPF, String telefone, String email, String senha) {
@@ -17,8 +16,7 @@ public abstract class Usuario {
         this.CPF = CPF;
         this.telefone = telefone;
         this.email = email;
-        this.senha = senha;
-        this.id = null;
+        this.senha = senha;;
     }
 
     
