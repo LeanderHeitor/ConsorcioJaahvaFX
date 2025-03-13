@@ -100,6 +100,10 @@ public class Fachada {
         consorcioController.adicionarGrupo(id, grupo);
     }
 
+    public double calcularValorParcela(double valorTotalConsorcio, int numeroParticipantes, double taxaAdministracao) {
+        return consorcioController.calcularValorParcela(valorTotalConsorcio, numeroParticipantes, taxaAdministracao);
+    }
+
     // MÉTODOS USUÁRIOS
 
     // METODOS PAGAMENTOS
