@@ -61,6 +61,10 @@ import java.util.Scanner;
 
 public class Testes {
 
+    private static Fachada fachada = Fachada.getInstance();
+    private static boolean sair = false;
+    private static int op = 5; // Ajuste conforme necessário
+
     public static void main(String[] args) {
 
         // Criando 4 Admins
@@ -96,20 +100,16 @@ public class Testes {
         Fachada fachada = new Fachada();
 
         Scanner dado = new Scanner(System.in);
-        boolean sair = false;
 
         while (!sair) {
-            System.out.println("---------MENU---------");
-            System.out.println("Escolha uma opção:");
-            System.out.println("1 - Testes Arthur:");
-            System.out.println("2 - Testes Heitor:");
-            System.out.println("3 - Testes João:");
-            System.out.println("4 - Testes Antônio:");
-            System.out.println("5 - Mostrar Requisitos:");
-            System.out.println("0 - Sair:");
-
+            System.out.println("Escolha uma operação:");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Arthur");
+            System.out.println("2 - Heitor");
+            System.out.println("3 - João");
+            System.out.println("4 - Antônio");
+            System.out.println("5 - Requisitos");
             int op = dado.nextInt();
-            dado.nextLine();
 
             switch (op) {
                 case 0:
@@ -239,7 +239,8 @@ public class Testes {
 
                     Cliente jClienteA = new Cliente("Luka", "0020", "888898888", "Tesouro@gmail.com", "654321");
                     Cliente jClienteB = new Cliente("Joabson", "0030", "999909999", "Joabson@gmail.com", "654123");
-                    Cliente jClienteC = new Cliente("Cleberson", "0040", "999909911", "Cleberson@gmail.com", "78787878");
+                    Cliente jClienteC = new Cliente("Cleberson", "0040", "999909911", "Cleberson@gmail.com",
+                            "78787878");
                     Cliente jClienteD = new Cliente("Deivson", "0050", "999909922", "Deivson@gmail.com", "89898989");
 
                     Grupo grupoJAtivo = grupoController.criarGrupo(jAdmin, jConsorcio);
@@ -349,6 +350,17 @@ public class Testes {
 
                     // Listar contratos para verificar as alterações
                     fachada.listarContratos();
+
+                    System.out.println(
+                            "\n\nREQ04: Cálculo do valor das parcelas com base no valor total do consórcio, número de participantes e taxa de administração.");
+
+                    // Exemplo de valores para o cálculo
+                    double valorTotalConsorcio = 100000.0; // Valor total do consórcio
+                    int numeroParticipantes = 10; // Número de participantes
+                    double taxaAdministracao = 0.1; // Taxa de administração (10%)
+
+                    double valorParcela = fachada.calcularValorParcela(valorTotalConsorcio, numeroParticipantes, taxaAdministracao);
+                    System.out.println("O valor de cada parcela é: " + valorParcela);
 
                     break;
             }
