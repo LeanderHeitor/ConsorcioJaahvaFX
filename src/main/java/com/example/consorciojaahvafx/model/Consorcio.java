@@ -50,6 +50,19 @@ public class Consorcio implements Processo {
 
     public void avaliarLance() {}
 
+    /**
+     * Calcula o valor das parcelas do consórcio.
+     *
+     * @param valorTotalConsorcio O valor total do consórcio.
+     * @param numeroParticipantes O número de participantes do consórcio.
+     * @param taxaAdministracao A taxa de administração (em porcentagem, por exemplo, 0.1 para 10%).
+     * @return O valor de cada parcela.
+     */
+    public double calcularValorParcela(double valorTotalConsorcio, int numeroParticipantes, double taxaAdministracao) {
+        double valorTotalComTaxa = valorTotalConsorcio + (valorTotalConsorcio * taxaAdministracao);
+        return valorTotalComTaxa / numeroParticipantes;
+    }
+
     @Override
     public Relatorio sendRelatorio() throws IOException {
         Relatorio relatorio = new Relatorio();
